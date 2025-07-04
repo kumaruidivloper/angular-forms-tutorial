@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-test-app": {
+    "angular-forms-tutorial": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -65,10 +65,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "angular-test-app:build:production"
+              "buildTarget": "angular-forms-tutorial:build:production"
             },
             "development": {
-              "buildTarget": "angular-test-app:build:development"
+              "buildTarget": "angular-forms-tutorial:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -94,5 +94,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "bccd7b74-e622-49bd-b4b6-862bbc1e45c9"
   }
 }

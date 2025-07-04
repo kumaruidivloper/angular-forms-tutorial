@@ -1,0 +1,27 @@
+<h2>Allow shipping to the following states</h2>
+
+<section>
+
+    <form [formGroup]="form" style="float: left">
+        <div>
+            <label>
+                <input type="checkbox" [formControl]="selectAll"/>
+                Select All
+            </label>
+        </div>
+        @for (option of states; track option.value) {
+            <div style="padding: 4px; background-color: rgb(237, 234, 230); margin-bottom: 5px; margin-right: 5px"> 
+                <label>
+                    <input type="checkbox" [formControlName]="option.value" />
+                    {{option.label}}
+                </label>
+            </div>
+        }
+
+    </form>
+
+
+    <div style="display: inline-block; padding: 10px; width: 100px; border: solid 1px #000; word-break: break-all;">
+        {{selectedValues}}
+    </div>
+</section>

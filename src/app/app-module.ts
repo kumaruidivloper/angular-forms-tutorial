@@ -3,14 +3,18 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
+ import { ReactiveFormsModule } from '@angular/forms';
+import { DynamicCheckboxFrom } from './dynamic-checkbox-from/dynamic-checkbox-from';
 
 @NgModule({
   declarations: [
-    App
+    App,
+    DynamicCheckboxFrom
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
