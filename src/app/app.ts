@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { EmpAddEdit } from './emp-add-edit/emp-add-edit';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +10,10 @@ import { Component } from '@angular/core';
 })
 export class App {
   protected title = 'Angular-Forms-Tutoriall';
+
+  constructor(private _dialog: MatDialog) {}
+
+  openAddEditEmpForm() {
+    this._dialog.open(EmpAddEdit);
+  }
 }

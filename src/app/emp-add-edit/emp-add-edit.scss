@@ -1,0 +1,23 @@
+.row {
+    display: flex;
+    gap: 10px
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.mat-mdc-dialog-inner-container {
+    padding-bottom: 15px;
+}
+
+.action {
+    padding: 0px 25px 20px ;
+    display: flex;
+    button {
+        flex: 1;
+    }
+}
+
+
+
