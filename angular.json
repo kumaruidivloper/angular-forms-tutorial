@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-test-app": {
+    "Angular-Forms-Tutoriall": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -35,7 +35,12 @@
             ],
             "styles": [
               "src/styles.scss"
-            ]
+            ],
+            "server": "src/main.server.ts",
+            "outputMode": "server",
+            "ssr": {
+              "entry": "src/server.ts"
+            }
           },
           "configurations": {
             "production": {
@@ -65,10 +70,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "angular-test-app:build:production"
+              "buildTarget": "Angular-Forms-Tutoriall:build:production"
             },
             "development": {
-              "buildTarget": "angular-test-app:build:development"
+              "buildTarget": "Angular-Forms-Tutoriall:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -94,5 +99,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "fbbb9737-0919-4b62-a85b-96c77c937500"
   }
 }
