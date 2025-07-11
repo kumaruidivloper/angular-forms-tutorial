@@ -2,26 +2,39 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+export interface Emp {
+  firstName: string
+  lastName: string
+  email: string
+  dob: string
+  gender: string
+  education: string
+  company: string
+  experience: number
+  package: number
+  id: string
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
   constructor(private _http: HttpClient) {}
 
-  addEmployee(data: any): Observable<any> {
-      return this._http.post('http://localhost:3000/employees', data);
+  addEmployee(data: Emp): Observable<Emp> {
+      return this._http.post<Emp>('http://localhost:3000/employees', data);
   }
 
-  updateEmployee(id: number, data: any): Observable<any> {
-      return this._http.put(`http://localhost:3000/employees/${id}`, data);
+  updateEmployee(id: number, data: Emp): Observable<Emp> {
+      return this._http.put<Emp>(`http://localhost:3000/employees/${id}`, data);
   }
 
-  getEmployeeList(): Observable<any> {
-    return this._http.get('http://localhost:3000/employees');
+  getEmployeeList(): Observable<Emp[]> {
+    return this._http.get<Emp[]>('http://localhost:3000/employees');
   }
 
-  deleteEmployee(id: number): Observable<any> {
-    return this._http.delete(`http://localhost:3000/employees/${id}`);
+  deleteEmployee(id: number): Observable<Emp> {
+    return this._http.delete<Emp>(`http://localhost:3000/employees/${id}`);
   }
 
 

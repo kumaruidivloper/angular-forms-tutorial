@@ -8,6 +8,7 @@ import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { Core } from './core/core';
+import { Emp } from './services/employee';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,7 @@ import { Core } from './core/core';
 export class App implements OnInit, AfterViewInit {
   protected title = 'Angular-Forms-Tutoriall';
   displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'dob', 'gender', 'education', 'company', 'experience', 'package', 'action'];
-  dataSource = new MatTableDataSource<any>([]);
+  dataSource = new MatTableDataSource<Emp>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -50,18 +51,18 @@ export class App implements OnInit, AfterViewInit {
   }
 
   getEmployeeList() {
-    this._empService.getEmployeeList().subscribe({
-      next: (res) => {
-        console.log(res);
-        this.dataSource = new MatTableDataSource(res);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-      },
-      error: (err: any) => {
-        console.log(err);
-      }
-    })
-  }
+  this._empService.getEmployeeList().subscribe({
+    next: (res: Emp[]) => {
+      console.log(res);
+      this.dataSource = new MatTableDataSource(res);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    },
+    error: (err: any) => {
+      console.error('Failed to fetch employee list:', err);
+    }
+  });
+}
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -84,7 +85,7 @@ export class App implements OnInit, AfterViewInit {
   }
 
 
-  openEditEmpForm(data: any) {
+  openEditEmpForm(data: Emp) {
     const dialogRef = this._dialog.open(EmpAddEdit, {
       data,
     })

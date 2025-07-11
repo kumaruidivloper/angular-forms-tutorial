@@ -4,6 +4,7 @@ import { EmployeeService } from '../services/employee';
 import { DialogRef } from '@angular/cdk/dialog';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Core } from '../core/core';
+import { Emp } from '../services/employee';
 
 @Component({
   selector: 'app-emp-add-edit',
@@ -47,7 +48,7 @@ export class EmpAddEdit implements OnInit {
       if(this.data) {
         console.log(this.empForm.value);
             this._empService.updateEmployee(this.data.id, this.empForm.value).subscribe({
-              next: (val: any) => {
+              next: (val: Emp) => {
                 // alert('Employee detail Updated !!!')
                 this._coreService.openSanckBar('Employee detail Updated !!!');
                 this._dialogRef.close(true);
@@ -59,7 +60,7 @@ export class EmpAddEdit implements OnInit {
       } else {
           console.log(this.empForm.value);
             this._empService.addEmployee(this.empForm.value).subscribe({
-              next: (val: any) => {
+              next: (val: Emp) => {
                 //alert('Employee added successfully')
                 this._coreService.openSanckBar('Employee added successfully');
                 this._dialogRef.close(true);
