@@ -1,0 +1,48 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "title": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": [
+    {
+      "name": "typicode",
+      "id": "a06c"
+    }
+  ],
+  "employees": [
+    {
+      "id": 1,
+      "firstName": "kumar",
+      "lastName": "dasd",
+      "email": "dsadas",
+      "dob": "2025-07-07T14:00:00.000Z",
+      "gender": "",
+      "education": "Graduate",
+      "company": "adas",
+      "experience": 432,
+      "package": 432
+    },
+    {
+      "id": "e562",
+      "firstName": "cxcx",
+      "lastName": "xzczx",
+      "email": "cxc",
+      "dob": "2025-07-07T14:00:00.000Z",
+      "gender": "male",
+      "education": "Graduate",
+      "company": "cxzcx",
+      "experience": 4,
+      "package": 4
+    }
+  ]
+}
