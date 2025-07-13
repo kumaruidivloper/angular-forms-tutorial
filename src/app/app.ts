@@ -1,11 +1,19 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.html',
   standalone: false,
-  styleUrl: './app.scss'
+  templateUrl: 'app.html',
+  styleUrl: './app.scss',
 })
 export class App {
-  protected title = 'Angular-Forms-Tutoriall';
+  user: { username: string } = { username: '' };
+
+  submitForm(myForm: NgForm) {
+    if (myForm.valid) {
+      alert('Submitted successfully, check console');
+      console.log(this.user);
+    }
+  }
 }
