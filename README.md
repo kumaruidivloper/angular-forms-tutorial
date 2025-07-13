@@ -63,3 +63,23 @@ ng serve
 <img width="1173" height="657" alt="image" src="https://github.com/user-attachments/assets/9256eabe-cbaa-4769-b974-6c1e657ac49a" />
 
 <img width="1172" height="655" alt="image" src="https://github.com/user-attachments/assets/ebe8ac5d-97e3-4781-92c9-fa3c8ad4c016" />
+
+## Template Driven Forms Part2
+
+<img width="1169" height="660" alt="image" src="https://github.com/user-attachments/assets/9d77c81f-7e88-4b6e-863b-2836e3b2c51b" />
+
+<img width="1171" height="658" alt="image" src="https://github.com/user-attachments/assets/0bfc6349-2417-4b38-939d-89959451ca3f" />
+
+<img width="1172" height="660" alt="image" src="https://github.com/user-attachments/assets/753a25a5-e4b4-4d70-89b9-5ea9753e8788" />
+
+<img width="1175" height="659" alt="image" src="https://github.com/user-attachments/assets/8a903c10-acc6-4cb2-bcfd-3485554c52be" />
+
+<img width="1176" height="658" alt="image" src="https://github.com/user-attachments/assets/b187664d-d48c-4c4d-b0ab-1ccb2f812d6a" />
+
+<img width="1173" height="659" alt="image" src="https://github.com/user-attachments/assets/1d5002a5-5955-4c61-81b2-565aa1bff85b" />
+
+<img width="1181" height="656" alt="image" src="https://github.com/user-attachments/assets/ae6861f1-9329-4da9-ac3d-c05a8c57add0" />
+
+<img width="1172" height="659" alt="image" src="https://github.com/user-attachments/assets/29a6ab86-a0df-44ea-b2a7-30ae1802585a" />
+
+<img width="1172" height="660" alt="image" src="https://github.com/user-attachments/assets/74b18473-5c28-4abf-a6ec-0ae1d2a5ff8e" />
