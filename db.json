@@ -33,30 +33,6 @@
       "id": "e48d"
     },
     {
-      "id": "9f26",
-      "firstName": "",
-      "lastName": "",
-      "email": "",
-      "dob": "",
-      "gender": "",
-      "education": "",
-      "company": "",
-      "experience": "",
-      "package": ""
-    },
-    {
-      "id": "3033",
-      "firstName": "",
-      "lastName": "",
-      "email": "",
-      "dob": "",
-      "gender": "",
-      "education": "",
-      "company": "",
-      "experience": "",
-      "package": ""
-    },
-    {
       "firstName": "Krishaan",
       "lastName": "Kumar",
       "email": "krishan@d.com",
@@ -69,52 +45,16 @@
       "id": "b8e5"
     },
     {
-      "id": "b505",
-      "firstName": "",
-      "lastName": "",
-      "email": "",
-      "dob": "",
-      "gender": "",
-      "education": "",
-      "company": "",
-      "experience": "",
-      "package": ""
-    },
-    {
-      "id": "7c24",
-      "firstName": "",
-      "lastName": "",
-      "email": "",
-      "dob": "",
-      "gender": "",
-      "education": "",
-      "company": "",
-      "experience": "",
-      "package": ""
-    },
-    {
-      "id": "82f4",
-      "firstName": "",
-      "lastName": "",
-      "email": "",
-      "dob": "",
-      "gender": "",
-      "education": "",
-      "company": "",
-      "experience": "",
-      "package": ""
-    },
-    {
-      "id": "a6ab",
-      "firstName": "",
-      "lastName": "",
-      "email": "",
-      "dob": "",
-      "gender": "",
-      "education": "",
-      "company": "",
-      "experience": "",
-      "package": ""
+      "id": "c7c5",
+      "firstName": "Vasuki",
+      "lastName": "B",
+      "email": "vasubalke@i.com",
+      "dob": "2025-07-14T14:00:00.000Z",
+      "gender": "female",
+      "education": "Graduate",
+      "company": "TCS",
+      "experience": 4,
+      "package": 4
     }
   ]
 }
