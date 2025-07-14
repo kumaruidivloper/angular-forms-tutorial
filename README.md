@@ -10,20 +10,25 @@ To start a local development server, run:
 ng serve
 ```
 
-## Reactive Forms Part4 (FormBuilder)
+## Reactive Forms Part5 (FormValidation)
 
-<img width="1173" height="657" alt="image" src="https://github.com/user-attachments/assets/afc185fe-26c7-4f4f-970f-fff11758342c" />
+<img width="1174" height="660" alt="image" src="https://github.com/user-attachments/assets/51d7dca1-6683-4bb2-aa4a-49bc55faa773" />
 
-<img width="1172" height="658" alt="image" src="https://github.com/user-attachments/assets/70cf337f-a424-4f79-a068-7fc3815fee2d" />
+<img width="1168" height="657" alt="image" src="https://github.com/user-attachments/assets/6e8a3172-6a49-4a33-bf33-b2f3dc58178d" />
 
-<img width="1170" height="659" alt="image" src="https://github.com/user-attachments/assets/17e74202-9dae-4a8f-8953-74d903030e0e" />
+<img width="1172" height="658" alt="image" src="https://github.com/user-attachments/assets/7a94752c-c794-4901-b184-ff97d391baaf" />
 
-<img width="1173" height="659" alt="image" src="https://github.com/user-attachments/assets/db96cb53-6b35-4c47-a3fe-8f145da0bd92" />
+<img width="1171" height="657" alt="image" src="https://github.com/user-attachments/assets/6157df46-87b7-45ef-b27a-fc867db2be17" />
 
-## FormBuilder Q&A
+<img width="1169" height="658" alt="image" src="https://github.com/user-attachments/assets/b4af3ea6-2877-4a5e-b2cd-75d1c87cbd0a" />
 
-<img width="1173" height="659" alt="image" src="https://github.com/user-attachments/assets/cd21fe0d-ba6f-4605-8d3b-ef7028a998eb" />
+<img width="1169" height="657" alt="image" src="https://github.com/user-attachments/assets/0522a9fc-7955-423b-894b-6324635b1111" />
 
-<img width="1173" height="657" alt="image" src="https://github.com/user-attachments/assets/d9de3d86-55a3-459a-b182-3a852320baf4" />
+<img width="1172" height="660" alt="image" src="https://github.com/user-attachments/assets/46f9c7ea-990f-4fb2-8630-c29270ee00e0" />
 
-<img width="1175" height="658" alt="image" src="https://github.com/user-attachments/assets/034c6b4f-718c-4474-b7b9-586c04551110" />
+
+## FormValidation Q&A
+
+<img width="1173" height="657" alt="image" src="https://github.com/user-attachments/assets/6eb806fb-e257-4749-9fe6-88b711352b5f" />
+
+<img width="1173" height="659" alt="image" src="https://github.com/user-attachments/assets/097a51b2-0ebf-4f80-a98e-f8c113fef757" />

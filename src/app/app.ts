@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import {
-  ReactiveFormsModule,
+  FormControl,
   FormGroup,
-  FormArray,
+  ReactiveFormsModule,
   Validators,
-  FormBuilder
 } from '@angular/forms';
 
 @Component({
@@ -14,36 +13,25 @@ import {
   styleUrl: './app.scss'
 })
 export class App {
-  employeeForm: FormGroup;
+  myForm: FormGroup;
+  nameControl: FormControl;
+  emailControl: FormControl;
 
-  constructor(private fb: FormBuilder) {
-    this.employeeForm = this.fb.group({
-      employees: this.fb.array([])
+  constructor() {
+    this.nameControl = new FormControl('', Validators.required);
+    this.emailControl = new FormControl('', [
+      Validators.required,
+      Validators.email,
+    ]);
+    this.myForm = new FormGroup({
+      name: this.nameControl,
+      email: this.emailControl,
     });
   }
 
-  get employees(): FormArray {
-    return this.employeeForm.get('employees') as FormArray;
-  }
-
-  addEmployee(): void {
-    const employeeGroup = this.fb.group({
-      name: ['', Validators.required],
-      job: ['', Validators.required]
-    });
-    this.employees.push(employeeGroup);
-  }
-
-  submitForm() {
-    if (this.employeeForm.invalid) {
-      return;
-    } else {
-      console.log(this.employeeForm.value);
+  formSubmit() {
+    if (this.myForm.valid) {
+      console.log('Form Values: ', this.myForm.value);
     }
-  }
-
-  deleteItem(index: number) {
-    this.employees.removeAt(index);
-
   }
 }

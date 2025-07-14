@@ -4,9 +4,9 @@
 }
 html {
   scroll-behavior: smooth;
-  background-color: #1f2022;
-  /* background-color: #e8e8e8; */
-  color: #fff;
+  /* background-color: #1f2022;
+  background-color: #e8e8e8;
+  color: #fff; */
 }
 body {
   margin: 0;
@@ -15,5 +15,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: #1f2022;
   height: 100vh;
+  color: #fff;
 }
