@@ -7,14 +7,23 @@
       <div class="mb-3">
         <label for="inputName" class="form-label">Full Name</label>
         <input type="text" class="form-control" id="inputName" formControlName="fname"/>
+        @if(userDetails.get('fname')?.invalid && userDetails.get('fname')?.touched) {
+          <span class="form-label text-danger">* Please enter your name</span>
+        }
       </div>
       <div class="mb-3">
         <label for="inputEmail" class="form-label">Email address</label>
         <input type="email" class="form-control" id="inputEmail" formControlName="email"/>
+        @if(userDetails.get('email')?.invalid && userDetails.get('email')?.touched) {
+          <span class="form-label text-danger">* Please enter your email</span>
+        }
       </div>
       <div class="mb-3">
         <label for="inputPassword" class="form-label">Password</label>
         <input type="password" class="form-control" id="inputPassword" formControlName="password"/>
+        @if(userDetails.get('password')?.invalid && userDetails.get('password')?.touched) {
+          <span class="form-label text-danger">* Please enter your password</span>
+        }
       </div>
     </ng-container>
     } @if (step == 2) {
@@ -29,6 +38,9 @@
           placeholder="+1"
           formControlName="mobile"
         />
+         @if(additionalDetails.get('mobile')?.invalid && additionalDetails.get('mobile')?.touched) {
+          <span class="form-label text-danger">* Please enter 10-digit mobile number</span>
+        }
       </div>
       <div class="mb-3">
         <div class="form-floating">
@@ -39,11 +51,17 @@
             formControlName="address"
           ></textarea>
           <label for="floatingTextArea" class="form-label">Street Address</label>
+           @if(additionalDetails.get('address')?.invalid && additionalDetails.get('address')?.touched) {
+          <span class="form-label text-danger">* Please enter your address</span>
+        }
         </div>
       </div>
       <div class="mb-3">
         <label for="inputCountry" class="form-label">Country</label>
         <input type="text" class="form-control" id="inputCountry" formControlName="country"/>
+        @if(additionalDetails.get('country')?.invalid && additionalDetails.get('country')?.touched) {
+          <span class="form-label text-danger">* Please specify your country</span>
+        }
       </div>
       <div class="mb-3">
         <label for="inputGender" class="form-label">Gender</label>
@@ -53,6 +71,9 @@
           <option value="female">Female</option>
           <option value="">Prefer not to answer</option>
         </select>
+        @if(additionalDetails.get('gender')?.invalid && additionalDetails.get('gender')?.touched) {
+          <span class="form-label text-danger">* Please select one option</span>
+        }
       </div>
     </ng-container>
     } @if (step == 3) {
@@ -68,6 +89,9 @@
             formControlName="comments"
           ></textarea>
           <label for="floatingTextArea" class="form-label">Comments</label>
+          @if(feedbackDetails.get('comments')?.invalid && feedbackDetails.get('comments')?.touched) {
+          <span class="form-label text-danger">* Please tye atleast 30 character length</span>
+        }
         </div>
       </div>
     </ng-container>

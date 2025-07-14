@@ -20,13 +20,13 @@ export class App {
       }),
       additionalDetails: this.fb.group({
         // More the one validator we need assign this in array
-        mobile: ['', [Validators.required, Validators.maxLength(10)]],
+        mobile: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
         address: ['', Validators.required],
         country: ['', Validators.required],
         gender: ['', Validators.required],
       }),
       feedback: this.fb.group({
-        comments: ['', Validators.maxLength(100)],
+        comments: ['', [Validators.required, Validators.pattern(/^\d{30}$/)]],
       })
     });
   }
@@ -38,11 +38,39 @@ export class App {
   }
 
   btnNext() {
-    this.step += 1;
+    const userDetailsGroup = this.myForm.get('userDetails') as FormGroup;
+    const additionalDetailsGroup = this.myForm.get('additionalDetails') as FormGroup;
+    const feedbackGroup = this.myForm.get('feedback') as FormGroup;
+    if (userDetailsGroup.invalid && this.step === 1) {
+      return;
+    }
+
+    if (additionalDetailsGroup.invalid && this.step === 2) {
+      return;
+    }
+
+    if (feedbackGroup.invalid && this.step === 3) {
+      this.step +=1;
+      return;
+    }
+    if (this.step < 3){
+      this.step +=1;
+    }
   }
 
   formSubmit() {
     console.log(this.myForm.value)
   }
 
+  get userDetails() {
+    return this.myForm.get('userDetails') as FormGroup;
+  }
+
+  get additionalDetails() {
+    return this.myForm.get('additionalDetails') as FormGroup;
+  }
+
+  get feedbackDetails() {
+    return this.myForm.get('feedback') as FormGroup;
+  }
 }
