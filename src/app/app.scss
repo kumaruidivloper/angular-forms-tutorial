@@ -1,64 +1,79 @@
-.my-form {
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-  color: #333;
-  font-size: 18px;
-  padding: 20px;
+h2 {
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-.container {
+/* Employee Row */
+.employee-row {
+  gap: 15px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Employee Fields */
+.employee-fields {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  padding: 15px;
   border: 1px solid #ddd;
   border-radius: 8px;
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 30px;
-  max-width: 450px;
-  margin: 40px auto;
+  background-color: #fff;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.form-group {
-  margin-bottom: 15px;
-}
-
+/* Labels */
 label {
-  display: block;
+  font-size: 14px;
   font-weight: bold;
-  margin-bottom: 8px;
-  margin-top: 10px;
   color: #555;
-}
-
-.form-control {
-  width: 100%;
   padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 16px;
-  color: #333;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease;
 }
 
-.form-control:focus {
+/* Inputs */
+input {
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
   outline: none;
-  border-color: #4caf50;
-  box-shadow: 0 0 4px rgba(76, 175, 80, 0.5);
+  width: 250px;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
 }
 
-button {
-  display: block;
+input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
+}
+
+/* Buttons */
+.add-button,
+.submit-button {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 20px;
   font-size: 16px;
-  margin: 20px auto 0;
-  padding: 10px 25px;
-  background-color: dodgerblue;
-  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
   border: none;
-  border-radius: 6px;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s;
 }
 
-button:hover {
-  background-color: #0051a1;
+.add-button {
+  color: #333;
+}
+
+.submit-button {
+  background-color: #007bff;
+  color: #fff;
+  margin-left: 10px;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
 }

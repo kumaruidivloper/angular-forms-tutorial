@@ -1,33 +1,32 @@
-<div class="container">
-  <form [formGroup]="myForm" (ngSubmit)="submitForm()" class="my-form">
-    <div class="form-group">
-      <label for="name">Name:</label>
-      <input
-        type="text"
-        formControlName="name"
-        class="form-control"
-        id="name"
-        autocomplete="off"
-      />
-
-      <label for="name">Email:</label>
-      <input
-        type="email"
-        formControlName="email"
-        class="form-control"
-        id="email"
-        autocomplete="off"
-      />
-
-      <label for="name">Age:</label>
-      <input
-        type="number"
-        formControlName="age"
-        class="form-control"
-        id="age"
-        autocomplete="off"
-      />
+<form [formGroup]="employeeForm" (ngSubmit)="submitForm()">
+  <h2>Employee Form</h2>
+  <div formArrayName="employees">
+    @for (emp of employees.controls; track emp; let i = $index) {
+    <div class="employee-row">
+      <div class="employee-fields" [formGroupName]="i">
+        <label>Name:</label>
+        <input
+          type="text"
+          formControlName="name"
+          placeholder="Enter employee name..."
+        />
+        <label>Job:</label>
+        <input
+          type="text"
+          formControlName="job"
+          placeholder="Enter employee job..."
+        />
+        <Button (click)="deleteItem(i)" style="background-color: red; color: #fff; font-weight: bold; border-radius: 8px; border: none; padding: 5px 15px;">Delete</Button>
+      </div>
     </div>
-    <button type="submit">Submit</button>
-  </form>
-</div>
+    }
+  </div>
+  <button class="add-button" (click)="addEmployee()">Add Employee</button>
+  <button class="submit-button" [disabled]="employeeForm.invalid">
+    Submit
+  </button>
+</form>
+
+<pre style="color: antiquewhite; border: solid 1px #fff; padding: 10px; margin-top: 40px;">
+   {{employeeForm.value | json}}
+</pre>
