@@ -1,23 +1,34 @@
 import { Component } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   standalone: false,
   templateUrl: 'app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
 })
 export class App {
-  usernameControl = new FormControl('', [
-    Validators.required,
-    Validators.minLength(3),
-    Validators.maxLength(10),
-    Validators.pattern('^[a-zA-Z0-9]+$'),
-  ]);
+  myForm: FormGroup;
 
-  showValue() {
-    console.log('Value: ', this.usernameControl.value);
-    console.log('Validation Status: ', this.usernameControl.valid);
-    console.log(this.usernameControl.errors);
+  constructor() {
+    this.myForm = new FormGroup({
+      name: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      age: new FormControl('', Validators.min(18)),
+    });
+  }
+
+  submitForm() {
+    const userAge = this.myForm.get('age')?.value;
+    if (userAge < 18) {
+      alert('Age must be 18 or older');
+      return;
+    } else if (this.myForm.valid) {
+      console.log(this.myForm.value);
+    }
   }
 }
