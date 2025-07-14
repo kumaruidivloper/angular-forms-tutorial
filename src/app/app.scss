@@ -1,69 +1,45 @@
 .form-container {
-  position: relative;
-  padding: 50px 50px;
-  background-image: linear-gradient(
-    174.2deg,
-    rgba(255, 244, 228, 1) 7.1%,
-    rgba(240, 246, 238, 1) 67.4%
-  );
-  border-radius: 10px;
+  width: 400px;
+  margin: 0 auto;
+  font-size: 20px;
+  padding: 30px;
+  border-radius: 15px;
+  border: 2px solid #1f2022;
 }
-.form-container h1 {
-  font-size: 2.5em;
-  text-align: center;
-  padding: 10px;
-  color: #000;
-  letter-spacing: 3px;
-  margin-bottom: 40px;
-  font-weight: 400;
-}
-.form-container .inputbox {
-  position: relative;
-  width: 300px;
-  height: 30px;
-  margin-bottom: 50px;
-  text-align: center;
-}
-.form-container .inputbox input {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 90%;
-  border: 2px solid #333;
-  outline: 0;
-  background: none;
-  padding: 10px;
-  border-radius: 10px;
-  font-size: 1.2em;
-}
-.form-container .inputbox:last-child {
-  margin-bottom: 0;
-}
-.form-container .inputbox span {
-  position: absolute;
-  top: 9px;
-  left: 10px;
-  font-size: 1.2em;
-  transition: 0.6s;
+
+/* Form labels */
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
   color: #1f2022;
+  font-weight: 350;
 }
-.form-container .inputbox input:focus ~ span,
-.form-container .inputbox input:valid ~ span {
-  transform: translateX(-13px) translateY(-35px);
-  font-size: 1em;
+
+/* Form input fields */
+input,
+select {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
-.form-container .inputbox button {
-  display: inline-block;
-  width: max-content;
+select {
   font-size: 15px;
-  padding: 10px;
-  margin: 5px;
-  background-color: #007bff;
-  color: #fff;
+}
+button[type="submit"] {
+  display: block;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  margin: 0 auto;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
 }
-.form-container .inputbox button:hover {
-  background-color: #0056b3;
+
+button[type="submit"]:hover {
+  background-color: #45a049;
 }
