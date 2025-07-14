@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import {
   ReactiveFormsModule,
   FormGroup,
-  FormControl,
   FormArray,
   Validators,
+  FormBuilder
 } from '@angular/forms';
 
 @Component({
@@ -16,9 +16,9 @@ import {
 export class App {
   employeeForm: FormGroup;
 
-  constructor() {
-    this.employeeForm = new FormGroup({
-      employees: new FormArray([]),
+  constructor(private fb: FormBuilder) {
+    this.employeeForm = this.fb.group({
+      employees: this.fb.array([])
     });
   }
 
@@ -27,9 +27,9 @@ export class App {
   }
 
   addEmployee(): void {
-    const employeeGroup = new FormGroup({
-      name: new FormControl('', Validators.required),
-      job: new FormControl('', Validators.required),
+    const employeeGroup = this.fb.group({
+      name: ['', Validators.required],
+      job: ['', Validators.required]
     });
     this.employees.push(employeeGroup);
   }
