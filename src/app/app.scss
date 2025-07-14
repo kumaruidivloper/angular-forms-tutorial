@@ -1,34 +1,49 @@
 .container {
-  width: 400px;
-  padding: 25px;
-  background: rgba(85, 85, 85, 0.469); /* Transparent white */
+  max-width: 90%;
+  width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 15px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* Soft shadow */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  margin: auto;
 }
 
-h2 {
-  color: #fff;
+h1 {
+  font-weight: 400;
+  text-align: center;
+  font-size: 40px;
+  color: dodgerblue;
+  margin-bottom: 20px;
 }
 
-.form-label {
-  color: #fff;
+h4 {
+  margin-bottom: 20px;
+  font-weight: 350;
+  font-size: 22px;
 }
 
+textarea ~ label {
+  color: #111;
+}
+
+.form-label,
 .form-control {
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #fff;
+  font-size: 16px;
 }
 
-.btn-primary {
-  background-color: rgba(0, 123, 255, 0.8);
-  border: none;
-  color: #fff;
-}
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+    padding: 15px;
+  }
 
-.btn-primary:hover {
-  background-color: rgba(0, 123, 255, 1);
+  h1 {
+    font-size: 30px;
+  }
+
+  h4 {
+    font-size: 18px; /* Adjust subheading size */
+  }
 }

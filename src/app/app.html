@@ -1,34 +1,86 @@
-<div class="container" [formGroup]="myForm" (ngSubmit)="formSubmit()">
-  <form>
-    <h1  class="text-center py-3">Login Form</h1>
-    <div class="mb-3">
-      <label for="inputName" class="form-label">Name</label>
-      <input
-        type="text"
-        class="form-control"
-        id="inputName"
-        formControlName="name"
-        autocomplete="off"
-      />
-      @if (nameControl.touched && nameControl.errors?.['required']) {
-      <span class="form-label text-danger">* Name required</span>
-      }
-    </div>
-    <div class="mb-3">
-      <label for="inputEmail" class="form-label">Email address</label>
-      <input
-        type="email"
-        class="form-control"
-        id="inputEmail"
-        formControlName="email"
-        autocomplete="off"
-      />
-      @if (emailControl.touched && emailControl.errors?.['required']) {
-      <span class="form-label text-danger">* Email required</span>
-      }
-    </div>
-    <div class="btn-group d-grid">
-      <button class="btn btn-primary" type="submit">Submit</button>
-    </div>
+<div class="container">
+  <h1>Multi Step Form</h1>
+  <form [formGroup]="myForm" (ngSubmit)="formSubmit()">
+    @if (step == 1) {
+    <ng-container formGroupName="userDetails">
+    <h4>User Details</h4>
+      <div class="mb-3">
+        <label for="inputName" class="form-label">Full Name</label>
+        <input type="text" class="form-control" id="inputName" formControlName="fname"/>
+      </div>
+      <div class="mb-3">
+        <label for="inputEmail" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="inputEmail" formControlName="email"/>
+      </div>
+      <div class="mb-3">
+        <label for="inputPassword" class="form-label">Password</label>
+        <input type="password" class="form-control" id="inputPassword" formControlName="password"/>
+      </div>
+    </ng-container>
+    } @if (step == 2) {
+    <ng-container formGroupName="additionalDetails">
+      <h4>Additional Details</h4>
+      <div class="mb-3">
+        <label for="inputMobile" class="form-label">Phone Number</label>
+        <input
+          type="number"
+          class="form-control"
+          id="inputMobile"
+          placeholder="+1"
+          formControlName="mobile"
+        />
+      </div>
+      <div class="mb-3">
+        <div class="form-floating">
+          <textarea
+            class="form-control"
+            placeholder="Enter Address"
+            id="floatingTextArea"
+            formControlName="address"
+          ></textarea>
+          <label for="floatingTextArea" class="form-label">Street Address</label>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="inputCountry" class="form-label">Country</label>
+        <input type="text" class="form-control" id="inputCountry" formControlName="country"/>
+      </div>
+      <div class="mb-3">
+        <label for="inputGender" class="form-label">Gender</label>
+        <select name="inputGender" id="inputGender" class="form-control" formControlName="gender">
+          <option value="" disabled selected>Select Gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="">Prefer not to answer</option>
+        </select>
+      </div>
+    </ng-container>
+    } @if (step == 3) {
+    <ng-container formGroupName="feedback">
+      <h4>Feedback/Comment</h4>
+      <div class="mb-3">
+        <div class="form-floating">
+          <textarea
+            class="form-control"
+            placeholder="Leave a comment here"
+            id="floatingTextArea"
+            style="height: 100px"
+            formControlName="comments"
+          ></textarea>
+          <label for="floatingTextArea" class="form-label">Comments</label>
+        </div>
+      </div>
+    </ng-container>
+    } @if (step != 1) {
+    <button type="button" class="btn btn-primary" (click)="btnPrevious()">
+      Previous
+    </button>
+    }
+    <button type="button" class="btn btn-primary mx-2" (click)="btnNext()">
+      Next
+    </button>
+    @if (step == 3) {
+    <button type="submit" class="btn btn-success">Submit</button>
+    }
   </form>
 </div>
