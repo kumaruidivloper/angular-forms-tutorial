@@ -1,96 +1,56 @@
-<mat-toolbar>
-  <span>CRUD Aplication</span>
-  <span class="example-spacer"></span>
-  <button mat-raised-button (click)="openAddEditEmpForm()">
-    ADD EMPLOYEE
-  </button>
-</mat-toolbar>
+
 <div class="main-body">
-  <mat-form-field>
-  <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
-</mat-form-field>
-<div class="table-container">
-  <table mat-table [dataSource]="dataSource" matSort>
-
-    <!-- ID Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-      <td mat-cell *matCellDef="let row; let i = index"> {{i + 1}} </td>
-    </ng-container>
-
-    <!-- Progress Column -->
-    <ng-container matColumnDef="firstName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
-      <td mat-cell *matCellDef="let row"> {{row.firstName}} </td>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="lastName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
-      <td mat-cell *matCellDef="let row"> {{row.lastName}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-      <td mat-cell *matCellDef="let row"> {{row.email}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="dob">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Dob </th>
-      <td mat-cell *matCellDef="let row"> {{row.dob | date}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="education">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
-      <td mat-cell *matCellDef="let row"> {{row.gender}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="company">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Company </th>
-      <td mat-cell *matCellDef="let row"> {{row.company}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="gender">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Education </th>
-      <td mat-cell *matCellDef="let row"> {{row.education}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="experience">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Experience </th>
-      <td mat-cell *matCellDef="let row"> {{row.experience}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="package">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Package </th>
-      <td mat-cell *matCellDef="let row"> {{row.package | currency: 'INR'}}L </td>
-    </ng-container>
-
-     <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
-      <td mat-cell *matCellDef="let row"> 
-        <button mat-icon-button style="color:dodgerblue;" (click)="openEditEmpForm(row)">
-          <mat-icon>edit</mat-icon>
-        </button>
-
-        <button mat-icon-button style="color:tomato;" (click)="deleteEmployee(row.id)">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </td>
-    </ng-container>
-
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-    <!-- Row shown when there is no matching data. -->
-    <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" colspan="11" style="text-align: center;padding: 5px; color: red; font-weight: bold;">No data matching the filter <span style="color: darkorchid; padding: 5px 15px;">[{{input.value}}]</span></td>
-    </tr>
-  </table>
-
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+<div class="two-column-layout">
+  <div class="column">
+      <div class="row">
+        <mat-form-field appearance="outline">
+            <mat-label>First name</mat-label>
+            <input matInput type="text" placeholder="Ex. Kumar">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Last name</mat-label>
+            <input matInput type="text" placeholder="Ex. Shan">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Last name</mat-label>
+            <input matInput type="text" placeholder="Ex. Shan">
+        </mat-form-field>
+         <mat-form-field appearance="outline">
+            <mat-label>Last name</mat-label>
+            <input matInput type="text" placeholder="Ex. Shan">
+        </mat-form-field>
+     </div>
+  </div>
+  <div class="column">
+      <div class="row">
+        <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" placeholder="Ex. test@gmail.com">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" placeholder="Ex. test@gmail.com">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>DOB</mat-label>
+            <input matInput [matDatepicker]="picker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>DOB</mat-label>
+            <input matInput [matDatepicker]="pickerr">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="pickerr"></mat-datepicker-toggle>
+            <mat-datepicker #pickerr></mat-datepicker>
+        </mat-form-field>
+       </div>
+  </div>
 </div>
 </div>
+
+
+
 
 

@@ -10,3 +10,43 @@
     width: 100%;
   }
 }
+
+
+.two-column-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding: 16px;
+
+  .column {
+    flex: 1 1 50%;
+    box-sizing: border-box;
+
+    .row {
+      display: flex;
+      gap: 16px;
+
+      mat-form-field {
+        flex: 1 1 calc(50% - 8px); // two columns with a 16px gap
+        min-width: 240px; // tweak for better sizing
+
+        @media (max-width: 768px) {
+          flex: 1 1 100%; // stack vertically on small screens
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+
+    .column {
+      flex: 1 1 100%; // full width column on mobile
+      .row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      }
+    }
+  }
+}
