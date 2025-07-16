@@ -51,7 +51,6 @@ import { MatDialogRef } from '@angular/material/dialog';
     MatSortModule,
     MatCheckboxModule,
     CommonModule
-    
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),

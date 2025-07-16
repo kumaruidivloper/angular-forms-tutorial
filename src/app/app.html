@@ -1,5 +1,5 @@
 <div class="main-body">
-  <h1 style="color: rgb(18, 18, 168); margin: 10px 0;">Change of personal details</h1>
+  <h1>Change of personal details</h1>
 </div>
 
 <form [formGroup]="myForm" (ngSubmit)="formSubmit()">
@@ -7,7 +7,7 @@
   <div class="row">
     <div class="column">
       <div>
-        <h4 style="padding: 8px 12px; background-color: rgb(9, 46, 169); color: #fff;  margin: 15px 0;">1. Your previous personal details</h4>
+        <h4 class="titleStyle">1. Your previous personal details</h4>
       </div>
       <div class="row">
         <mat-form-field appearance="outline">
@@ -90,7 +90,7 @@
       </div>
 
       <div>
-        <h4 style="padding: 8px 12px; background-color: rgb(9, 46, 169); color: #fff;  margin: 15px 0;">2. Type of change requierd</h4>
+        <h4 class="titleStyle">2. Type of change requierd</h4>
       </div>
 
       <div class="row" *ngFor="let group of typeOfChangeReq">
@@ -112,24 +112,25 @@
          * Please select at least one option
         </span>
       </div>
+
       <div>
-        <p style="padding: 0 0 8px 0; color: #6a6767; font-size: 18px;">
+        <p class="noteStyle">
          <b>Note:</b> You can also change also change your address, email address or contact phone number throught your My AMP account. If you have't registered for your online account, visit amp.com.au to get started.
         </p>
       </div>
       <div>
-        <p style="padding: 8px 12px; background-color: rgb(105, 130, 214); color: #000000; margin: 5px 0 8px 0;">
+        <p class="titleStyle2">
           Change of name
         </p>
       </div>
       <div>
-        <p style="padding: 0 0 8px 0; color: #6a6767; font-size: 18px;">
+        <p class="noteStyle">
          Please make sure that you provide photocopies of your original identification documents and that the copy is correctly certified. Refer to the information sheet for detils on how to certify your documents. 
         </p>
       </div>
 
       <div>
-        <p style="padding: 8px; color: #6a6767; font-size: 18px; border: solid 1px #171fb3;">
+        <p class="borderStyle">
          It's important that you mail the original certified copies of your documents to us - we can't accept faxed or emailed copies of the certified documents. 
         </p>
       </div>
@@ -137,17 +138,17 @@
     <div class="column">
 
       <div>
-        <h4 style="padding: 8px 12px; background-color: rgb(9, 46, 169); color: #fff; margin: 15px 0 0px 0;">2. Your previous personal details</h4>
+        <h4 class="titleStyle">2. Your previous personal details</h4>
       </div>
 
       <div>
-        <p style="padding: 8px 12px; background-color: rgb(105, 130, 214); color: #000000; margin: 5px 0 8px 0;">
+        <p class="titleStyle2">
           Reason for change of name
         </p>
       </div>
 
       <div>
-        <p style="padding: 0 0 8px 0; color: #6a6767; font-size: 18px;">
+        <p class="noteStyle">
           Please select the reason you've changed your name and provide us with the relevent documents showing your new name detais:
         </p>
       </div>
@@ -263,13 +264,7 @@
 </div>
 </form>
 
-<div class="preview" style="position: fixed;
-    padding: 10px 28px 10px 15px;
-    top: 189px;
-    left: 143px;
-    background: rgba(0, 0, 0, 0.6);
-    color: #fff;
-    width: 10%; border-radius: 18px;">
+<div class="preview">
     <button style="margin-bottom: 10px;" (click)="togglePre = !togglePre">{{togglePre ? 'Hide' : 'Show'}}</button>
     <pre *ngIf="togglePre">{{myForm.value | json}}</pre>
 </div>
