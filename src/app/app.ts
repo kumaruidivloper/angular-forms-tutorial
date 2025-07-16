@@ -1,24 +1,17 @@
 import { AfterViewInit, Component, OnInit, ViewChild, Inject, Optional } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { EmpAddEdit } from './emp-add-edit/emp-add-edit';
 import { EmployeeService } from './services/employee';
-import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
-import {MatSort, MatSortModule} from '@angular/material/sort';
-import {MatTableDataSource, MatTableModule} from '@angular/material/table';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatPaginator} from '@angular/material/paginator';
+import { MatSort} from '@angular/material/sort';
+import { MatTableDataSource} from '@angular/material/table';
 import { Core } from './core/core';
 import { Emp } from './services/employee';
-import { DialogRef } from '@angular/cdk/dialog';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {
   FormControl,
   FormGroup,
   FormBuilder,
-  ReactiveFormsModule,
-  Validators,
-  AbstractControl,
-  ValidationErrors
+  Validators
 } from '@angular/forms';
 import { CustomValidators } from './Validators/validators';
 
@@ -64,7 +57,6 @@ export class App implements OnInit, AfterViewInit {
   ] 
 
   constructor(
-    private _dialog: MatDialog, 
     private _empService: EmployeeService,
     @Optional() private _dialogRef: MatDialogRef<App>, // Make optional
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any, // Make optional
@@ -113,108 +105,26 @@ export class App implements OnInit, AfterViewInit {
   return this.myForm.get('userDetails.reasonNameChange') as FormControl;
   }
 
-  onCheckboxChange(event: any, value: string, type: string) {
-    if(type === 'toc') {
-        const currentValues = this.typeOfChangeReqControl.value || [];
-      
-      if (event.checked) {
-        if (!currentValues.includes(value)) {
-          const newValues = [...currentValues, value];
-          this.typeOfChangeReqControl.setValue(newValues);
-        }
-      } else {
-        const newValues = currentValues.filter((item: string) => item !== value);
-        this.typeOfChangeReqControl.setValue(newValues);
-      }
-      
-      // Force validation update
-      this.typeOfChangeReqControl.updateValueAndValidity();
-    } else {
-         const currentValues = this.reasonNameChangeControl.value || [];
-      
-      if (event.checked) {
-        if (!currentValues.includes(value)) {
-          const newValues = [...currentValues, value];
-          this.reasonNameChangeControl.setValue(newValues);
-        }
-      } else {
-        const newValues = currentValues.filter((item: string) => item !== value);
-        this.reasonNameChangeControl.setValue(newValues);
-      }
-      
-      // Force validation update
-      this.reasonNameChangeControl.updateValueAndValidity();
-    }
-      
+  onCheckboxChange(event: any, value: string, type: string): void {
+      const control = type === 'toc' ? this.typeOfChangeReqControl : this.reasonNameChangeControl;
+      const currentValues = control.value || [];
+      const newValues = event.checked ? this.addValueToArray(currentValues, value) : this.removeValueFromArray(currentValues, value);
+      control.setValue(newValues);
+      control.updateValueAndValidity();
+  }
+
+  private addValueToArray(array: string[], value: string): string[] {
+    return array.includes(value) ? array : [...array, value];
+  }
+
+  private removeValueFromArray(array: string[], value: string): string[] {
+    return array.filter(item => item !== value);
   }
 
   ngOnInit(): void {
-      this.getEmployeeList();
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-
-  openAddEditEmpForm() {
-    const dialogRef = this._dialog.open(EmpAddEdit);
-    dialogRef.afterClosed().subscribe({
-      next: (val) => {
-        if(val) {
-          this.getEmployeeList();
-        }
-      }
-    })
-  }
-
-  getEmployeeList() {
-  this._empService.getEmployeeList().subscribe({
-    next: (res: Emp[]) => {
-      console.log(res);
-      this.dataSource = new MatTableDataSource(res);
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-    },
-    error: (err: any) => {
-      console.error('Failed to fetch employee list:', err);
-    }
-  });
-}
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-
-  deleteEmployee(id: number) {
-    this._empService.deleteEmployee(id).subscribe({
-      next: (res) => {
-        //alert('Employee Delete !!!');
-        this._coreService.openSanckBar('Employee Delete !!!', 'done');
-        this.getEmployeeList();
-      },
-      error: console.log,
-    })
-  }
-
-
-  openEditEmpForm(data: Emp) {
-    const dialogRef = this._dialog.open(EmpAddEdit, {
-      data,
-    })
-
-    dialogRef.afterClosed().subscribe({
-      next: (val) => {
-        if(val) {
-          this.getEmployeeList();
-        }
-      }
-    })
+  ngAfterViewInit(): void {
   }
 
 typeOfChangeReq = [
@@ -246,30 +156,30 @@ reasonNameChange = [
   }
 
   formSubmit() {
-  // Mark all fields as touched to show validation errors
-  this.myForm.markAllAsTouched();
-  
-  // if (this.myForm.valid) {
-    // Form is valid, proceed with submission
-    console.log('Form submitted:', this.myForm.value);
-  // } else {
-    // console.log('Form is invalid');
-    // console.log('reasonNameChange errors:', this.typeOfChangeReqControl.errors);
-  // }
+    // Mark all fields as touched to show validation errors
+    this.myForm.markAllAsTouched();
+    
+    // if (this.myForm.valid) {
+      // Form is valid, proceed with submission
+      console.log('Form submitted:', this.myForm.value);
+    // } else {
+      // console.log('Form is invalid');
+      // console.log('reasonNameChange errors:', this.typeOfChangeReqControl.errors);
+    // }
 
-  this._empService.addEmployee(this.myForm.value).subscribe({
-      next: (val: Emp) => {
-        //alert('Employee added successfully')
-        this._coreService.openSanckBar('User Details added successfully');
-        if (this._dialogRef && typeof this._dialogRef.close === 'function') {
-            this._dialogRef.close(true);
+    this._empService.addEmployee(this.myForm.value).subscribe({
+        next: (val: Emp) => {
+          //alert('Employee added successfully')
+          this._coreService.openSanckBar('User Details added successfully');
+          if (this._dialogRef && typeof this._dialogRef.close === 'function') {
+              this._dialogRef.close(true);
+          }
+          console.table(this.myForm.value)
+        },
+        error: (err: any) => {
+          console.error(err)
         }
-        console.table(this.myForm.value)
-      },
-      error: (err: any) => {
-        console.error(err)
-      }
-    }) 
-}
+      }) 
+  }
 
 }
