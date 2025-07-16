@@ -258,14 +258,16 @@
     </div>
   </div>
   
-  <div style="text-align: right;">
+  <div class="buttonAlginRight">
     <button matButton="filled" type="submit">Submit</button>
   </div>
 </div>
 </form>
 
 <div class="preview">
-    <button style="margin-bottom: 10px;" (click)="togglePre = !togglePre">{{togglePre ? 'Hide' : 'Show'}}</button>
+   <div class="buttonAlginCenter">
+     <button class="previexToggle" (click)="togglePre = !togglePre">{{togglePre ? 'Hide' : 'Show'}}</button>
+   </div> 
     <pre *ngIf="togglePre">{{myForm.value | json}}</pre>
 </div>
 
