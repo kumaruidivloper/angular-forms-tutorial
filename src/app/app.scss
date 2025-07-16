@@ -12,41 +12,87 @@
 }
 
 
-.two-column-layout {
+/* Default mobile-first layout */
+.row {
   display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
-  padding: 16px;
+  flex-direction: column; /* Stack on small screens */
+  gap: 28px;
+}
+
+.column {
+  box-sizing: border-box;
+  width: 100%; /* Full width by default */
+}
+
+/* Desktop layout: Two columns side-by-side */
+@media (min-width: 768px) {
+  .row {
+    flex-direction: row;
+  }
 
   .column {
     flex: 1 1 50%;
-    box-sizing: border-box;
-
-    .row {
-      display: flex;
-      gap: 16px;
-
-      mat-form-field {
-        flex: 1 1 calc(50% - 8px); // two columns with a 16px gap
-        min-width: 240px; // tweak for better sizing
-
-        @media (max-width: 768px) {
-          flex: 1 1 100%; // stack vertically on small screens
-        }
-      }
-    }
-  }
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-
-    .column {
-      flex: 1 1 100%; // full width column on mobile
-      .row {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      }
-    }
+    width: 50%;
   }
 }
+
+/* Print layout: Two columns side-by-side */
+@media print {
+  .row {
+    display: flex;
+    flex-direction: row;
+    gap: 5px; /* Slightly smaller gap for print */
+  }
+
+  .column {
+    flex: 1 1 50%;
+    width: 50%;
+    padding: 8px; /* Slightly smaller padding for print */
+    box-sizing: border-box;
+  }
+  
+  /* Optional: Additional print-specific styles */
+  body {
+    font-size: 12pt; /* Standard print font size */
+    line-height: 1.4;
+    margin: 0; /* Remove default margins */
+  }
+  
+  /* Reduce page margins */
+  @page {
+    margin: 0; /* Smaller page margins */
+  }
+  
+  /* Remove backgrounds and shadows for better printing */
+  .column {
+    background: none !important;
+    box-shadow: none !important;
+  }
+}
+
+.example-section {
+  .label-text {
+        font-size: 18px;
+        color: #6a6767;
+        display: inline-block;
+    }
+  .check-item {
+    padding: opx 0px;
+    line-height: 4;
+  }
+}
+
+.example-section-row {
+  display: flex;
+  justify-content: space-between; // or `space-evenly`, `space-around`
+  flex-direction: column;
+  p.row-check-item {
+  span {
+    font-size: 18px;
+  }
+  
+  }
+}
+    
+  
+

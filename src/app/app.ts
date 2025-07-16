@@ -24,6 +24,30 @@ export class App implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  public states: string[] =[
+    'South Australia',
+    'Tasmania',
+    'Western Australia',
+    'Victoria',
+    'New South Wales',
+    'Queensland'
+  ] 
+
+  public titleNames: string[] =[
+    'Mr.',
+    'Mrs.',
+    'Miss.',
+    'Ms.',
+    'Mx.',
+    'Dr.',
+    'Prof.',
+    'Rev.',
+    'Fr.',
+    'Sir',
+    'Madam / Dame',
+    'Master'
+  ] 
+
   constructor(
     private _dialog: MatDialog, 
     private _empService: EmployeeService,

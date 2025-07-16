@@ -19,44 +19,44 @@ export interface Emp {
   providedIn: 'root'
 })
 // JSON Server
-export class EmployeeService {
-  constructor(private _http: HttpClient) {}
-
-  addEmployee(data: Emp): Observable<Emp> {
-      return this._http.post<Emp>('http://localhost:3000/employees', data);
-  }
-
-  updateEmployee(id: number, data: Emp): Observable<Emp> {
-      return this._http.put<Emp>(`http://localhost:3000/employees/${id}`, data);
-  }
-
-  getEmployeeList(): Observable<Emp[]> {
-    return this._http.get<Emp[]>('http://localhost:3000/employees');
-  }
-
-  deleteEmployee(id: number): Observable<Emp> {
-    return this._http.delete<Emp>(`http://localhost:3000/employees/${id}`);
-  }
-}
-
-// https://6875a09b814c0dfa6539009e.mockapi.io/api/v1/formSubmit
 // export class EmployeeService {
-//   public baseURL: string = 'https://6875a09b814c0dfa6539009e.mockapi.io/api/v1/formSubmit';
 //   constructor(private _http: HttpClient) {}
 
 //   addEmployee(data: Emp): Observable<Emp> {
-//       return this._http.post<Emp>(this.baseURL, data);
+//       return this._http.post<Emp>('http://localhost:3000/employees', data);
 //   }
 
 //   updateEmployee(id: number, data: Emp): Observable<Emp> {
-//       return this._http.put<Emp>(this.baseURL+`/${id}`, data);
+//       return this._http.put<Emp>(`http://localhost:3000/employees/${id}`, data);
 //   }
 
 //   getEmployeeList(): Observable<Emp[]> {
-//     return this._http.get<Emp[]>(this.baseURL);
+//     return this._http.get<Emp[]>('http://localhost:3000/employees');
 //   }
 
 //   deleteEmployee(id: number): Observable<Emp> {
-//     return this._http.delete<Emp>(this.baseURL+`/${id}`);
+//     return this._http.delete<Emp>(`http://localhost:3000/employees/${id}`);
 //   }
 // }
+
+// https://6875a09b814c0dfa6539009e.mockapi.io/api/v1/formSubmit
+export class EmployeeService {
+  public baseURL: string = 'https://6875a09b814c0dfa6539009e.mockapi.io/api/v1/formSubmit';
+  constructor(private _http: HttpClient) {}
+
+  addEmployee(data: Emp): Observable<Emp> {
+      return this._http.post<Emp>(this.baseURL, data);
+  }
+
+  updateEmployee(id: number, data: Emp): Observable<Emp> {
+      return this._http.put<Emp>(this.baseURL+`/${id}`, data);
+  }
+
+  getEmployeeList(): Observable<Emp[]> {
+    return this._http.get<Emp[]>(this.baseURL);
+  }
+
+  deleteEmployee(id: number): Observable<Emp> {
+    return this._http.delete<Emp>(this.baseURL+`/${id}`);
+  }
+}

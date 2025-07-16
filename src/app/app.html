@@ -1,28 +1,151 @@
-
 <div class="main-body">
-<div class="two-column-layout">
-  <div class="column">
+  <h1 style="color: rgb(18, 18, 168); margin: 10px 0;">Change of personal details</h1>
+</div>
+
+<form>
+<div class="main-body">
+  <div class="row">
+    <div class="column">
+      <div>
+        <h4 style="padding: 8px 12px; background-color: rgb(9, 46, 169); color: #fff;  margin: 15px 0;">1. Your previous personal details</h4>
+      </div>
       <div class="row">
         <mat-form-field appearance="outline">
-            <mat-label>First name</mat-label>
-            <input matInput type="text" placeholder="Ex. Kumar">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>Last name</mat-label>
-            <input matInput type="text" placeholder="Ex. Shan">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>Last name</mat-label>
-            <input matInput type="text" placeholder="Ex. Shan">
-        </mat-form-field>
-         <mat-form-field appearance="outline">
-            <mat-label>Last name</mat-label>
-            <input matInput type="text" placeholder="Ex. Shan">
+            <mat-label>Account Number</mat-label>
+            <input matInput type="number" placeholder="Ex. 1234567890">
         </mat-form-field>
      </div>
-  </div>
-  <div class="column">
+     <div class="row">
+        <mat-form-field appearance="outline">
+            <mat-label>Title</mat-label>
+            <input matInput type="text" placeholder="Ex. Title Name">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>DOB</mat-label>
+            <input matInput [matDatepicker]="dob">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="dob"></mat-datepicker-toggle>
+            <mat-datepicker #dob></mat-datepicker>
+        </mat-form-field>
+     </div>
+     <div class="row">
+        <mat-form-field appearance="outline">
+            <mat-label>Surname</mat-label>
+            <input matInput type="text" placeholder="Ex. Jhonpapa">
+        </mat-form-field>
+     </div>
+     <div class="row">
+        <mat-form-field appearance="outline">
+            <mat-label>Given name(s)</mat-label>
+            <input matInput type="text" placeholder="Ex. Jhonpapa">
+        </mat-form-field>
+     </div>
+     <div class="row">
+        <mat-form-field appearance="outline">
+            <mat-label>Address</mat-label>
+            <input matInput type="text" placeholder="Ex. 100/308 GreatWestren Hwy, Parramatta, NSW 2114">
+        </mat-form-field>
+     </div>
+     <div class="row">
+        <mat-form-field appearance="outline">
+            <mat-label>Suburb</mat-label>
+            <input matInput type="text" placeholder="Ex. 100/308 GreatWestren Hwy, Parramatta, NSW 2114">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>State</mat-label>
+          <mat-select>
+              @for (state of states; track state) {
+                  <mat-option [value]="state">{{ state }}</mat-option>
+              }
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Postcode</mat-label>
+            <input matInput type="text" placeholder="Ex. 2000">
+        </mat-form-field>
+     </div>
+     <div class="row">
+      <mat-form-field appearance="outline">
+            <mat-label>Contact phone number</mat-label>
+            <input matInput type="number" placeholder="Ex. 000 000 000">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+            <mat-label>Mobile Number</mat-label>
+            <input matInput type="number" placeholder="Ex. 000 000 000">
+      </mat-form-field>
+     </div>
+     <div class="row">
+      <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" placeholder="Ex. test@gmail.com">
+        </mat-form-field>
+      </div>
+
+      <div>
+        <h4 style="padding: 8px 12px; background-color: rgb(9, 46, 169); color: #fff;  margin: 15px 0;">2. Type of change requierd</h4>
+      </div>
+
       <div class="row">
+        <section class="example-section-row">
+          <p class="row-check-item"><mat-checkbox><span>Name</span></mat-checkbox></p>
+          <p class="row-check-item"><mat-checkbox><span>Address</span></mat-checkbox></p>
+          <p class="row-check-item"><mat-checkbox><span>Email address</span></mat-checkbox></p>
+        </section>
+      </div>
+      <div class="row">
+        <section class="example-section-row">
+          <p class="row-check-item"><mat-checkbox><span>Contact phone number</span></mat-checkbox></p>
+          <p class="row-check-item"></p>
+          <p class="row-check-item"><mat-checkbox><span>Date of birth</span></mat-checkbox></p>
+        </section>
+      </div>
+      <div>
+        <p style="padding: 0 0 8px 0; color: #6a6767; font-size: 18px;">
+         <b>Note:</b> You can also change also change your address, email address or contact phone number throught your My AMP account. If you have't registered for your online account, visit amp.com.au to get started.
+        </p>
+      </div>
+      <div>
+        <p style="padding: 8px 12px; background-color: rgb(105, 130, 214); color: #000000; margin: 5px 0 8px 0;">
+          Change of name
+        </p>
+      </div>
+      <div>
+        <p style="padding: 0 0 8px 0; color: #6a6767; font-size: 18px;">
+         Please make sure that you provide photocopies of your original identification documents and that the copy is correctly certified. Refer to the information sheet for detils on how to certify your documents. 
+        </p>
+      </div>
+
+      <div>
+        <p style="padding: 8px; color: #6a6767; font-size: 18px; border: solid 1px #171fb3;">
+         It's important that you mail the original certified copies of your documents to us - we can't accept faxed or emailed copies of the certified documents. 
+        </p>
+      </div>
+    </div>
+    <div class="column">
+      <div>
+        <h4 style="padding: 8px 12px; background-color: rgb(9, 46, 169); color: #fff; margin: 15px 0 0px 0;">2. Your previous personal details</h4>
+      </div>
+      <div>
+        <p style="padding: 8px 12px; background-color: rgb(105, 130, 214); color: #000000; margin: 5px 0 8px 0;">
+          Reason for change of name
+        </p>
+      </div>
+      <div>
+        <p style="padding: 0 0 8px 0; color: #6a6767; font-size: 18px;">
+          Please select the reason you've changed your name and provide us with the relevent documents showing your new name detais:
+        </p>
+      </div>
+      <div class="row">
+        <section class="example-section">
+          <p class="check-item"><mat-checkbox><span class="label-text">Marriage - certified copy of the marriage certificate issued by the Registry of Birth, Deaths and Marriages.</span></mat-checkbox></p>
+          <p class="check-item"><mat-checkbox><span class="label-text">Deed poll - a certified copy of the change of name registration certificate.</span></mat-checkbox></p>
+          <p class="check-item"><mat-checkbox><span class="label-text">Revert to maiden name - documents that show a clear link between your current  name and your  new name (eg a certified copy of the marriage certificate issued by the Registry of Births, Deaths and Marriages).</span></mat-checkbox></p>
+          <p class="check-item"><mat-checkbox><span class="label-text">Incorrect spelling of name</span></mat-checkbox></p>
+          <p class="check-item"><mat-checkbox><span class="label-text">Known by name</span></mat-checkbox></p>
+        </section>
+      </div>
+
+      <!-- <div class="row">
         <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
             <input matInput type="email" placeholder="Ex. test@gmail.com">
@@ -38,17 +161,108 @@
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
+       </div> -->
+       <div>
+        <p style="padding: 8px 12px; background-color: rgb(105, 130, 214); color: #000000; margin: 5px 0 8px 0;">
+          New name details
+        </p>
+      </div>
+      <div class="row">
         <mat-form-field appearance="outline">
-            <mat-label>DOB</mat-label>
-            <input matInput [matDatepicker]="pickerr">
-            <mat-hint>MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="pickerr"></mat-datepicker-toggle>
-            <mat-datepicker #pickerr></mat-datepicker>
+          <mat-label>Title</mat-label>
+          <mat-select>
+              @for (titleItem of titleNames; track titleItem) {
+                  <mat-option [value]="titleItem">{{ titleItem }}</mat-option>
+              }
+          </mat-select>
         </mat-form-field>
-       </div>
+      </div>
+      <div class="row">
+        <mat-form-field appearance="outline">
+            <mat-label>Surname</mat-label>
+            <input matInput type="text" placeholder="Ex. Jhonpapa">
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="outline">
+            <mat-label>Given name(S)</mat-label>
+            <input matInput type="text" placeholder="Ex. Jhonpapa">
+        </mat-form-field>
+      </div>
+
+      <div>
+        <p style="padding: 0 0 12px 0; color: #6a6767; font-size: 18px; margin-top: -10px;">
+          <b>Note:</b> We won't be able to process your request if you don't send us the certified of the relevent documents
+        </p>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="outline">
+            <mat-label>Given name(S)</mat-label>
+            <input matInput type="text" placeholder="Ex. Jhonpapa">
+        </mat-form-field>
+      </div>
+
+      <div>
+        <p style="padding: 8px 12px; background-color: rgb(105, 130, 214); color: #000000; margin: 5px 0 8px 0;">
+          New Address
+        </p>
+      </div>
+
+      <div>
+        <p style="padding: 0 0 12px 0; color: #6a6767; font-size: 18px;">
+          Please provide your new address details:
+        </p>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="outline">
+            <mat-label>Residential Address</mat-label>
+            <input matInput type="text" placeholder="Ex. 100/308 GreatWestren Hwy, Parramatta, NSW 2114">
+        </mat-form-field>
+     </div>
+
+     <div class="row">
+        <mat-form-field appearance="outline">
+            <mat-label>Suburb</mat-label>
+            <input matInput type="text" placeholder="Ex. BanksTown">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>State</mat-label>
+          <mat-select>
+              @for (state of states; track state) {
+                  <mat-option [value]="state">{{ state }}</mat-option>
+              }
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Postcode</mat-label>
+            <input matInput type="text" placeholder="Ex. 2000">
+        </mat-form-field>
+     </div>
+
+     <div class="row">
+        <mat-form-field appearance="outline">
+            <mat-label>Country</mat-label>
+            <input matInput type="text" placeholder="Ex. Australia">
+        </mat-form-field>
+     </div>
+
+    </div>
+  </div>
+  
+  <div style="text-align: right;">
+    <button matButton="filled" type="submit">Submit</button>
   </div>
 </div>
-</div>
+</form>
+
+<pre>
+
+</pre>
+
+
 
 
 
