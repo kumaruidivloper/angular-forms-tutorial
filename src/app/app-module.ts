@@ -21,6 +21,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatSort,
     MatSnackBarModule,
     MatSortModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    CommonModule
     
   ],
   providers: [

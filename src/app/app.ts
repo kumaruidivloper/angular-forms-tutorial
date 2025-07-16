@@ -9,6 +9,16 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { Core } from './core/core';
 import { Emp } from './services/employee';
+import {
+  FormControl,
+  FormGroup,
+  FormBuilder,
+  ReactiveFormsModule,
+  Validators,
+  AbstractControl,
+  ValidationErrors
+} from '@angular/forms';
+import { CustomValidators } from './Validators/validators';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +33,8 @@ export class App implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
+  myForm!: FormGroup
 
   public states: string[] =[
     'South Australia',
@@ -51,8 +63,84 @@ export class App implements OnInit, AfterViewInit {
   constructor(
     private _dialog: MatDialog, 
     private _empService: EmployeeService,
-    private _coreService: Core
-  ) {}
+    private _coreService: Core,
+    private fb: FormBuilder
+  ) {
+
+    this.myForm = this.fb.group({
+      userDetails: this.fb.group({
+        accnumber: ['', Validators.required],
+        title: ['', Validators.required],
+        dob: ['', Validators.required],
+        surname: ['', Validators.required],
+        givenName: ['', Validators.required],
+        address: ['', Validators.required],
+        suburb: ['', Validators.required],
+        state: ['', Validators.required],
+        postcode: ['', Validators.required],
+        contacNumber: ['', Validators.required],
+        mobileNumber: ['', Validators.required],
+        email: ['', [Validators.required,Validators.email]],
+        toc: [[], CustomValidators.atLeastOneSelected],
+        reasonNameChange: [[], CustomValidators.atLeastOneSelected],
+        //Inline Validator
+        // reasonNameChange: [[], [Validators.required,(control: AbstractControl) => {
+        //           return control.value && control.value.length > 0 ? null : { required: true };
+        // }]],
+        nctitle: ['', Validators.required],
+        ncsurname: ['', Validators.required],
+        ncgivenName: ['', Validators.required],
+        newaddress: ['', Validators.required],
+        newsuburb: ['', Validators.required],
+        newstate: ['', Validators.required],
+        newpostcode: ['', Validators.required],
+        country: ['', Validators.required],
+      })
+    })
+  }
+
+  get typeOfChangeReqControl(): FormControl {
+  return this.myForm.get('userDetails.toc') as FormControl;
+  }
+
+  get reasonNameChangeControl(): FormControl {
+  return this.myForm.get('userDetails.reasonNameChange') as FormControl;
+  }
+
+  onCheckboxChange(event: any, value: string, type: string) {
+    if(type === 'toc') {
+        const currentValues = this.typeOfChangeReqControl.value || [];
+      
+      if (event.checked) {
+        if (!currentValues.includes(value)) {
+          const newValues = [...currentValues, value];
+          this.typeOfChangeReqControl.setValue(newValues);
+        }
+      } else {
+        const newValues = currentValues.filter((item: string) => item !== value);
+        this.typeOfChangeReqControl.setValue(newValues);
+      }
+      
+      // Force validation update
+      this.typeOfChangeReqControl.updateValueAndValidity();
+    } else {
+         const currentValues = this.reasonNameChangeControl.value || [];
+      
+      if (event.checked) {
+        if (!currentValues.includes(value)) {
+          const newValues = [...currentValues, value];
+          this.reasonNameChangeControl.setValue(newValues);
+        }
+      } else {
+        const newValues = currentValues.filter((item: string) => item !== value);
+        this.reasonNameChangeControl.setValue(newValues);
+      }
+      
+      // Force validation update
+      this.reasonNameChangeControl.updateValueAndValidity();
+    }
+      
+  }
 
   ngOnInit(): void {
       this.getEmployeeList();
@@ -122,5 +210,46 @@ export class App implements OnInit, AfterViewInit {
       }
     })
   }
+
+typeOfChangeReq = [
+  [
+    { value: 'name', label: 'Name' },
+    { value: 'address', label: 'Address' },
+    { value: 'email', label: 'Email address' }
+  ],
+  [
+    { value: 'phoneNumber', label: 'Contact phone number' },
+    { value: 'dob', label: 'Date of birth' }
+  ]
+];
+
+reasonNameChange = [
+  {value: 'marriage' , label: 'Marriage - certified copy of the marriage certificate issued by the Registry of Birth, Deaths and Marriages.'},
+  {value: 'deedpoll', label: 'Deed poll - a certified copy of the change of name registration certificate.'},
+  {value: 'reverttomaidenname', label: 'Revert to maiden name - documents that show a clear link between your current name and your new name (eg a certified copy of the marriage certificate issued by the Registry of Births, Deaths and Marriages).'},
+  {value: 'incorrectspellingofname', label: 'Incorrect spelling of name'},
+  {value: 'knowbyname', label: 'Know by name'},
+]
+
+
+
+  // Helper method for empty slots (if you need consistent spacing)
+  getEmptySlots(usedSlots: number): any[] {
+    const maxSlots = 3; // or whatever your max is
+    return new Array(maxSlots - usedSlots);
+  }
+
+  formSubmit() {
+  // Mark all fields as touched to show validation errors
+  this.myForm.markAllAsTouched();
+  
+  // if (this.myForm.valid) {
+    // Form is valid, proceed with submission
+    console.log('Form submitted:', this.myForm.value);
+  // } else {
+    // console.log('Form is invalid');
+    // console.log('reasonNameChange errors:', this.typeOfChangeReqControl.errors);
+  // }
+}
 
 }
