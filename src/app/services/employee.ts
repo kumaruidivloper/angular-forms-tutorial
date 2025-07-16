@@ -2,23 +2,49 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+// export interface Emp {
+//   firstName: string
+//   lastName: string
+//   email: string
+//   dob: string
+//   gender: string
+//   education: string
+//   company: string
+//   experience: number
+//   package: number
+//   id: string
+// }
+
 export interface Emp {
-  firstName: string
-  lastName: string
-  email: string
+  accnumber: string
+  title: string
   dob: string
+  surname: string
+  givenName: string
   gender: string
-  education: string
-  company: string
-  experience: number
-  package: number
-  id: string
+  address: string
+  suburb: string
+  state: string
+  postcode: string
+  contacNumber: string
+  mobileNumber: string
+  email: string
+  toc: any[]
+  reasonNameChange: any[]
+  nctitle: string
+  ncsurname: string
+  ncgivenName: string
+  newaddress: string
+  newsuburb: string
+  newstate: string
+  newpostcode: string
+  country: string
 }
 
 @Injectable({
   providedIn: 'root'
 })
-// JSON Server
+//JSON Server
 // export class EmployeeService {
 //   constructor(private _http: HttpClient) {}
 

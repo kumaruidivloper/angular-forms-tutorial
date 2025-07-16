@@ -41,6 +41,14 @@
         </mat-form-field>
      </div>
      <div class="row">
+        <mat-radio-group aria-label="Select an option" formControlName="gender">
+            <mat-label><b>Gender</b></mat-label>
+            <mat-radio-button value="male">Male</mat-radio-button>
+            <mat-radio-button value="female">Female</mat-radio-button>
+            <mat-radio-button value="others">Others</mat-radio-button>
+        </mat-radio-group>
+    </div>
+     <div class="row">
         <mat-form-field appearance="outline">
             <mat-label>Address</mat-label>
             <input matInput type="text" placeholder="Ex. 100/308 GreatWestren Hwy, Parramatta, NSW 2114" formControlName="address">
@@ -61,7 +69,7 @@
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Postcode</mat-label>
-            <input matInput type="text" placeholder="Ex. 2000" formControlName="postcode">
+            <input matInput type="number" placeholder="Ex. 2000" formControlName="postcode">
         </mat-form-field>
      </div>
      <div class="row">
@@ -235,7 +243,7 @@
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Postcode</mat-label>
-            <input matInput type="text" placeholder="Ex. 2000" formControlName="newpostcode">
+            <input matInput type="number" placeholder="Ex. 2000" formControlName="newpostcode">
         </mat-form-field>
      </div>
 
@@ -255,9 +263,16 @@
 </div>
 </form>
 
-<pre>
-
-</pre>
+<div class="preview" style="position: fixed;
+    padding: 10px 28px;
+    top: 189px;
+    left: 143px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    width: 10%; border-radius: 18px;">
+    <button style="margin-bottom: 10px;" (click)="togglePre = !togglePre">{{togglePre ? 'Hide' : 'Show'}}</button>
+    <pre *ngIf="togglePre">{{myForm.value | json}}</pre>
+</div>
 
 
 

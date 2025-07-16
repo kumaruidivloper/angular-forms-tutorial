@@ -27,6 +27,7 @@ import { CustomValidators } from './Validators/validators';
   styleUrl: './app.scss'
 })
 export class App implements OnInit, AfterViewInit {
+  togglePre: boolean = true;
   protected title = 'Angular-Forms-Tutoriall';
   displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'dob', 'gender', 'education', 'company', 'experience', 'package', 'action'];
   dataSource = new MatTableDataSource<Emp>;
@@ -74,6 +75,7 @@ export class App implements OnInit, AfterViewInit {
         dob: ['', Validators.required],
         surname: ['', Validators.required],
         givenName: ['', Validators.required],
+        gender: ['', Validators.required],
         address: ['', Validators.required],
         suburb: ['', Validators.required],
         state: ['', Validators.required],
@@ -250,6 +252,17 @@ reasonNameChange = [
     // console.log('Form is invalid');
     // console.log('reasonNameChange errors:', this.typeOfChangeReqControl.errors);
   // }
+
+  this._empService.addEmployee(this.myForm.value).subscribe({
+              next: (val: Emp) => {
+                //alert('Employee added successfully')
+                // this._coreService.openSanckBar('Employee added successfully');
+                // this._dialogRef.close(true);
+              },
+              error: (err: any) => {
+                console.error(err)
+              }
+            }) 
 }
 
 }

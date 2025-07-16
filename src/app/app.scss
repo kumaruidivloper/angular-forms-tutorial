@@ -4,7 +4,7 @@
 
 .main-body {
   padding-top: 20px;
-  max-width: 90%;
+  max-width: 50%;
   margin: 0 auto;
   mat-form-field {
     width: 100%;
@@ -67,6 +67,9 @@
   .column {
     background: none !important;
     box-shadow: none !important;
+  }
+  .preview {
+    display: none;
   }
 }
 
