@@ -147,14 +147,6 @@ reasonNameChange = [
   {value: 'knowbyname', label: 'Know by name'},
 ]
 
-
-
-  // Helper method for empty slots (if you need consistent spacing)
-  getEmptySlots(usedSlots: number): any[] {
-    const maxSlots = 3; // or whatever your max is
-    return new Array(maxSlots - usedSlots);
-  }
-
   formSubmit() {
     // Mark all fields as touched to show validation errors
     this.myForm.markAllAsTouched();
