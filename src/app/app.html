@@ -6,15 +6,18 @@
 <div class="main-body" formGroupName="userDetails">
   <div class="row">
     <div class="column">
+
       <div>
         <h4 class="titleStyle">1. Your previous personal details</h4>
       </div>
+
       <div class="row">
         <mat-form-field appearance="outline">
             <mat-label>Account Number</mat-label>
             <input matInput type="number" placeholder="Ex. 1234567890" formControlName="accnumber">
         </mat-form-field>
      </div>
+
      <div class="row">
         <mat-form-field appearance="outline">
             <mat-label>Title</mat-label>
@@ -28,18 +31,21 @@
             <mat-datepicker #dob></mat-datepicker>
         </mat-form-field>
      </div>
+
      <div class="row">
         <mat-form-field appearance="outline">
             <mat-label>Surname</mat-label>
             <input matInput type="text" placeholder="Ex. Jhonpapa" formControlName="surname">
         </mat-form-field>
      </div>
+
      <div class="row">
         <mat-form-field appearance="outline">
             <mat-label>Given name(s)</mat-label>
             <input matInput type="text" placeholder="Ex. Jhonpapa" formControlName="givenName">
         </mat-form-field>
      </div>
+
      <div class="row">
         <mat-radio-group aria-label="Select an option" formControlName="gender">
             <mat-label><b>Gender</b></mat-label>
@@ -48,12 +54,14 @@
             <mat-radio-button value="others">Others</mat-radio-button>
         </mat-radio-group>
     </div>
+
      <div class="row">
         <mat-form-field appearance="outline">
             <mat-label>Address</mat-label>
             <input matInput type="text" placeholder="Ex. 100/308 GreatWestren Hwy, Parramatta, NSW 2114" formControlName="address">
         </mat-form-field>
      </div>
+
      <div class="row">
         <mat-form-field appearance="outline">
             <mat-label>Suburb</mat-label>
@@ -72,6 +80,7 @@
             <input matInput type="number" placeholder="Ex. 2000" formControlName="postcode">
         </mat-form-field>
      </div>
+
      <div class="row">
       <mat-form-field appearance="outline">
             <mat-label>Contact phone number</mat-label>
@@ -82,6 +91,7 @@
             <input matInput type="number" placeholder="Ex. 000 000 000" formControlName="mobileNumber">
       </mat-form-field>
      </div>
+
      <div class="row">
       <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
@@ -118,11 +128,13 @@
          <b>Note:</b> You can also change also change your address, email address or contact phone number throught your My AMP account. If you have't registered for your online account, visit amp.com.au to get started.
         </p>
       </div>
+
       <div>
         <p class="titleStyle2">
           Change of name
         </p>
       </div>
+
       <div>
         <p class="noteStyle">
          Please make sure that you provide photocopies of your original identification documents and that the copy is correctly certified. Refer to the information sheet for detils on how to certify your documents. 
@@ -134,6 +146,7 @@
          It's important that you mail the original certified copies of your documents to us - we can't accept faxed or emailed copies of the certified documents. 
         </p>
       </div>
+
     </div>
     <div class="column">
 
@@ -261,12 +274,13 @@
   <div class="buttonAlginRight">
     <button matButton="filled" type="submit">Submit</button>
   </div>
+  
 </div>
 </form>
 
 <div class="preview">
    <div class="buttonAlginCenter">
-     <button class="previexToggle" (click)="togglePre = !togglePre">{{togglePre ? 'Hide' : 'Show'}}</button>
+     <button class="previexToggle {{togglePre ? 'Hide' : 'Show'}}" (click)="togglePre = !togglePre">{{togglePre ? 'Hide' : 'Show'}}</button>
    </div> 
     <pre *ngIf="togglePre">{{myForm.value | json}}</pre>
 </div>
