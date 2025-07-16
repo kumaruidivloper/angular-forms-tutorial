@@ -1,9 +1,5 @@
-import { AfterViewInit, Component, OnInit, ViewChild, Inject, Optional } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { AfterViewInit, Component, OnInit, Inject, Optional } from '@angular/core';
 import { EmployeeService } from './services/employee';
-import { MatPaginator} from '@angular/material/paginator';
-import { MatSort} from '@angular/material/sort';
-import { MatTableDataSource} from '@angular/material/table';
 import { Core } from './core/core';
 import { Emp } from './services/employee';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -24,11 +20,6 @@ import { CustomValidators } from './Validators/validators';
 export class App implements OnInit, AfterViewInit {
   togglePre: boolean = true;
   protected title = 'Angular-Forms-Tutoriall';
-  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'dob', 'gender', 'education', 'company', 'experience', 'package', 'action'];
-  dataSource = new MatTableDataSource<Emp>;
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
 
   myForm!: FormGroup
 
