@@ -22,6 +22,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CommonModule } from '@angular/common';
+import { MatDialogRef } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -57,7 +58,11 @@ import { CommonModule } from '@angular/common';
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
-    provideClientHydration(withEventReplay())
+    provideClientHydration(withEventReplay()),
+    {
+      provide: MatDialogRef,
+      useValue: {}
+    }
   ],
   bootstrap: [App]
 })

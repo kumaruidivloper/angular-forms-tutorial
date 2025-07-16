@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, Inject, Optional } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EmpAddEdit } from './emp-add-edit/emp-add-edit';
 import { EmployeeService } from './services/employee';
@@ -9,6 +9,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { Core } from './core/core';
 import { Emp } from './services/employee';
+import { DialogRef } from '@angular/cdk/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {
   FormControl,
   FormGroup,
@@ -64,6 +66,8 @@ export class App implements OnInit, AfterViewInit {
   constructor(
     private _dialog: MatDialog, 
     private _empService: EmployeeService,
+    @Optional() private _dialogRef: MatDialogRef<App>, // Make optional
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any, // Make optional
     private _coreService: Core,
     private fb: FormBuilder
   ) {
@@ -254,15 +258,18 @@ reasonNameChange = [
   // }
 
   this._empService.addEmployee(this.myForm.value).subscribe({
-              next: (val: Emp) => {
-                //alert('Employee added successfully')
-                // this._coreService.openSanckBar('Employee added successfully');
-                // this._dialogRef.close(true);
-              },
-              error: (err: any) => {
-                console.error(err)
-              }
-            }) 
+      next: (val: Emp) => {
+        //alert('Employee added successfully')
+        this._coreService.openSanckBar('User Details added successfully');
+        if (this._dialogRef && typeof this._dialogRef.close === 'function') {
+            this._dialogRef.close(true);
+        }
+        console.table(this.myForm.value)
+      },
+      error: (err: any) => {
+        console.error(err)
+      }
+    }) 
 }
 
 }
