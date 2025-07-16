@@ -36,6 +36,13 @@
   }
 }
 
+/* Only for mobile screens (max-width: 767px) */
+@media (max-width: 767px) {
+.main-body {
+  max-width: 90%;
+}
+}
+
 /* Print layout: Two columns side-by-side */
 @media print {
   .row {
