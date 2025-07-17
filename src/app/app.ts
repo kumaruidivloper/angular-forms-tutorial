@@ -23,6 +23,118 @@ export class App implements OnInit, AfterViewInit {
 
   myForm!: FormGroup
 
+  // Generic error message configuration
+  private errorMessages: { [key: string]: { [key: string]: string } } = {
+    'userDetails.accnumber': {
+      required: 'Account number is required',
+      pattern: 'Account number must be numeric'
+    },
+    'userDetails.title': {
+      required: 'Title is required'
+    },
+    'userDetails.dob': {
+      required: 'Date of birth is required'
+    },
+    'userDetails.surname': {
+      required: 'Surname is required',
+      minlength: 'Surname must be at least 2 characters',
+      maxlength: 'Surname cannot exceed 50 characters'
+    },
+    'userDetails.givenName': {
+      required: 'Given name is required',
+      minlength: 'Given name must be at least 2 characters',
+      maxlength: 'Given name cannot exceed 50 characters'
+    },
+    'userDetails.gender': {
+      required: 'Gender is required'
+    },
+    'userDetails.address': {
+      required: 'Address is required'
+    },
+    'userDetails.suburb': {
+      required: 'Suburb is required'
+    },
+    'userDetails.state': {
+      required: 'State is required'
+    },
+    'userDetails.postcode': {
+      required: 'Postcode is required',
+      pattern: 'Postcode must be 4 digits',
+      minlength: 'Postcode must be 4 digits',
+      maxlength: 'Postcode must be 4 digits'
+    },
+    'userDetails.contacNumber': {
+      required: 'Contact number is required',
+      pattern: 'Contact number format is invalid'
+    },
+    'userDetails.mobileNumber': {
+      required: 'Mobile number is required',
+      pattern: 'Mobile number format is invalid'
+    },
+    'userDetails.email': {
+      required: 'Email is required',
+      email: 'Please enter a valid email address'
+    },
+    'userDetails.toc': {
+      atLeastOneRequired: 'Please select at least one type of change'
+    },
+    'userDetails.reasonNameChange': {
+      atLeastOneRequired: 'Please select at least one reason for name change'
+    },
+    'userDetails.nctitle': {
+      required: 'New title is required'
+    },
+    'userDetails.ncsurname': {
+      required: 'New surname is required'
+    },
+    'userDetails.ncgivenName': {
+      required: 'New given name is required'
+    },
+    'userDetails.newaddress': {
+      required: 'New address is required'
+    },
+    'userDetails.newsuburb': {
+      required: 'New suburb is required'
+    },
+    'userDetails.newstate': {
+      required: 'New state is required'
+    },
+    'userDetails.newpostcode': {
+      required: 'New postcode is required',
+      pattern: 'New postcode must be 4 digits'
+    },
+    'userDetails.country': {
+      required: 'Country is required'
+    }
+  };
+
+   // Field display names for dynamic error generation
+  private fieldDisplayNames: { [key: string]: string } = {
+    'userDetails.accnumber': 'Account Number',
+    'userDetails.title': 'Title',
+    'userDetails.dob': 'Date of Birth',
+    'userDetails.surname': 'Surname',
+    'userDetails.givenName': 'Given Name',
+    'userDetails.gender': 'Gender',
+    'userDetails.address': 'Address',
+    'userDetails.suburb': 'Suburb',
+    'userDetails.state': 'State',
+    'userDetails.postcode': 'Postcode',
+    'userDetails.contacNumber': 'Contact Number',
+    'userDetails.mobileNumber': 'Mobile Number',
+    'userDetails.email': 'Email',
+    'userDetails.toc': 'Type of Change',
+    'userDetails.reasonNameChange': 'Reason for Name Change',
+    'userDetails.nctitle': 'New Title',
+    'userDetails.ncsurname': 'New Surname',
+    'userDetails.ncgivenName': 'New Given Name',
+    'userDetails.newaddress': 'New Address',
+    'userDetails.newsuburb': 'New Suburb',
+    'userDetails.newstate': 'New State',
+    'userDetails.newpostcode': 'New Postcode',
+    'userDetails.country': 'Country'
+  };
+
   public states: string[] =[
     'South Australia',
     'Tasmania',
@@ -57,19 +169,19 @@ export class App implements OnInit, AfterViewInit {
 
     this.myForm = this.fb.group({
       userDetails: this.fb.group({
-        accnumber: ['', Validators.required],
+        accnumber: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]],
         title: ['', Validators.required],
         dob: ['', Validators.required],
-        surname: ['', Validators.required],
-        givenName: ['', Validators.required],
+        surname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+        givenName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
         gender: ['', Validators.required],
         address: ['', Validators.required],
         suburb: ['', Validators.required],
         state: ['', Validators.required],
-        postcode: ['', Validators.required],
-        contacNumber: ['', Validators.required],
-        mobileNumber: ['', Validators.required],
-        email: ['', [Validators.required,Validators.email]],
+        postcode: ['', [Validators.required, Validators.pattern(/^\d{4}$/)]],
+        contacNumber: ['', [Validators.required, Validators.pattern(/^[0-9\s\-\+\(\)]+$/)]],
+        mobileNumber: ['', [Validators.required, Validators.pattern(/^[0-9\s\-\+\(\)]+$/)]],
+        email: ['', [Validators.required, Validators.email]],
         toc: [[], CustomValidators.atLeastOneSelected],
         reasonNameChange: [[], CustomValidators.atLeastOneSelected],
         //Inline Validator
@@ -82,10 +194,106 @@ export class App implements OnInit, AfterViewInit {
         newaddress: ['', Validators.required],
         newsuburb: ['', Validators.required],
         newstate: ['', Validators.required],
-        newpostcode: ['', Validators.required],
+        newpostcode: ['', [Validators.required, Validators.pattern(/^\d{4}$/)]],
         country: ['', Validators.required],
       })
     })
+  }
+
+  /**
+   * Generic method to get error message for any form field
+   * @param fieldPath - The path to the form field (e.g., 'userDetails.email')
+   * @returns The error message string or null if no error
+   */
+  getErrorMessage(fieldPath: string): string | null {
+    const control = this.myForm.get(fieldPath);
+    
+    if (!control || !control.errors || !control.touched) {
+      return null;
+    }
+
+    const errors = control.errors;
+    const fieldErrors = this.errorMessages[fieldPath];
+
+    // Check for specific error messages first
+    if (fieldErrors) {
+      for (const errorType in errors) {
+        if (fieldErrors[errorType]) {
+          return fieldErrors[errorType];
+        }
+      }
+    }
+
+    // Fallback to generic error messages
+    return this.getGenericErrorMessage(fieldPath, errors);
+  }
+
+  /**
+   * Generate generic error messages when specific ones are not defined
+   * @param fieldPath - The path to the form field
+   * @param errors - The errors object from the form control
+   * @returns A generic error message
+   */
+  private getGenericErrorMessage(fieldPath: string, errors: any): string {
+    const fieldName: string | undefined = this.fieldDisplayNames[fieldPath] || fieldPath.split('.').pop();
+    
+    if (errors['required']) {
+      return `${fieldName} is required`;
+    }
+    if (errors['email']) {
+      return `Please enter a valid ${fieldName?.toLowerCase()}`;
+    }
+    if (errors['minlength']) {
+      return `${fieldName} must be at least ${errors['minlength'].requiredLength} characters`;
+    }
+    if (errors['maxlength']) {
+      return `${fieldName} cannot exceed ${errors['maxlength'].requiredLength} characters`;
+    }
+    if (errors['pattern']) {
+      return `${fieldName} format is invalid`;
+    }
+    if (errors['atLeastOneRequired']) {
+      return `Please select at least one ${fieldName?.toLowerCase()}`;
+    }
+    
+    return `${fieldName} is invalid`;
+  }
+
+  /**
+   * Check if a field has errors and is touched
+   * @param fieldPath - The path to the form field
+   * @returns true if field has errors and is touched
+   */
+  hasFieldError(fieldPath: string): boolean {
+    const control = this.myForm.get(fieldPath);
+    return !!(control && control.errors && control.touched);
+  }
+
+  /**
+   * Get all error messages for a field (useful for fields with multiple validations)
+   * @param fieldPath - The path to the form field
+   * @returns Array of error messages
+   */
+  getAllErrorMessages(fieldPath: string): string[] {
+    const control = this.myForm.get(fieldPath);
+    
+    if (!control || !control.errors || !control.touched) {
+      return [];
+    }
+
+    const errors = control.errors;
+    const fieldErrors = this.errorMessages[fieldPath];
+    const messages: string[] = [];
+
+    for (const errorType in errors) {
+      if (fieldErrors && fieldErrors[errorType]) {
+        messages.push(fieldErrors[errorType]);
+      } else {
+        messages.push(this.getGenericErrorMessage(fieldPath, { [errorType]: errors[errorType] }));
+      }
+    }
+
+    return messages;
   }
 
   get typeOfChangeReqControl(): FormControl {

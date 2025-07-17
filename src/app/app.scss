@@ -3,12 +3,20 @@
 }
 
 .main-body {
-  padding-top: 20px;
+  padding-top: 10px;
   max-width: 50%;
   margin: 0 auto;
+  border: solid 1px #d9d6d6;
+  padding-right: 25px;
+  padding-left: 10px;
+  background-color: #f9f6f6;
   mat-form-field {
     width: 100%;
   }
+}
+.main-body.top {
+  padding: 15px 10px;
+  border: none;
 }
 
 
@@ -162,6 +170,7 @@ div.buttonAlginCenter {
 }
 div.buttonAlginRight {
   text-align: right;
+  padding: 40px 0px;
 }
 
 button.Show.previexToggle {
@@ -170,6 +179,33 @@ button.Show.previexToggle {
 
 button.Hide.previexToggle {
   background-color: #f44336; color: #fff;
+}
+
+.error-message {
+  color: #ba1a1a;
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+}
+
+.error-message span {
+  display: block;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+p.noteStyle2 
+{
+  padding: 0 0 12px 0; color: #6a6767; font-size: 18px; margin-top: 10px;
+}
+p.address 
+{
+  padding: 8px 12px; background-color: rgb(105, 130, 214); color: #000000; margin: 5px 0 8px 0;
+}
+
+p.provideAddress 
+{
+  padding: 0 0 12px 0; color: #6a6767; font-size: 18px;
 }
 
 
