@@ -361,7 +361,7 @@ reasonNameChange = [
     this._empService.addEmployee(this.myForm.value).subscribe({
         next: (val: Emp) => {
           //alert('Employee added successfully')
-          this._coreService.openSanckBar('User Details added successfully');
+          this._coreService.openSanckBar('User Details added successfully');       
           if (this._dialogRef && typeof this._dialogRef.close === 'function') {
               this._dialogRef.close(true);
           }
