@@ -25,8 +25,8 @@
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>DOB</mat-label>
-            <input matInput [matDatepicker]="dob" formControlName="dob">
-            <mat-hint>MM/DD/YYYY</mat-hint>
+            <input matInput [matDatepicker]="dob" formControlName="dob" placeholder="MM/DD/YYYY">
+            <mat-hint></mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="dob"></mat-datepicker-toggle>
             <mat-datepicker #dob></mat-datepicker>
         </mat-form-field>
