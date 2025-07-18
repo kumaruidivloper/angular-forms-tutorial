@@ -27,7 +27,7 @@ export class App implements OnInit, AfterViewInit {
   private errorMessages: { [key: string]: { [key: string]: string } } = {
     'userDetails.accnumber': {
       required: 'Account number is required',
-      pattern: 'Account number must be numeric'
+      pattern: 'Account number must containe 9 digit'
     },
     'userDetails.title': {
       required: 'Title is required'
