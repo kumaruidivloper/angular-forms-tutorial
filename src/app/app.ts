@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit, Inject, Optional } from '@angular/core';
 import { EmployeeService } from './services/employee';
 import { Core } from './core/core';
-import { Emp } from './services/employee';
+import { User } from './services/employee';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {
   FormControl,
@@ -359,7 +359,7 @@ reasonNameChange = [
     // }
 
     this._empService.addEmployee(this.myForm.value).subscribe({
-        next: (val: Emp) => {
+        next: (val: User) => {
           //alert('Employee added successfully')
           this._coreService.openSanckBar('User Details added successfully');       
           if (this._dialogRef && typeof this._dialogRef.close === 'function') {
