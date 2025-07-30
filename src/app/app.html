@@ -141,18 +141,21 @@
       <div>
         <h4 class="titleStyle">2. Type of change requierd</h4>
       </div>
-
-      <div class="row" *ngFor="let group of typeOfChangeReq">
-        <section class="example-section-row">
-          <p class="row-check-item" *ngFor="let option of group">
-            <mat-checkbox
-              [checked]="typeOfChangeReqControl.value.includes(option.value)"
-              (change)="onCheckboxChange($event, option.value, 'toc')">
-              <span>{{ option.label }}</span>
-            </mat-checkbox>
-          </p>
-        </section>
-      </div>
+     
+     <div [ngClass]="hasFieldError('userDetails.toc')? 'errorArea':''">
+        <div class="row" *ngFor="let group of typeOfChangeReq">
+          <section class="example-section-row">
+            <p class="row-check-item" *ngFor="let option of group">
+              <mat-checkbox
+                [checked]="typeOfChangeReqControl.value.includes(option.value)"
+                (change)="onCheckboxChange($event, option.value, 'toc'); markAsTouched('userDetails.toc')">
+                <span>{{ option.label }}</span>
+              </mat-checkbox>
+            </p>
+          </section>
+        </div>
+     </div> 
+      
 
       <!-- Validation Error Display -->
       <!-- <div *ngIf="typeOfChangeReqControl.invalid && typeOfChangeReqControl.touched" 
@@ -209,17 +212,20 @@
         </p>
       </div>
 
+    <div [ngClass]="hasFieldError('userDetails.reasonNameChange')? 'errorArea':''" style="padding-top: 10px;">
       <div class="row" *ngFor="let reason of reasonNameChange">
         <section class="example-section">
           <p class="row-check">
             <mat-checkbox
               [checked]="reasonNameChangeControl.value.includes(reason.value)"
-              (change)="onCheckboxChange($event, reason.value, 'resonOfChange')">
+              (change)="onCheckboxChange($event, reason.value, 'resonOfChange'); markAsTouched('userDetails.reasonNameChange')">
               <span class="label-text">{{ reason.label }}</span>
             </mat-checkbox>
           </p>
         </section>
       </div>
+    </div>
+      
 
       <!-- Validation Error Display -->
       <!-- <div *ngIf="reasonNameChangeControl.invalid && reasonNameChangeControl.touched" 

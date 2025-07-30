@@ -326,6 +326,10 @@ export class App implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
   }
 
+  markAsTouched(controlName: string) {
+    this.myForm.get(controlName)?.markAsTouched();
+  }
+
 typeOfChangeReq = [
   [
     { value: 'name', label: 'Name' },
