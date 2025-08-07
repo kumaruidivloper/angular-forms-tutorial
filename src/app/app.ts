@@ -7,7 +7,8 @@ import {
   FormControl,
   FormGroup,
   FormBuilder,
-  Validators
+  Validators,
+  FormArray
 } from '@angular/forms';
 import { CustomValidators } from './Validators/validators';
 
@@ -196,8 +197,36 @@ export class App implements OnInit, AfterViewInit {
         newstate: ['', Validators.required],
         newpostcode: ['', [Validators.required, Validators.pattern(/^\d{4}$/)]],
         country: ['', Validators.required],
+        contacts: this.fb.array([
+          this.fb.group({
+            number: [""],
+            type: [""],
+            description: [""],
+          }),
+        ]),
       })
     })
+  }
+
+  get contacts() {
+    const userDetails = this.myForm.get("userDetails") as FormGroup;
+    return userDetails.get("contacts") as FormArray;
+  }
+
+  addContact(event: Event) {
+    this.contacts.push(
+      this.fb.group({
+        number: [""],
+        type: [""],
+        description: [""],
+      })
+    );
+    event.preventDefault();
+  }
+
+  deleteContacts(index: number, event: Event) {
+    this.contacts.removeAt(index);
+    event.preventDefault();
   }
 
   /**
