@@ -349,34 +349,34 @@
         </mat-form-field>
      </div>
 
-     <button  matButton="filled" (click)="addContact($event)" style="margin-bottom: 15px;">Add contact</button>
-     <div class="row" formArrayName="contacts" *ngFor="let control of contacts.controls; let i = index" >
+    <button  matButton="filled" (click)="addContact($event)" style="margin: 15px 0;">Add contact</button>
+    <div class="row" formArrayName="contacts" *ngFor="let control of contacts.controls; let i = index" >
     <ng-container [formGroupName]="i">
       <fieldset   style="margin-bottom: 20px; position: relative; padding-top:35px; border-radius: 10px; border: solid #999 1px; width: 100%;">
         <button (click)="deleteContacts(i, $event)" style="position: absolute; top: -9px; right: 0; background: red; color: #fff; border: none; padding: 5px 10px; cursor: pointer; border-top-right-radius: 10px;">Delete</button>
       <legend style="font-weight: bold; color: blueviolet;">Add Contacts details {{i + 1}}</legend>
-        <div style="display: flex; gap: 10px; width: 100%; margin-bottom:20px">
+        <div style="display: flex; gap: 10px; width: 100%">
           <mat-form-field appearance="outline">
             <mat-label>Number</mat-label>
             <input matInput formControlName="number" style="flex-grow: 1; padding: 5px;" type="text" placeholder="Number" />
-            <mat-error *ngIf="hasFieldError('userDetails.contacts[0]')">
-              {{ getErrorMessage('userDetails.contacts[0]') }}
+            <mat-error *ngIf="hasFieldError('userDetails.contacts.' + i + '.number')">
+              {{ getErrorMessage('userDetails.contacts.' + i + '.number') }}
             </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Type</mat-label>
-            <input matInput formControlName="type" style="flex-grow: 1; padding: 5px;" type="text" placeholder="type" />
-              <mat-error *ngIf="hasFieldError('userDetails.contacts[1]')">
-            {{ getErrorMessage('userDetails.contacts[1]') }}
-            </mat-error>
+            <input matInput formControlName="type" style="flex-grow: 1; padding: 5px;" type="text" placeholder="Type" />
+              <mat-error *ngIf="hasFieldError('userDetails.contacts.' + i + '.type')">
+                {{ getErrorMessage('userDetails.contacts.' + i + '.type') }}
+              </mat-error>
           </mat-form-field>
         </div>
-        <div style="display: flex; gap: 10px; width: 100%; margin-bottom:20px">
+        <div style="display: flex; gap: 10px; width: 100%">
           <mat-form-field appearance="outline">
-            <mat-label>Descriptipn</mat-label>
-            <textarea matInput formControlName="description" style="flex-grow: 1;" placeholder="Address"></textarea>
-            <mat-error *ngIf="hasFieldError('userDetails.contacts[2]')">
-            {{ getErrorMessage('userDetails.contacts[2]') }}
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description" style="flex-grow: 1;" placeholder="Descriptipn"></textarea>
+            <mat-error *ngIf="hasFieldError('userDetails.contacts.' + i + '.description')">
+                {{ getErrorMessage('userDetails.contacts.' + i + '.description') }}
             </mat-error>
           </mat-form-field>
           

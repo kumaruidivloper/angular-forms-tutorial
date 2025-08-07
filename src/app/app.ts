@@ -199,9 +199,9 @@ export class App implements OnInit, AfterViewInit {
         country: ['', Validators.required],
         contacts: this.fb.array([
           this.fb.group({
-            number: [""],
-            type: [""],
-            description: [""],
+            number: ['', Validators.required],
+            type: ['', Validators.required],
+            description: ['', Validators.required],
           }),
         ]),
       })
@@ -209,16 +209,16 @@ export class App implements OnInit, AfterViewInit {
   }
 
   get contacts() {
-    const userDetails = this.myForm.get("userDetails") as FormGroup;
-    return userDetails.get("contacts") as FormArray;
+    const userDetails = this.myForm.get('userDetails') as FormGroup;
+    return userDetails.get('contacts') as FormArray;
   }
 
   addContact(event: Event) {
     this.contacts.push(
       this.fb.group({
-        number: [""],
-        type: [""],
-        description: [""],
+        number: ['', Validators.required],
+        type: ['', Validators.required],
+        description: ['', Validators.required],
       })
     );
     event.preventDefault();
@@ -264,7 +264,7 @@ export class App implements OnInit, AfterViewInit {
    * @returns A generic error message
    */
   private getGenericErrorMessage(fieldPath: string, errors: any): string {
-    const fieldName: string | undefined = this.fieldDisplayNames[fieldPath] || fieldPath.split('.').pop();
+    const fieldName: string | undefined = this.capitalizeFirstLetter(this.fieldDisplayNames[fieldPath] || fieldPath.split('.').pop()) 
     
     if (errors['required']) {
       return `${fieldName} is required`;
@@ -286,6 +286,11 @@ export class App implements OnInit, AfterViewInit {
     }
     
     return `${fieldName} is invalid`;
+  }
+
+  capitalizeFirstLetter(str: string | undefined) {
+    if (!str) return ''; // handle empty or null string
+    return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
   /**
