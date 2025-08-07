@@ -216,6 +216,26 @@ p.provideAddress
   background-color: #f4433624;
   border: solid 1px #f44336c0;
 }
+.dynamicForm
+{
+  margin-bottom: 20px; position: relative; padding-top:35px; border-radius: 10px; border: solid #999 1px; width: 100%;
+}
+.dynamicFieldError {
+  background-color: #f4433624;
+  border: solid 1px #f44336c0;
+}
+.deleteButton
+{
+  position: absolute; 
+  top: -9px; right: 0; 
+  background: rgb(237 223 223); 
+  color: #fff; 
+  border: none; 
+  padding: 1px 5px; 
+  cursor: pointer; 
+  border-top-right-radius: 10px; 
+  border-bottom-left-radius: 10px;
+}
 
 
     
