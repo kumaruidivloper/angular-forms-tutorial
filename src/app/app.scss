@@ -240,6 +240,21 @@ legend.legendError {
   border-top-right-radius: 10px; 
   border-bottom-left-radius: 10px;
 }
+.delete_icon
+{
+font-size: 19px; 
+margin-top: 5px; 
+height: 20px; 
+width: 20px; 
+color: rgb(222, 29, 29);
+}
+
+.deleteButton:hover {
+    background-color: #f44336;
+    .delete_icon {
+      color: rgb(225, 219, 219);
+    }
+}
 .preview.Show {
   background: rgba(0, 0, 0, 0.0);
 }
