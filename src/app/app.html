@@ -390,7 +390,8 @@
   </div>
   
   <div class="buttonAlginRight">
-    <button matButton="filled" type="submit">Submit</button>
+    <pre>{{myForm.valid}}</pre>
+    <button matButton="filled" type="submit" [disabled]="!myForm.valid">Submit</button>
   </div>
   
 </div>
