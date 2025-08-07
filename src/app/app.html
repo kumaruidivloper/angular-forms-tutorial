@@ -396,7 +396,7 @@
 </div>
 </form>
 
-<div class="preview">
+<div class="preview" [ngClass]="togglePre ? 'Hide' : 'Show'">
    <div class="buttonAlginCenter">
      <button class="previewToggle {{togglePre ? 'Hide' : 'Show'}}" (click)="togglePre = !togglePre">{{togglePre ? 'Hide' : 'Show'}}</button>
    </div> 

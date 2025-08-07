@@ -231,7 +231,7 @@ legend.legendError {
 .deleteButton
 {
   position: absolute; 
-  top: -9px; right: 0; 
+  top: -8px; right: 0; 
   background: rgb(237 223 223); 
   color: #fff; 
   border: none; 
@@ -239,6 +239,9 @@ legend.legendError {
   cursor: pointer; 
   border-top-right-radius: 10px; 
   border-bottom-left-radius: 10px;
+}
+.preview.Show {
+  background: rgba(0, 0, 0, 0.0);
 }
 
 
