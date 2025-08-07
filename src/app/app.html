@@ -354,7 +354,7 @@
     <ng-container [formGroupName]="i">
       <fieldset   class="dynamicForm" [ngClass]="hasFieldError('userDetails.contacts.' + i + '.number') && hasFieldError('userDetails.contacts.' + i + '.type') && hasFieldError('userDetails.contacts.' + i + '.description')? 'dynamicFieldError':''">
         <button (click)="deleteContacts(i, $event)" class="deleteButton"><mat-icon style="font-size: 19px; margin-top: 5px; height: 20px; width: 20px; color: rgb(222, 29, 29);"> delete</mat-icon></button>
-      <legend style="font-weight: bold; color: rgb(105, 130, 214);">Add Contacts details {{i + 1}}</legend>
+      <legend class="legendText" [ngClass]="hasFieldError('userDetails.contacts.' + i + '.number') && hasFieldError('userDetails.contacts.' + i + '.type') && hasFieldError('userDetails.contacts.' + i + '.description')? 'legendError':''">Add Contacts details {{i + 1}}</legend>
         <div style="display: flex; gap: 10px; width: 100%">
           <mat-form-field appearance="outline">
             <mat-label>Number</mat-label>

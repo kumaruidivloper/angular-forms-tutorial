@@ -217,6 +217,13 @@ fieldset.dynamicFieldError {
   background-color: #f4433624;
   border: solid 1px #f44336c0;
 }
+legend.legendError {
+  color: rgb(225 34 20);
+}
+.legendText{
+  font-weight: bold; color: rgb(105, 130, 214);
+}
+
 .dynamicForm
 {
   margin-bottom: 20px; position: relative; padding-top:35px; border-radius: 10px; border: solid #999 1px; width: 100%;
