@@ -398,7 +398,7 @@
 
 <div class="preview">
    <div class="buttonAlginCenter">
-     <button class="previexToggle {{togglePre ? 'Hide' : 'Show'}}" (click)="togglePre = !togglePre">{{togglePre ? 'Hide' : 'Show'}}</button>
+     <button class="previewToggle {{togglePre ? 'Hide' : 'Show'}}" (click)="togglePre = !togglePre">{{togglePre ? 'Hide' : 'Show'}}</button>
    </div> 
     <pre *ngIf="togglePre">{{myForm.value | json}}</pre>
 </div>
