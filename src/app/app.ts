@@ -8,7 +8,8 @@ import {
   FormGroup,
   FormBuilder,
   Validators,
-  FormArray
+  FormArray,
+  AbstractControl
 } from '@angular/forms';
 import { CustomValidators } from './Validators/validators';
 
@@ -21,6 +22,7 @@ import { CustomValidators } from './Validators/validators';
 export class App implements OnInit, AfterViewInit {
   togglePre: boolean = true;
   protected title = 'Angular-Forms-Tutoriall';
+  isAddcontactEnable: boolean = false;
 
   myForm!: FormGroup
 
@@ -170,6 +172,7 @@ export class App implements OnInit, AfterViewInit {
 
     this.myForm = this.fb.group({
       userDetails: this.fb.group({
+        hasContacts: [false],
         accnumber: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]],
         title: ['', Validators.required],
         dob: ['', Validators.required],
@@ -197,15 +200,14 @@ export class App implements OnInit, AfterViewInit {
         newstate: ['', Validators.required],
         newpostcode: ['', [Validators.required, Validators.pattern(/^\d{4}$/)]],
         country: ['', Validators.required],
-        contacts: this.fb.array([
-          this.fb.group({
-            number: ['', Validators.required],
-            type: ['', Validators.required],
-            description: ['', Validators.required],
-          }),
-        ]),
+        contacts: this.fb.array([])
       })
     })
+  }
+
+  get hasContactsControl(): AbstractControl | null {
+    const userDetails = this.myForm.get('userDetails') as FormGroup;
+    return userDetails.get('hasContacts')?.value || false;
   }
 
   get contacts() {
@@ -214,16 +216,28 @@ export class App implements OnInit, AfterViewInit {
   }
 
   addContact(event: Event) {
-    this.contacts.push(
-      this.fb.group({
-        number: ['', Validators.required],
-        type: ['', Validators.required],
-        description: ['', Validators.required],
-      })
-    );
+    this.createContact();
     event.preventDefault();
   }
 
+  createContactGroup() {
+    this.createContact();
+  }
+
+  createContact() {
+    this.contacts.push(
+      this.fb.group({
+        number: ['', [Validators.required, Validators.pattern(/^\d{4}$/)]],
+        type: ['', Validators.required],
+        description: ['', Validators.required],
+      })
+    )
+  }
+
+  enableAddContact() {
+    this.isAddcontactEnable = !this.isAddcontactEnable
+  }
+ 
   deleteContacts(index: number, event: Event) {
     this.contacts.removeAt(index);
     event.preventDefault();
@@ -355,6 +369,14 @@ export class App implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    const userDetials = this.myForm.get('userDetails') as FormGroup;
+    userDetials.get('hasContacts')?.valueChanges.subscribe(hasContacts => {
+      if(hasContacts && hasContacts.length === 0) {
+        this.contacts.push(this.createContactGroup());
+      } else if (!hasContacts) {
+        this.contacts.clear();
+      }
+    });
   }
 
   ngAfterViewInit(): void {

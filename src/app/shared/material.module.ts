@@ -23,6 +23,8 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 const MaterialModules = [
   MatFormFieldModule,
@@ -47,6 +49,8 @@ const MaterialModules = [
   MatSortModule,
   MatSnackBarModule,
   CommonModule,
+  MatSlideToggleModule,
+  MatButtonToggleModule,
   HttpClientModule
 ];
 
