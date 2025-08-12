@@ -374,10 +374,12 @@ export class App implements OnInit, AfterViewInit {
   ngOnInit(): void {
     const userDetials = this.myForm.get('userDetails') as FormGroup;
     userDetials.get('hasContacts')?.valueChanges.subscribe(hasContacts => {
-      if(hasContacts && hasContacts.length === 0) {
+      console.log(this.contacts.value)
+      if(hasContacts && this.contacts.value === 0) {
         this.contacts.push(this.createContactGroup());
       } else if (!hasContacts) {
         this.contacts.clear();
+        this.addContactDisabled = false;
       }
     });
   }
