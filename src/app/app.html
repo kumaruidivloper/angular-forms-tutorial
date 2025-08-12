@@ -15,9 +15,12 @@
         <mat-form-field appearance="outline">
             <mat-label>Account Number</mat-label>
             <input matInput type="number" placeholder="Ex. 1234567890" formControlName="accnumber">
-            <mat-error *ngIf="hasFieldError('userDetails.accnumber')">
+            <!-- <mat-error *ngIf="hasFieldError('userDetails.accnumber')">
               {{ getErrorMessage('userDetails.accnumber') }}
-            </mat-error>
+            </mat-error> -->
+            @if(hasFieldError('userDetails.accnumber')) {
+              <mat-error>{{ getErrorMessage('userDetails.accnumber') }}</mat-error>
+            }
         </mat-form-field>
      </div>
 
@@ -25,9 +28,12 @@
         <mat-form-field appearance="outline">
             <mat-label>Title</mat-label>
             <input matInput type="text" placeholder="Ex. Title Name" formControlName="title">
-            <mat-error *ngIf="hasFieldError('userDetails.title')">
+            <!-- <mat-error *ngIf="hasFieldError('userDetails.title')">
               {{ getErrorMessage('userDetails.title') }}
-            </mat-error>
+            </mat-error> -->
+            @if (hasFieldError('userDetails.title')) {
+              <mat-error>{{ getErrorMessage('userDetails.title') }}</mat-error>
+            }
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>DOB</mat-label>
@@ -35,9 +41,12 @@
             <mat-hint></mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="dob"></mat-datepicker-toggle>
             <mat-datepicker #dob></mat-datepicker>
-            <mat-error *ngIf="hasFieldError('userDetails.dob')">
+            <!-- <mat-error *ngIf="hasFieldError('userDetails.dob')">
               {{ getErrorMessage('userDetails.dob') }}
-            </mat-error>
+            </mat-error> -->
+            @if (hasFieldError('userDetails.dob')) {
+              <mat-error>{{ getErrorMessage('userDetails.dob') }}</mat-error>
+            }
         </mat-form-field>
      </div>
 
@@ -45,9 +54,12 @@
         <mat-form-field appearance="outline">
             <mat-label>Surname</mat-label>
             <input matInput type="text" placeholder="Ex. Jhonpapa" formControlName="surname">
-            <mat-error *ngIf="hasFieldError('userDetails.surname')">
+            <!-- <mat-error *ngIf="hasFieldError('userDetails.surname')">
               {{ getErrorMessage('userDetails.surname') }}
-            </mat-error>
+            </mat-error> -->
+            @if (hasFieldError('userDetails.surname')) {
+              <mat-error>{{ getErrorMessage('userDetails.surname') }}</mat-error>
+            }
         </mat-form-field>
      </div>
 
@@ -55,9 +67,12 @@
         <mat-form-field appearance="outline">
             <mat-label>Given name(s)</mat-label>
             <input matInput type="text" placeholder="Ex. Jhonpapa" formControlName="givenName">
-            <mat-error *ngIf="hasFieldError('userDetails.givenName')">
+            <!-- <mat-error *ngIf="hasFieldError('userDetails.givenName')">
               {{ getErrorMessage('userDetails.givenName') }}
-            </mat-error>
+            </mat-error> -->
+            @if(hasFieldError('userDetails.givenName')) {
+                <mat-error>{{ getErrorMessage('userDetails.givenName') }}</mat-error>
+            }
         </mat-form-field>
      </div>
 
@@ -69,17 +84,24 @@
               <mat-radio-button value="others">Others</mat-radio-button>
           </mat-radio-group>
       </div>
-      <div *ngIf="hasFieldError('userDetails.gender')" class="error-message">
+      <!-- <div *ngIf="hasFieldError('userDetails.gender')" class="error-message">
             <span>{{ getErrorMessage('userDetails.gender') }}</span>
-      </div>
-
+      </div> -->
+      @if(hasFieldError('userDetails.gender')) {
+        <div class="error-message">
+          <span>{{ getErrorMessage('userDetails.gender') }}</span>
+        </div>
+      }
      <div class="row">
         <mat-form-field appearance="outline">
             <mat-label>Address</mat-label>
             <input matInput type="text" placeholder="Ex. 100/308 GreatWestren Hwy, Parramatta, NSW 2114" formControlName="address">
-            <mat-error *ngIf="hasFieldError('userDetails.address')">
+            <!-- <mat-error *ngIf="hasFieldError('userDetails.address')">
               {{ getErrorMessage('userDetails.address') }}
-            </mat-error>
+            </mat-error> -->
+            @if(hasFieldError('userDetails.address')) {
+              <mat-error>{{ getErrorMessage('userDetails.address') }}</mat-error>
+            }
         </mat-form-field>
      </div>
 
@@ -87,9 +109,12 @@
         <mat-form-field appearance="outline">
             <mat-label>Suburb</mat-label>
             <input matInput type="text" placeholder="Ex. 100/308 GreatWestren Hwy, Parramatta, NSW 2114" formControlName="suburb">
-            <mat-error *ngIf="hasFieldError('userDetails.suburb')">
+            <!-- <mat-error *ngIf="hasFieldError('userDetails.suburb')">
               {{ getErrorMessage('userDetails.suburb') }}
-            </mat-error>
+            </mat-error> -->
+            @if(hasFieldError('userDetails.suburb')) {
+              <mat-error>{{ getErrorMessage('userDetails.suburb') }}</mat-error>
+            }
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>State</mat-label>
@@ -98,16 +123,22 @@
                   <mat-option [value]="state">{{ state }}</mat-option>
               }
           </mat-select>
-           <mat-error *ngIf="hasFieldError('userDetails.state')">
+           <!-- <mat-error *ngIf="hasFieldError('userDetails.state')">
             {{ getErrorMessage('userDetails.state') }}
-          </mat-error>
+          </mat-error> -->
+          @if(hasFieldError('userDetails.state')) {
+            <mat-error>{{ getErrorMessage('userDetails.state') }}</mat-error>
+          }
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Postcode</mat-label>
             <input matInput type="number" placeholder="Ex. 2000" formControlName="postcode">
-            <mat-error *ngIf="hasFieldError('userDetails.postcode')">
+            <!-- <mat-error *ngIf="hasFieldError('userDetails.postcode')">
               {{ getErrorMessage('userDetails.postcode') }}
-            </mat-error>
+            </mat-error> -->
+            @if(hasFieldError('userDetails.postcode')) {
+              <mat-error>{{ getErrorMessage('userDetails.postcode') }}</mat-error>
+            }
         </mat-form-field>
      </div>
 
@@ -115,16 +146,22 @@
       <mat-form-field appearance="outline">
             <mat-label>Contact phone number</mat-label>
             <input matInput type="number" placeholder="Ex. 000 000 000" formControlName="contacNumber">
-            <mat-error *ngIf="hasFieldError('userDetails.contacNumber')">
+            <!-- <mat-error *ngIf="hasFieldError('userDetails.contacNumber')">
               {{ getErrorMessage('userDetails.contacNumber') }}
-            </mat-error>
+            </mat-error> -->
+            @if(hasFieldError('userDetails.contacNumber')) {
+              <mat-error>{{ getErrorMessage('userDetails.contacNumber') }}</mat-error>
+            }
       </mat-form-field>
       <mat-form-field appearance="outline">
             <mat-label>Mobile Number</mat-label>
             <input matInput type="number" placeholder="Ex. 000 000 000" formControlName="mobileNumber">
-            <mat-error *ngIf="hasFieldError('userDetails.mobileNumber')">
+            <!-- <mat-error *ngIf="hasFieldError('userDetails.mobileNumber')">
               {{ getErrorMessage('userDetails.mobileNumber') }}
-            </mat-error>
+            </mat-error> -->
+            @if(hasFieldError('userDetails.mobileNumber')) {
+                <mat-error>{{ getErrorMessage('userDetails.mobileNumber') }}</mat-error>
+            }
       </mat-form-field>
      </div>
 
@@ -132,9 +169,12 @@
       <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
             <input matInput type="email" placeholder="Ex. test@gmail.com" formControlName="email">
-            <mat-error *ngIf="hasFieldError('userDetails.email')">
+            <!-- <mat-error *ngIf="hasFieldError('userDetails.email')">
               {{ getErrorMessage('userDetails.email') }}
-            </mat-error>
+            </mat-error> -->
+            @if(hasFieldError('userDetails.email')) {
+                <mat-error>{{ getErrorMessage('userDetails.email') }}</mat-error>
+            }
         </mat-form-field>
       </div>
 
@@ -143,7 +183,7 @@
       </div>
      
      <div [ngClass]="hasFieldError('userDetails.toc')? 'errorArea':''">
-        <div class="row" *ngFor="let group of typeOfChangeReq">
+        <!-- <div class="row" *ngFor="let group of typeOfChangeReq">
           <section class="example-section-row">
             <p class="row-check-item" *ngFor="let option of group">
               <mat-checkbox
@@ -153,7 +193,24 @@
               </mat-checkbox>
             </p>
           </section>
-        </div>
+        </div> -->
+        @for (group of typeOfChangeReq; track $index) {
+          <div class="row">
+            <section class="example-section-row">
+                @for (option of group; track option.value) {
+                  <p class="row-check-item">
+                    <mat-checkbox
+                      [checked]="typeOfChangeReqControl.value.includes(option.value)"
+                      (change)="
+                        onCheckboxChange($event, option.value, 'toc');
+                        markAsTouched('userDetails.toc')">
+                      <span>{{ option.label }}</span>
+                    </mat-checkbox>
+                  </p>
+                }
+            </section>
+          </div>
+        }
      </div> 
       
 
@@ -165,10 +222,14 @@
         </span>
       </div> -->
 
-      <div *ngIf="hasFieldError('userDetails.toc')" class="error-message">
+      <!-- <div *ngIf="hasFieldError('userDetails.toc')" class="error-message">
         <span>{{ getErrorMessage('userDetails.toc') }}</span>
-      </div>
-
+      </div> -->
+      @if(hasFieldError('userDetails.toc')) {
+        <div class="error-message">
+            <span>{{ getErrorMessage('userDetails.toc') }}</span>
+        </div>
+      }
       <div>
         <p class="noteStyle">
          <b>Note:</b> You can also change also change your address, email address or contact phone number throught your My AMP account. If you have't registered for your online account, visit amp.com.au to get started.
@@ -213,7 +274,7 @@
       </div>
 
     <div [ngClass]="hasFieldError('userDetails.reasonNameChange')? 'errorArea':''" style="padding-top: 10px;">
-      <div class="row" *ngFor="let reason of reasonNameChange">
+      <!-- <div class="row" *ngFor="let reason of reasonNameChange">
         <section class="example-section">
           <p class="row-check">
             <mat-checkbox
@@ -223,7 +284,22 @@
             </mat-checkbox>
           </p>
         </section>
-      </div>
+      </div> -->
+      @for (reason of reasonNameChange; track reason.value) {
+          <div class="row">
+            <section class="example-section">
+              <p class="row-check">
+                <mat-checkbox
+                  [checked]="reasonNameChangeControl.value.includes(reason.value)"
+                  (change)="
+                    onCheckboxChange($event, reason.value, 'resonOfChange');
+                    markAsTouched('userDetails.reasonNameChange')">
+                  <span class="label-text">{{ reason.label }}</span>
+                </mat-checkbox>
+              </p>
+            </section>
+          </div>
+      }
     </div>
       
 
@@ -235,10 +311,14 @@
         </span>
       </div> -->
 
-      <div *ngIf="hasFieldError('userDetails.reasonNameChange')" class="error-message">
+      <!-- <div *ngIf="hasFieldError('userDetails.reasonNameChange')" class="error-message">
         <span>{{ getErrorMessage('userDetails.reasonNameChange') }}</span>
-      </div>
-
+      </div> -->
+      @if(hasFieldError('userDetails.reasonNameChange')) {
+          <div class="error-message">
+            <span>{{ getErrorMessage('userDetails.reasonNameChange') }}</span>
+          </div>
+      }
        <div>
         <p style="padding: 8px 12px; background-color: rgb(105, 130, 214); color: #000000; margin: 5px 0 8px 0;">
           New name details
@@ -253,9 +333,12 @@
                   <mat-option [value]="titleItem">{{ titleItem }}</mat-option>
               }
           </mat-select>
-          <mat-error *ngIf="hasFieldError('userDetails.nctitle')">
+          <!-- <mat-error *ngIf="hasFieldError('userDetails.nctitle')">
             {{ getErrorMessage('userDetails.nctitle') }}
-          </mat-error>
+          </mat-error> -->
+          @if(hasFieldError('userDetails.nctitle')) {
+            <mat-error>{{ getErrorMessage('userDetails.nctitle') }}</mat-error>
+          }
         </mat-form-field>
       </div>
 
@@ -263,9 +346,12 @@
         <mat-form-field appearance="outline">
             <mat-label>Surname</mat-label>
             <input matInput type="text" placeholder="Ex. Jhonpapa" formControlName="ncsurname">
-            <mat-error *ngIf="hasFieldError('userDetails.ncsurname')">
+            <!-- <mat-error *ngIf="hasFieldError('userDetails.ncsurname')">
               {{ getErrorMessage('userDetails.ncsurname') }}
-            </mat-error>
+            </mat-error> -->
+            @if(hasFieldError('userDetails.ncsurname')) {
+              <mat-error>{{ getErrorMessage('userDetails.ncsurname') }}</mat-error>
+            }
         </mat-form-field>
       </div>
 
@@ -273,9 +359,12 @@
         <mat-form-field appearance="outline">
             <mat-label>Given name(S)</mat-label>
             <input matInput type="text" placeholder="Ex. Jhonpapa" formControlName="ncgivenName">
-            <mat-error *ngIf="hasFieldError('userDetails.ncgivenName')">
+            <!-- <mat-error *ngIf="hasFieldError('userDetails.ncgivenName')">
               {{ getErrorMessage('userDetails.ncgivenName') }}
-            </mat-error>
+            </mat-error> -->
+            @if(hasFieldError('userDetails.ncgivenName')) {
+              <mat-error>{{ getErrorMessage('userDetails.ncgivenName') }}</mat-error>
+            }
         </mat-form-field>
       </div>
 
@@ -301,9 +390,12 @@
         <mat-form-field appearance="outline">
             <mat-label>Residential Address</mat-label>
             <input matInput type="text" placeholder="Ex. 100/308 GreatWestren Hwy, Parramatta, NSW 2114" formControlName="newaddress">
-            <mat-error *ngIf="hasFieldError('userDetails.newaddress')">
+            <!-- <mat-error *ngIf="hasFieldError('userDetails.newaddress')">
               {{ getErrorMessage('userDetails.newaddress') }}
-            </mat-error>
+            </mat-error> -->
+            @if(hasFieldError('userDetails.newaddress')) {
+              <mat-error>{{ getErrorMessage('userDetails.newaddress') }}</mat-error>
+            }
         </mat-form-field>
      </div>
 
@@ -311,9 +403,12 @@
         <mat-form-field appearance="outline">
             <mat-label>Suburb</mat-label>
             <input matInput type="text" placeholder="Ex. BanksTown" formControlName="newsuburb">
-            <mat-error *ngIf="hasFieldError('userDetails.newsuburb')">
+            <!-- <mat-error *ngIf="hasFieldError('userDetails.newsuburb')">
               {{ getErrorMessage('userDetails.newsuburb') }}
-            </mat-error>
+            </mat-error> -->
+            @if(hasFieldError('userDetails.newsuburb')) {
+              <mat-error>{{ getErrorMessage('userDetails.newsuburb') }}</mat-error>
+            }
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>State</mat-label>
@@ -322,16 +417,22 @@
                   <mat-option [value]="state">{{ state }}</mat-option>
               }
           </mat-select>
-          <mat-error *ngIf="hasFieldError('userDetails.newstate')">
+          <!-- <mat-error *ngIf="hasFieldError('userDetails.newstate')">
             {{ getErrorMessage('userDetails.newstate') }}
-          </mat-error>
+          </mat-error> -->
+          @if(hasFieldError('userDetails.newstate')) {
+            <mat-error>{{ getErrorMessage('userDetails.newstate') }}</mat-error>
+          }
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Postcode</mat-label>
             <input matInput type="number" placeholder="Ex. 2000" formControlName="newpostcode">
-            <mat-error *ngIf="hasFieldError('userDetails.newpostcode')">
+            <!-- <mat-error *ngIf="hasFieldError('userDetails.newpostcode')">
               {{ getErrorMessage('userDetails.newpostcode') }}
-            </mat-error>
+            </mat-error> -->
+            @if(hasFieldError('userDetails.newpostcode')) {
+              <mat-error>{{ getErrorMessage('userDetails.newpostcode') }}</mat-error>
+            }
         </mat-form-field>
      </div>
 
@@ -342,10 +443,12 @@
             <!-- <mat-error *ngIf="myForm.get('userDetails.country')?.hasError('required') && myForm.get('userDetails.country')?.touched">
               Country is required
             </mat-error> -->
-
-            <mat-error *ngIf="hasFieldError('userDetails.country')">
+            <!-- <mat-error *ngIf="hasFieldError('userDetails.country')">
               {{ getErrorMessage('userDetails.country') }}
-            </mat-error>
+            </mat-error> -->
+            @if(hasFieldError('userDetails.country')) {
+              <mat-error>{{ getErrorMessage('userDetails.country') }}</mat-error>
+            }
         </mat-form-field>
      </div>
 
@@ -367,9 +470,7 @@
                   hasFieldError('userDetails.contacts.' + i + '.type') &&
                   hasFieldError('userDetails.contacts.' + i + '.description')
                     ? 'dynamicFieldError'
-                    : ''
-                "
-              >
+                    : ''">
                 <button (click)="deleteContacts(i, $event)" class="deleteButton">
                   <mat-icon class="delete_icon">delete</mat-icon>
                 </button>
@@ -378,11 +479,7 @@
                   [ngClass]="
                     hasFieldError('userDetails.contacts.' + i + '.number') &&
                     hasFieldError('userDetails.contacts.' + i + '.type') &&
-                    hasFieldError('userDetails.contacts.' + i + '.description')
-                      ? 'legendError'
-                      : ''
-                  "
-                >
+                    hasFieldError('userDetails.contacts.' + i + '.description') ? 'legendError' : ''">
                   Add Contacts details {{ i + 1 }}
                 </legend>
 
@@ -394,13 +491,13 @@
                       formControlName="number"
                       style="flex-grow: 1"
                       type="text"
-                      placeholder="Number"
-                    />
-                    <mat-error
-                      *ngIf="hasFieldError('userDetails.contacts.' + i + '.number')"
-                    >
+                      placeholder="Number"/>
+                    <!-- <mat-error *ngIf="hasFieldError('userDetails.contacts.' + i + '.number')">
                       {{ getErrorMessage('userDetails.contacts.' + i + '.number') }}
-                    </mat-error>
+                    </mat-error> -->
+                    @if(hasFieldError('userDetails.contacts.' + i + '.number')) {
+                        <mat-error>{{ getErrorMessage('userDetails.contacts.' + i + '.number') }}</mat-error>
+                    }
                   </mat-form-field>
 
                   <mat-form-field appearance="outline">
@@ -412,11 +509,12 @@
                       type="text"
                       placeholder="Type"
                     />
-                    <mat-error
-                      *ngIf="hasFieldError('userDetails.contacts.' + i + '.type')"
-                    >
+                    <!-- <mat-error *ngIf="hasFieldError('userDetails.contacts.' + i + '.type')">
                       {{ getErrorMessage('userDetails.contacts.' + i + '.type') }}
-                    </mat-error>
+                    </mat-error> -->
+                    @if(hasFieldError('userDetails.contacts.' + i + '.type')) {
+                        <mat-error>{{ getErrorMessage('userDetails.contacts.' + i + '.type') }}</mat-error>
+                    }
                   </mat-form-field>
                 </div>
 
@@ -427,13 +525,14 @@
                       matInput
                       formControlName="description"
                       style="flex-grow: 1"
-                      placeholder="Description"
-                    ></textarea>
-                    <mat-error
-                      *ngIf="hasFieldError('userDetails.contacts.' + i + '.description')"
-                    >
+                      placeholder="Description">
+                    </textarea>
+                    <!-- <mat-error *ngIf="hasFieldError('userDetails.contacts.' + i + '.description')">
                       {{ getErrorMessage('userDetails.contacts.' + i + '.description') }}
-                    </mat-error>
+                    </mat-error> -->
+                    @if(hasFieldError('userDetails.contacts.' + i + '.description')) {
+                        <mat-error>{{ getErrorMessage('userDetails.contacts.' + i + '.description') }}</mat-error>
+                    }
                   </mat-form-field>
                 </div>
               </fieldset>
@@ -456,8 +555,11 @@
 <div class="preview" [ngClass]="togglePre ? 'Hide' : 'Show'">
    <div class="buttonAlginCenter">
      <button class="previewToggle {{togglePre ? 'Hide Preview' : 'Show Preview'}}" (click)="togglePre = !togglePre">{{togglePre ? 'Hide Preview' : 'Show Preview'}}</button>
-   </div> 
-    <pre *ngIf="togglePre">{{myForm.value | json}}</pre>
+   </div>
+   <!-- <pre *ngIf="togglePre">{{myForm.value | json}}</pre>  -->
+  @if(togglePre) {
+      <pre>{{myForm.value | json}}</pre>
+  }
 </div>
 
 

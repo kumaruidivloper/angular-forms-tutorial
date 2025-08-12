@@ -216,15 +216,15 @@ export class App implements OnInit, AfterViewInit {
   }
 
   addContact(event: Event) {
-    this.createContact();
+    this.createNewContact();
     event.preventDefault();
   }
 
   createContactGroup() {
-    this.createContact();
+    this.createNewContact();
   }
 
-  createContact() {
+  createNewContact() {
     this.contacts.push(
       this.fb.group({
         number: ['', [Validators.required, Validators.pattern(/^\d{4}$/)]],
