@@ -460,9 +460,12 @@
 
   @if(hasContactsControl) {
       <button [disabled]="addContactDisabled"  matButton="filled" (click)="addContact($event)" style="margin: 15px 0;">Add contact</button>
-      @for (control of contacts.controls; track $index; let i = $index) {
+      @for (control of contacts.controls; track trackById(control); let i = $index) {
         <div class="row" formArrayName="contacts">
             <ng-container [formGroupName]="i">
+              <pre>{{hasFieldError('userDetails.contacts.' + i + '.number') &&
+                  hasFieldError('userDetails.contacts.' + i + '.type') &&
+                  hasFieldError('userDetails.contacts.' + i + '.description')}}</pre>
               <fieldset
                 class="dynamicForm"
                 [ngClass]="

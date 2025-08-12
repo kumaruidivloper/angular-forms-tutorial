@@ -24,6 +24,7 @@ export class App implements OnInit, AfterViewInit {
   protected title = 'Angular-Forms-Tutoriall';
   isAddcontactEnable: boolean = false;
   addContactDisabled: boolean = false;
+  index: number = 0;
 
   myForm!: FormGroup
 
@@ -206,6 +207,11 @@ export class App implements OnInit, AfterViewInit {
     })
   }
 
+  trackById(item: any): number {
+    console.log(item.controls.id.value)
+    return item.controls.id.value;
+  }
+
   get hasContactsControl(): AbstractControl | null {
     const userDetails = this.myForm.get('userDetails') as FormGroup;
     return userDetails.get('hasContacts')?.value || false;
@@ -228,8 +234,10 @@ export class App implements OnInit, AfterViewInit {
   }
 
   createNewContact() {
+    this.index++;
     this.contacts.push(
       this.fb.group({
+        id:[this.index],
         number: ['', [Validators.required, Validators.pattern(/^\d{4}$/)]],
         type: ['', Validators.required],
         description: ['', Validators.required],
