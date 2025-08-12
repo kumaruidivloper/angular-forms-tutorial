@@ -23,6 +23,7 @@ export class App implements OnInit, AfterViewInit {
   togglePre: boolean = true;
   protected title = 'Angular-Forms-Tutoriall';
   isAddcontactEnable: boolean = false;
+  addContactDisabled: boolean = false;
 
   myForm!: FormGroup
 
@@ -217,6 +218,8 @@ export class App implements OnInit, AfterViewInit {
 
   addContact(event: Event) {
     this.createNewContact();
+    console.log(this.contacts.length)
+    this.addContactDisabled = this.contacts.length === 5 ? true : false;
     event.preventDefault();
   }
 

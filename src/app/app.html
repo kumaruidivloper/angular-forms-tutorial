@@ -459,7 +459,7 @@
      </div>
 
   @if(hasContactsControl) {
-      <button  matButton="filled" (click)="addContact($event)" style="margin: 15px 0;">Add contact</button>
+      <button [disabled]="addContactDisabled"  matButton="filled" (click)="addContact($event)" style="margin: 15px 0;">Add contact</button>
       @for (control of contacts.controls; track $index; let i = $index) {
         <div class="row" formArrayName="contacts">
             <ng-container [formGroupName]="i">
