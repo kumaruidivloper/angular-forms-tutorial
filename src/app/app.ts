@@ -243,6 +243,7 @@ export class App implements OnInit, AfterViewInit {
  
   deleteContacts(index: number, event: Event) {
     this.contacts.removeAt(index);
+    this.addContactDisabled = this.contacts.length < 5 ? false : true;
     event.preventDefault();
   }
 
