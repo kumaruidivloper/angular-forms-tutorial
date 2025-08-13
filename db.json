@@ -55,6 +55,18 @@
       "company": "TCS",
       "experience": 4,
       "package": 4
+    },
+    {
+      "id": "f80b",
+      "firstName": "fdsfds",
+      "lastName": "fdsfds",
+      "email": "nb@dfds.com",
+      "dob": "2025-08-04T14:00:00.000Z",
+      "gender": "male",
+      "education": "Diploma",
+      "company": "fdsfds",
+      "experience": 44,
+      "package": 44
     }
   ]
 }

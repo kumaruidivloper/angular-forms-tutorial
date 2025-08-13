@@ -13,3 +13,11 @@ ng serve
 ## To Run JSON Server
 
 json-server --watch db.json
+
+## To Run app local N/W device
+
+ng serve --host 0.0.0.0 --port 4200
+
+## Modular Angular Boilerplate
+
+ng new my-app --no-standalone
