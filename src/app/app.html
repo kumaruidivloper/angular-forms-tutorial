@@ -556,6 +556,15 @@
 </form>
 
 <div class="preview" [ngClass]="togglePre ? 'Hide' : 'Show'">
+  <div>
+    <pre>{{lastSaved}}</pre>
+    @if(lastSaved) {
+      <span class="save-indicator">
+        <mat-icon>cloud_done</mat-icon>
+        Last saved: {{ lastSaved | date:'short' }}
+      </span>
+     }
+  </div>
    <div class="buttonAlginCenter">
      <button class="previewToggle {{togglePre ? 'Hide Preview' : 'Show Preview'}}" (click)="togglePre = !togglePre">{{togglePre ? 'Hide Preview' : 'Show Preview'}}</button>
    </div>

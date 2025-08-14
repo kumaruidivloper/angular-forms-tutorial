@@ -262,6 +262,24 @@ color: rgb(222, 29, 29);
   margin-top: 10px;
 }
 
+.form-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid #e0e0e0;
+}
+.save-indicator {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #cdea10;
+    font-size: 19px;
+    justify-content: center;
+    padding: 0 0 20px 0;
+}
+
 
     
   

@@ -1,8 +1,10 @@
-import { AfterViewInit, Component, OnInit, Inject, Optional } from '@angular/core';
+import { FormPersistenceService } from './services/form-persistence.service';
+import { AfterViewInit, Component, OnInit, Inject, Optional, OnDestroy } from '@angular/core';
 import { EmployeeService } from './services/employee';
 import { Core } from './core/core';
-import { User } from './services/employee';
+import { User } from './interface/user';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Subject, takeUntil, debounceTime, distinctUntilChanged } from 'rxjs';
 import {
   FormControl,
   FormGroup,
@@ -12,6 +14,7 @@ import {
   AbstractControl
 } from '@angular/forms';
 import { CustomValidators } from './Validators/validators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
@@ -19,12 +22,16 @@ import { CustomValidators } from './Validators/validators';
   standalone: false,
   styleUrl: './app.scss'
 })
-export class App implements OnInit, AfterViewInit {
+export class App implements OnInit, AfterViewInit, OnDestroy {
   togglePre: boolean = true;
   protected title = 'Angular-Forms-Tutoriall';
   isAddcontactEnable: boolean = false;
   addContactDisabled: boolean = false;
   index: number = 0;
+  private destroy$ = new Subject<void>();
+  private hasUnsavedChanges = false;
+  lastSaved: Date | null = null;
+  isSubmitting = false;
 
   myForm!: FormGroup
 
@@ -169,7 +176,9 @@ export class App implements OnInit, AfterViewInit {
     @Optional() private _dialogRef: MatDialogRef<App>, // Make optional
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any, // Make optional
     private _coreService: Core,
-    private fb: FormBuilder
+    private formPersistenceService: FormPersistenceService,
+    private fb: FormBuilder,
+    private snackBar: MatSnackBar
   ) {
 
     this.myForm = this.fb.group({
@@ -253,6 +262,54 @@ export class App implements OnInit, AfterViewInit {
     this.contacts.removeAt(index);
     this.addContactDisabled = this.contacts.length < 5 ? false : true;
     event.preventDefault();
+  }
+
+  private setupAutoSave(): void {
+    this.myForm.valueChanges
+      .pipe(
+        debounceTime(2000), // Wait 2 seconds after user stops typing
+        distinctUntilChanged(),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(() => {
+        this.hasUnsavedChanges = true;
+        this.saveFormState();
+      });
+  }
+
+  private saveFormState(): void {
+    if (this.myForm.pristine) return;
+
+    this.formPersistenceService.saveFormState(this.myForm)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (savedState) => {
+          this.lastSaved = new Date(savedState.lastModified);
+          console.log(this.lastSaved)
+          console.log(this.myForm.value)
+          this.hasUnsavedChanges = false;
+        },
+        error: (error) => {
+          console.error('Error saving form state:', error);
+        }
+      });
+  }
+
+  private loadSavedFormState(): void {
+    this.formPersistenceService.loadFormState()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (savedState) => {
+          if (savedState) {
+            this.myForm.patchValue(savedState.formData);
+            this.lastSaved = new Date(savedState.lastModified);
+            this.snackBar.open('Previous form data restored', 'Dismiss', { duration: 3000 });
+          }
+        },
+        error: (error) => {
+          console.error('Error loading saved form state:', error);
+        }
+      });
   }
 
   /**
@@ -391,6 +448,14 @@ export class App implements OnInit, AfterViewInit {
         this.addContactDisabled = false;
       }
     });
+
+    this.loadSavedFormState();
+    this.setupAutoSave();
+  }
+
+   ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   ngAfterViewInit(): void {
@@ -421,6 +486,28 @@ reasonNameChange = [
 ]
 
   formSubmit() {
+    this.formPersistenceService.saveUserData(this.myForm.value)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: (savedData) => {
+            this.isSubmitting = false;
+            this.hasUnsavedChanges = false;
+            this.snackBar.open('Form submitted successfully!', 'Dismiss', { duration: 3000 });
+            this.myForm.reset();
+            this.myForm.patchValue({
+              // preferences: {
+              //   newsletter: false,
+              //   notifications: true
+              // }
+            });
+            this.lastSaved = null;
+          },
+          error: (error) => {
+            this.isSubmitting = false;
+            this.snackBar.open('Error submitting form. Please try again.', 'Dismiss', { duration: 3000 });
+            console.error('Error submitting form:', error);
+          }
+        });
     // Mark all fields as touched to show validation errors
     this.myForm.markAllAsTouched();
     
