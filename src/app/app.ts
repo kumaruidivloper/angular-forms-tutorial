@@ -15,6 +15,9 @@ import {
 } from '@angular/forms';
 import { CustomValidators } from './Validators/validators';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ChangeDetectorRef } from '@angular/core';
+import { LocalStorageService } from './services/localStorage.service';
+
 
 @Component({
   selector: 'app-root',
@@ -32,6 +35,8 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   private hasUnsavedChanges = false;
   lastSaved: Date | null = null;
   isSubmitting = false;
+  private readonly STORAGE_KEY = 'userFormData';
+  private readonly AUTO_SAVE_DELAY = 1000;
 
   myForm!: FormGroup
 
@@ -178,7 +183,9 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     private _coreService: Core,
     private formPersistenceService: FormPersistenceService,
     private fb: FormBuilder,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private cdr: ChangeDetectorRef,
+    private localStorageService: LocalStorageService
   ) {
 
     this.myForm = this.fb.group({
@@ -254,6 +261,67 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     )
   }
 
+  /**
+   * Save form data to localStorage with 1-hour expiration
+   */
+  saveFormData(): void {
+    if (this.myForm.dirty) {
+      const formValue = this.myForm.value;
+      this.localStorageService.setItem(this.STORAGE_KEY, formValue, 1); // 1 hour expiration
+      console.log('Form data saved to localStorage');
+    }
+  }
+
+
+  /**
+   * Load form data from localStorage if available and not expired
+   */
+  private loadFormData(): void {
+    const savedData = this.localStorageService.getItem(this.STORAGE_KEY);
+    
+    if (savedData && savedData.userDetails) {
+      try {
+        // Load the basic form values
+        this.myForm.patchValue(savedData, { emitEvent: false });
+        
+        // Handle FormArray for contacts separately
+        if (savedData.userDetails.contacts && Array.isArray(savedData.userDetails.contacts)) {
+          this.loadContactsFormArray(savedData.userDetails.contacts);
+        }
+        
+        console.log('Form data loaded from localStorage');
+      } catch (error) {
+        console.error('Error loading form data:', error);
+        // Clear corrupted data
+        this.localStorageService.removeItem(this.STORAGE_KEY);
+      }
+    }
+  }
+
+  /**
+   * Load contacts into FormArray
+   */
+  private loadContactsFormArray(contacts: any[]): void {
+    const contactsArray = this.myForm.get('userDetails.contacts') as FormArray;
+    
+    // Clear existing contacts
+    while (contactsArray.length !== 0) {
+      contactsArray.removeAt(0);
+    }
+    
+    // Add saved contacts
+    contacts.forEach(contact => {
+      const contactGroup = this.fb.group({
+        id: [contact.id || null],
+        number: [contact.number || '', Validators.required],
+        type: [contact.type || '', Validators.required],
+        description: [contact.description || '']
+      });
+      
+      contactsArray.push(contactGroup);
+    });
+  }
+
   enableAddContact() {
     this.isAddcontactEnable = !this.isAddcontactEnable
   }
@@ -285,6 +353,8 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       .subscribe({
         next: (savedState) => {
           this.lastSaved = new Date(savedState.lastModified);
+          this.cdr.detectChanges(); // Or this.cdr.markForCheck()
+          this.saveFormData();
           console.log(this.lastSaved)
           console.log(this.myForm.value)
           this.hasUnsavedChanges = false;
@@ -438,6 +508,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.loadFormData();
     const userDetials = this.myForm.get('userDetails') as FormGroup;
     userDetials.get('hasContacts')?.valueChanges.subscribe(hasContacts => {
       console.log(this.contacts.value)
