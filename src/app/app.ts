@@ -224,7 +224,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   }
 
   trackById(item: any): number {
-    console.log(item.controls.id.value)
+    // console.log(item.controls.id.value)
     return item.controls.id.value;
   }
 
@@ -250,10 +250,13 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   }
 
   createNewContact() {
-    this.index++;
+    let highestId = this.contacts.length > 0
+  ? Math.max(...this.contacts.controls.map(c => c.value.id))
+  : 0;
+  console.log(highestId++)
     this.contacts.push(
       this.fb.group({
-        id:[this.index],
+        id:[highestId++],
         number: ['', [Validators.required, Validators.pattern(/^\d{4}$/)]],
         type: ['', Validators.required],
         description: ['', Validators.required],
@@ -328,7 +331,7 @@ markTouchedForFieldsWithValues() {
         id: [contact.id || null],
         number: [contact.number || '', Validators.required],
         type: [contact.type || '', Validators.required],
-        description: [contact.description || '']
+        description: [contact.description || '', Validators.required]
       });
       
       contactsArray.push(contactGroup);
@@ -355,7 +358,33 @@ markTouchedForFieldsWithValues() {
       .subscribe(() => {
         this.hasUnsavedChanges = true;
         this.saveFormState();
+        this.cdr.detectChanges();
       });
+
+  const contactsArray = this.myForm.get('userDetails.contacts') as FormArray;
+  if (contactsArray) {
+    contactsArray.valueChanges
+      .pipe(
+        debounceTime(2000),
+        distinctUntilChanged(),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(() => {
+        this.myForm.markAsDirty(); // This is the key fix
+        this.saveFormState();
+        this.cdr.detectChanges();
+      });
+  }
+  }
+
+  private compareFormValues(prev: any, curr: any): boolean {
+    try {
+      // Deep comparison using JSON
+      return JSON.stringify(prev) === JSON.stringify(curr);
+    } catch (error) {
+      // Fallback to false if JSON serialization fails
+      return false;
+    }
   }
 
   private saveFormState(): void {
@@ -431,6 +460,7 @@ markTouchedForFieldsWithValues() {
    */
   private getGenericErrorMessage(fieldPath: string, errors: any): string {
     const fieldName: string | undefined = this.capitalizeFirstLetter(this.fieldDisplayNames[fieldPath] || fieldPath.split('.').pop()) 
+    console.log(fieldName)
     
     if (errors['required']) {
       return `${fieldName} is required`;
@@ -536,6 +566,7 @@ markTouchedForFieldsWithValues() {
 
     this.loadSavedFormState();
     this.setupAutoSave();
+    this.addContactDisabled = this.contacts.length >= 5 ? true : false;
   }
 
    ngOnDestroy(): void {

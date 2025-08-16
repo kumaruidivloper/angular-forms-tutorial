@@ -466,6 +466,7 @@
               <pre>{{hasFieldError('userDetails.contacts.' + i + '.number') &&
                   hasFieldError('userDetails.contacts.' + i + '.type') &&
                   hasFieldError('userDetails.contacts.' + i + '.description')}}</pre>
+                  <pre>{{i}}</pre>
               <fieldset
                 class="dynamicForm"
                 [ngClass]="
@@ -493,7 +494,7 @@
                       matInput
                       formControlName="number"
                       style="flex-grow: 1"
-                      type="text"
+                      type="number"
                       placeholder="Number"/>
                     <!-- <mat-error *ngIf="hasFieldError('userDetails.contacts.' + i + '.number')">
                       {{ getErrorMessage('userDetails.contacts.' + i + '.number') }}
@@ -521,7 +522,7 @@
                   </mat-form-field>
                 </div>
 
-                <div style="display: flex; gap: 10px; width: 100%">
+                <div style="display: flex; gap: 10px; width: 100%; margin-top: 15px;">
                   <mat-form-field appearance="outline">
                     <mat-label>Description</mat-label>
                     <textarea
