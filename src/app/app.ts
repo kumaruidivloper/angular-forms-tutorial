@@ -261,6 +261,19 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     )
   }
 
+  // Mark all fields with values as touched
+markTouchedForFieldsWithValues() {
+  const userDetailsGroup = this.myForm.get('userDetails') as FormGroup;
+  
+  Object.keys(userDetailsGroup.controls).forEach(key => {
+    const control = userDetailsGroup.get(key);
+    
+    if (control && control.value) {
+      control.markAsTouched();
+    }
+  });
+}
+
   /**
    * Save form data to localStorage with 1-hour expiration
    */
@@ -509,6 +522,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadFormData();
+    this.markTouchedForFieldsWithValues();
     const userDetials = this.myForm.get('userDetails') as FormGroup;
     userDetials.get('hasContacts')?.valueChanges.subscribe(hasContacts => {
       console.log(this.contacts.value)
