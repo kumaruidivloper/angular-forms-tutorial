@@ -241,7 +241,6 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
 
   addContact(event: Event) {
     this.createNewContact();
-    console.log(this.contacts.length)
     this.addContactDisabled = this.contacts.length === 5 ? true : false;
     event.preventDefault();
   }
@@ -565,7 +564,6 @@ private hasStoredFormData(): boolean {
     this.loadSavedFormState();
     this.setupAutoSave();
     this.addContactDisabled = this.contacts.length >= 5 ? true : false;
-    this.highestId = this.contacts.length > 0 ? Math.max(...this.contacts.controls.map(c => c.value.id)) : this.index++;
   }
 
    ngOnDestroy(): void {
