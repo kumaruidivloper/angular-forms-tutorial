@@ -251,13 +251,10 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   }
 
   createNewContact() {
-    let highestId = this.contacts.length > 0
-  ? Math.max(...this.contacts.controls.map(c => c.value.id))
-  : 1;
     this.index++
     this.contacts.push(
       this.fb.group({
-        id:[highestId++],
+        id:[this.index],
         number: ['', [Validators.required, Validators.pattern(/^\d{4}$/)]],
         type: ['', Validators.required],
         description: ['', Validators.required],
@@ -276,6 +273,12 @@ markTouchedForFieldsWithValues() {
       control.markAsTouched();
     }
   });
+}
+
+// Helper method to check localStorage
+private hasStoredFormData(): boolean {
+  const storedData = localStorage.getItem(this.STORAGE_KEY);
+  return storedData !== null && storedData !== undefined;
 }
 
   /**
@@ -543,7 +546,11 @@ markTouchedForFieldsWithValues() {
 
   ngOnInit(): void {
     this.loadFormData();
+
+     // Check if localStorage key exists and has data
+  if (this.hasStoredFormData()) {
     this.markTouchedForFieldsWithValues();
+  }
     const userDetials = this.myForm.get('userDetails') as FormGroup;
     userDetials.get('hasContacts')?.valueChanges.subscribe(hasContacts => {
       // console.log(this.contacts.value)
