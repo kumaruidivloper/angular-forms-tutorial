@@ -37,6 +37,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   isSubmitting = false;
   private readonly STORAGE_KEY = 'userFormData';
   private readonly AUTO_SAVE_DELAY = 1000;
+  highestId: number = 0;
 
   myForm!: FormGroup
 
@@ -224,7 +225,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   }
 
   trackById(item: any): number {
-    // console.log(item.controls.id.value)
+    console.log(item.controls.id.value)
     return item.controls.id.value;
   }
 
@@ -252,8 +253,8 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   createNewContact() {
     let highestId = this.contacts.length > 0
   ? Math.max(...this.contacts.controls.map(c => c.value.id))
-  : 0;
-  console.log(highestId++)
+  : 1;
+    this.index++
     this.contacts.push(
       this.fb.group({
         id:[highestId++],
@@ -377,16 +378,6 @@ markTouchedForFieldsWithValues() {
   }
   }
 
-  private compareFormValues(prev: any, curr: any): boolean {
-    try {
-      // Deep comparison using JSON
-      return JSON.stringify(prev) === JSON.stringify(curr);
-    } catch (error) {
-      // Fallback to false if JSON serialization fails
-      return false;
-    }
-  }
-
   private saveFormState(): void {
     if (this.myForm.pristine) return;
 
@@ -397,8 +388,8 @@ markTouchedForFieldsWithValues() {
           this.lastSaved = new Date(savedState.lastModified);
           this.cdr.detectChanges(); // Or this.cdr.markForCheck()
           this.saveFormData();
-          console.log(this.lastSaved)
-          console.log(this.myForm.value)
+          // console.log(this.lastSaved)
+          // console.log(this.myForm.value)
           this.hasUnsavedChanges = false;
         },
         error: (error) => {
@@ -459,8 +450,7 @@ markTouchedForFieldsWithValues() {
    * @returns A generic error message
    */
   private getGenericErrorMessage(fieldPath: string, errors: any): string {
-    const fieldName: string | undefined = this.capitalizeFirstLetter(this.fieldDisplayNames[fieldPath] || fieldPath.split('.').pop()) 
-    console.log(fieldName)
+    const fieldName: string | undefined = this.capitalizeFirstLetter(this.fieldDisplayNames[fieldPath] || fieldPath.split('.').pop())
     
     if (errors['required']) {
       return `${fieldName} is required`;
@@ -539,6 +529,7 @@ markTouchedForFieldsWithValues() {
       const currentValues = control.value || [];
       const newValues = event.checked ? this.addValueToArray(currentValues, value) : this.removeValueFromArray(currentValues, value);
       control.setValue(newValues);
+      control.markAsDirty();
       control.updateValueAndValidity();
   }
 
@@ -555,7 +546,7 @@ markTouchedForFieldsWithValues() {
     this.markTouchedForFieldsWithValues();
     const userDetials = this.myForm.get('userDetails') as FormGroup;
     userDetials.get('hasContacts')?.valueChanges.subscribe(hasContacts => {
-      console.log(this.contacts.value)
+      // console.log(this.contacts.value)
       if(hasContacts && this.contacts.value === 0) {
         this.contacts.push(this.createContactGroup());
       } else if (!hasContacts) {
@@ -567,6 +558,7 @@ markTouchedForFieldsWithValues() {
     this.loadSavedFormState();
     this.setupAutoSave();
     this.addContactDisabled = this.contacts.length >= 5 ? true : false;
+    this.highestId = this.contacts.length > 0 ? Math.max(...this.contacts.controls.map(c => c.value.id)) : this.index++;
   }
 
    ngOnDestroy(): void {

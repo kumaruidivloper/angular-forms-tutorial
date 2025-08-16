@@ -13,7 +13,7 @@ export class CustomValidators {
 
   static atLeastOneSelected(control: AbstractControl): ValidationErrors | null {
     const value = control.value;
-    console.log('Validator called with value:', value);
+    // console.log('Validator called with value:', value);
     if (!value || value.length === 0) {
       return { atLeastOneRequired: true };
     }
