@@ -381,6 +381,7 @@ private hasStoredFormData(): boolean {
       .subscribe(() => {
         this.myForm.markAsDirty(); // This is the key fix
         this.saveFormState();
+
         this.cdr.detectChanges();
       });
   }
@@ -395,6 +396,7 @@ private hasStoredFormData(): boolean {
         next: (savedState) => {
           this.lastSaved = new Date(savedState.lastModified);
           this.cdr.detectChanges(); // Or this.cdr.markForCheck()
+          this._coreService.openSanckBar('Form data saved to localStorage'); 
           this.saveFormData();
           // console.log(this.lastSaved)
           // console.log(this.myForm.value)
@@ -570,6 +572,12 @@ private hasStoredFormData(): boolean {
     this.loadSavedFormState();
     this.setupAutoSave();
     this.addContactDisabled = this.contacts.length >= 5 ? true : false;
+
+    if(this.hasStoredFormData()) {
+      this._coreService.openSanckBar('Saved User Details data loaded from localStorage'); 
+    } else {
+      this._coreService.openSanckBar('There is no User Details saved'); 
+    }
   }
 
    ngOnDestroy(): void {
