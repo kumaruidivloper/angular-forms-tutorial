@@ -37,6 +37,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   private readonly STORAGE_KEY = 'userFormData';
   private readonly AUTO_SAVE_DELAY = 1000;
   highestId: number = 0;
+  isReset: boolean = false;
 
   myForm!: FormGroup
 
@@ -293,7 +294,7 @@ private hasStoredFormData(): boolean {
     if (this.myForm.dirty) {
       const formValue = this.myForm.value;
       this.localStorageService.setItem(this.STORAGE_KEY, formValue, 1); // 1 hour expiration
-      console.log('Form data saved to localStorage');
+      // console.log('Form data saved to localStorage');
     }
   }
 
@@ -389,13 +390,14 @@ private hasStoredFormData(): boolean {
 
   private saveFormState(): void {
     if (this.myForm.pristine) return;
+    if (this.isReset) return;
     this.formPersistenceService.saveFormState(this.myForm)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (savedState) => {
           this.lastSaved = new Date(savedState.lastModified);
           this.cdr.detectChanges(); // Or this.cdr.markForCheck()
-          this._coreService.openSanckBar('Form data saved to localStorage'); 
+          this._coreService.openSanckBar('Form data has been successfully saved to localStorage'); 
           this.saveFormData();
           // console.log(this.lastSaved)
           // console.log(this.myForm.value)
@@ -577,7 +579,7 @@ private hasStoredFormData(): boolean {
     this.addContactDisabled = this.contacts.length >= 5 ? true : false;
 
     if(this.hasStoredFormData()) {
-      this._coreService.openSanckBar('Saved User Details Data Loaded From LocalStorage'); 
+      this._coreService.openSanckBar('Saved user details have been loaded from localStorage'); 
       this.genderControlValue.markAsTouched();
     } else {
       this._coreService.openSanckBar('There is no User Details saved'); 
@@ -665,6 +667,19 @@ reasonNameChange = [
           console.error(err)
         }
       }) 
+  }
+
+  resetForm(event: Event){
+    this.myForm.reset(); event.preventDefault();
+    this.myForm.get('userDetails.toc')?.setValue([]);
+    this.myForm.get('userDetails.reasonNameChange')?.setValue([]);
+    this.localStorageService.removeItem(this.STORAGE_KEY);
+    this.lastSaved = null;
+    this.isReset = true;
+    this._coreService.openSanckBar('The form has been reset successfully');
+    setTimeout(() => {
+      this.isReset = false;
+    }, 2010)
   }
 
 }
