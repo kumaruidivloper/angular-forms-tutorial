@@ -76,7 +76,7 @@
         </mat-form-field>
      </div>
 
-     <div class="row">
+     <div class="row" [ngClass]="hasFieldError('userDetails.gender') ? 'errorArea': ''">
           <mat-radio-group aria-label="Select an option" formControlName="gender">
               <mat-label><b>Gender</b></mat-label>
               <mat-radio-button value="male">Male</mat-radio-button>

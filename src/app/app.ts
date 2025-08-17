@@ -368,28 +368,27 @@ private hasStoredFormData(): boolean {
         this.hasUnsavedChanges = true;
         this.saveFormState();
         this.cdr.detectChanges();
-      });
+  });
 
-  const contactsArray = this.myForm.get('userDetails.contacts') as FormArray;
-  if (contactsArray) {
-    contactsArray.valueChanges
-      .pipe(
-        debounceTime(2000),
-        distinctUntilChanged(),
-        takeUntil(this.destroy$)
-      )
-      .subscribe(() => {
-        this.myForm.markAsDirty(); // This is the key fix
-        this.saveFormState();
+    const contactsArray = this.myForm.get('userDetails.contacts') as FormArray;
+    if (contactsArray) {
+      contactsArray.valueChanges
+        .pipe(
+          debounceTime(2000),
+          distinctUntilChanged(),
+          takeUntil(this.destroy$)
+        )
+        .subscribe(() => {
+          this.myForm.markAsDirty(); // This is the key fix
+          this.saveFormState();
 
-        this.cdr.detectChanges();
+          this.cdr.detectChanges();
       });
-  }
+    }
   }
 
   private saveFormState(): void {
     if (this.myForm.pristine) return;
-
     this.formPersistenceService.saveFormState(this.myForm)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
@@ -534,6 +533,10 @@ private hasStoredFormData(): boolean {
   return this.myForm.get('userDetails.reasonNameChange') as FormControl;
   }
 
+  get genderControlValue(): FormControl {
+    return this.myForm.get('userDetails.gender') as FormControl
+  }
+
   onCheckboxChange(event: any, value: string, type: string): void {
       const control = type === 'toc' ? this.typeOfChangeReqControl : this.reasonNameChangeControl;
       const currentValues = control.value || [];
@@ -575,9 +578,12 @@ private hasStoredFormData(): boolean {
 
     if(this.hasStoredFormData()) {
       this._coreService.openSanckBar('Saved User Details data loaded from localStorage'); 
+      console.log(this.genderControlValue.markAsTouched());
     } else {
       this._coreService.openSanckBar('There is no User Details saved'); 
     }
+
+      
   }
 
    ngOnDestroy(): void {
