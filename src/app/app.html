@@ -489,18 +489,18 @@
 
                 <div style="display: flex; gap: 10px; width: 100%">
                   <mat-form-field appearance="outline">
-                    <mat-label>Number</mat-label>
+                    <mat-label>Postcode</mat-label>
                     <input
                       matInput
-                      formControlName="number"
+                      formControlName="postcode"
                       style="flex-grow: 1"
                       type="number"
-                      placeholder="Number"/>
+                      placeholder="Ex. 2000"/>
                     <!-- <mat-error *ngIf="hasFieldError('userDetails.contacts.' + i + '.number')">
                       {{ getErrorMessage('userDetails.contacts.' + i + '.number') }}
                     </mat-error> -->
-                    @if(hasFieldError('userDetails.contacts.' + i + '.number')) {
-                        <mat-error>{{ getErrorMessage('userDetails.contacts.' + i + '.number') }}</mat-error>
+                    @if(hasFieldError('userDetails.contacts.' + i + '.postcode')) {
+                        <mat-error>{{ getErrorMessage('userDetails.contacts.' + i + '.postcode') }}</mat-error>
                     }
                   </mat-form-field>
 

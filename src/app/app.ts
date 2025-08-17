@@ -149,7 +149,8 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     'userDetails.newsuburb': 'New Suburb',
     'userDetails.newstate': 'New State',
     'userDetails.newpostcode': 'New Postcode',
-    'userDetails.country': 'Country'
+    'userDetails.country': 'Country',
+    'userDetails.contacts': 'Contacts'
   };
 
   public states: string[] =[
@@ -253,7 +254,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     this.contacts.push(
       this.fb.group({
         id:[index],
-        number: ['', [Validators.required, Validators.pattern(/^\d{4}$/)]],
+        postcode: ['', [Validators.required, Validators.pattern(/^\d{4}$/)]],
         type: ['', Validators.required],
         description: ['', Validators.required],
       })
@@ -261,17 +262,22 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   }
 
 
-  // Mark all fields with values as touched
-markTouchedForFieldsWithValues() {
-  const userDetailsGroup = this.myForm.get('userDetails') as FormGroup;
-  
-  Object.keys(userDetailsGroup.controls).forEach(key => {
-    const control = userDetailsGroup.get(key);
-    
-    if (control && control.value) {
+// Mark all fields with values as touched
+private markTouchedIfHasValue(control: any): void {
+  if (control instanceof FormGroup || control instanceof FormArray) {
+    Object.values(control.controls).forEach(childControl => 
+      this.markTouchedIfHasValue(childControl)
+    );
+  } else {
+    if (control?.value) {
       control.markAsTouched();
     }
-  });
+  }
+}
+
+markTouchedForFieldsWithValues(): void {
+  this.markTouchedIfHasValue(this.myForm.get('userDetails'));
+  this.markTouchedIfHasValue(this.contacts);
 }
 
 // Helper method to check localStorage
@@ -332,7 +338,7 @@ private hasStoredFormData(): boolean {
     contacts.forEach(contact => {
       const contactGroup = this.fb.group({
         id: [contact.id || null],
-        number: [contact.number || '', Validators.required],
+        postcode: [contact.postcode || '', [Validators.required, Validators.pattern(/^\d{4}$/)]],
         type: [contact.type || '', Validators.required],
         description: [contact.description || '', Validators.required]
       });
