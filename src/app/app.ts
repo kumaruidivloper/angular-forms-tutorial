@@ -579,7 +579,7 @@ private hasStoredFormData(): boolean {
     this.addContactDisabled = this.contacts.length >= 5 ? true : false;
 
     if(this.hasStoredFormData()) {
-      this._coreService.openSanckBar('Saved user details have been loaded from localStorage'); 
+      this._coreService.openSanckBar('Saved user details have been loaded from localStora'); 
       this.genderControlValue.markAsTouched();
     } else {
       this._coreService.openSanckBar('There is no User Details saved'); 
