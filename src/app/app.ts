@@ -225,7 +225,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   }
 
   trackById(item: any): number {
-    console.log(item.controls.id.value)
+    // console.log(item.controls.id.value)
     return item.controls.id.value;
   }
 
@@ -242,6 +242,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   addContact(event: Event) {
     this.createNewContact();
     this.addContactDisabled = this.contacts.length === 5 ? true : false;
+    // this.index = this.contacts.length ? Math.max(...this.contacts.controls.map(c => c.value.id)) + 1 : Math.max(...this.contacts.controls.map(c => c.value.id)) + 1
     event.preventDefault();
   }
 
@@ -250,17 +251,19 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   }
 
   createNewContact() {
-    this.index++
+    // this.index++;
+    console.log(this.contacts.controls.length);
+    let index = this.contacts.controls.length == 0? 1 : Math.max(...this.contacts.controls.map(c => c.value.id))+1;
     this.contacts.push(
       this.fb.group({
-        id:[this.index],
+        id:[index],
         number: ['', [Validators.required, Validators.pattern(/^\d{4}$/)]],
         type: ['', Validators.required],
         description: ['', Validators.required],
       })
     )
+    // console.log(Math.max(...this.contacts.controls.map(c => c.value.id)))
   }
-
   // Mark all fields with values as touched
 markTouchedForFieldsWithValues() {
   const userDetailsGroup = this.myForm.get('userDetails') as FormGroup;
