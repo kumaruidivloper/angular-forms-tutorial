@@ -463,14 +463,14 @@
       @for (control of contacts.controls; track trackById(control); let i = $index) {
         <div class="row" formArrayName="contacts">
             <ng-container [formGroupName]="i">
-              <pre>{{hasFieldError('userDetails.contacts.' + i + '.number') &&
+              <pre>{{hasFieldError('userDetails.contacts.' + i + '.postcode') &&
                   hasFieldError('userDetails.contacts.' + i + '.type') &&
                   hasFieldError('userDetails.contacts.' + i + '.description')}}</pre>
                   <pre>{{i}}</pre>
               <fieldset
                 class="dynamicForm"
                 [ngClass]="
-                  hasFieldError('userDetails.contacts.' + i + '.number') &&
+                  hasFieldError('userDetails.contacts.' + i + '.postcode') &&
                   hasFieldError('userDetails.contacts.' + i + '.type') &&
                   hasFieldError('userDetails.contacts.' + i + '.description')
                     ? 'dynamicFieldError'
@@ -481,7 +481,7 @@
                 <legend
                   class="legendText"
                   [ngClass]="
-                    hasFieldError('userDetails.contacts.' + i + '.number') &&
+                    hasFieldError('userDetails.contacts.' + i + '.postcode') &&
                     hasFieldError('userDetails.contacts.' + i + '.type') &&
                     hasFieldError('userDetails.contacts.' + i + '.description') ? 'legendError' : ''">
                   Add Contacts details {{ i + 1 }}

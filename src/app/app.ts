@@ -255,8 +255,8 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
       this.fb.group({
         id:[index],
         postcode: ['', [Validators.required, Validators.pattern(/^\d{4}$/)]],
-        type: ['', Validators.required],
-        description: ['', Validators.required],
+        type: ['', [Validators.required,Validators.minLength(2), Validators.maxLength(50)]],
+        description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       })
     )
   }
@@ -339,8 +339,8 @@ private hasStoredFormData(): boolean {
       const contactGroup = this.fb.group({
         id: [contact.id || null],
         postcode: [contact.postcode || '', [Validators.required, Validators.pattern(/^\d{4}$/)]],
-        type: [contact.type || '', Validators.required],
-        description: [contact.description || '', Validators.required]
+        type: [contact.type || '', [Validators.required,Validators.minLength(2), Validators.maxLength(50)]],
+        description: [contact.description || '', [Validators.required,Validators.minLength(2), Validators.maxLength(50)]]
       });
       
       contactsArray.push(contactGroup);
