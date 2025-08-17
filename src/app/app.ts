@@ -30,7 +30,6 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   protected title = 'Angular-Forms-Tutoriall';
   isAddcontactEnable: boolean = false;
   addContactDisabled: boolean = false;
-  index: number = 0;
   private destroy$ = new Subject<void>();
   private hasUnsavedChanges = false;
   lastSaved: Date | null = null;
@@ -242,7 +241,6 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   addContact(event: Event) {
     this.createNewContact();
     this.addContactDisabled = this.contacts.length === 5 ? true : false;
-    // this.index = this.contacts.length ? Math.max(...this.contacts.controls.map(c => c.value.id)) + 1 : Math.max(...this.contacts.controls.map(c => c.value.id)) + 1
     event.preventDefault();
   }
 
@@ -251,8 +249,6 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   }
 
   createNewContact() {
-    // this.index++;
-    console.log(this.contacts.controls.length);
     let index = this.contacts.controls.length == 0? 1 : Math.max(...this.contacts.controls.map(c => c.value.id))+1;
     this.contacts.push(
       this.fb.group({
@@ -262,8 +258,9 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
         description: ['', Validators.required],
       })
     )
-    // console.log(Math.max(...this.contacts.controls.map(c => c.value.id)))
   }
+
+
   // Mark all fields with values as touched
 markTouchedForFieldsWithValues() {
   const userDetailsGroup = this.myForm.get('userDetails') as FormGroup;
