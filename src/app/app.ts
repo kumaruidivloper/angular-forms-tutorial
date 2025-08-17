@@ -577,8 +577,8 @@ private hasStoredFormData(): boolean {
     this.addContactDisabled = this.contacts.length >= 5 ? true : false;
 
     if(this.hasStoredFormData()) {
-      this._coreService.openSanckBar('Saved User Details data loaded from localStorage'); 
-      console.log(this.genderControlValue.markAsTouched());
+      this._coreService.openSanckBar('Saved User Details Data Loaded From LocalStorage'); 
+      this.genderControlValue.markAsTouched();
     } else {
       this._coreService.openSanckBar('There is no User Details saved'); 
     }
