@@ -582,7 +582,7 @@ private hasStoredFormData(): boolean {
       this._coreService.openSanckBar('Saved user details have been loaded from localStorage'); 
       this.genderControlValue.markAsTouched();
     } else {
-      this._coreService.openSanckBar('There is no User Details saved'); 
+      this._coreService.openSanckBar('No stored user details detected in localStorage'); 
     }
 
       
