@@ -358,34 +358,51 @@ private hasStoredFormData(): boolean {
     event.preventDefault();
   }
 
+  // private setupAutoSave(): void {
+  //   this.myForm.valueChanges
+  //     .pipe(
+  //       debounceTime(2000), // Wait 2 seconds after user stops typing
+  //       distinctUntilChanged(),
+  //       takeUntil(this.destroy$)
+  //     )
+  //     .subscribe(() => {
+  //       this.hasUnsavedChanges = true;
+  //       this.saveFormState();
+  //       this.cdr.detectChanges();
+  // });
+
+  //   const contactsArray = this.myForm.get('userDetails.contacts') as FormArray;
+  //   if (contactsArray) {
+  //     contactsArray.valueChanges
+  //       .pipe(
+  //         debounceTime(2000),
+  //         distinctUntilChanged(),
+  //         takeUntil(this.destroy$)
+  //       )
+  //       .subscribe(() => {
+  //         this.myForm.markAsDirty(); // This is the key fix
+  //         this.saveFormState();
+
+  //         this.cdr.detectChanges();
+  //     });
+  //   }
+  // }
+
   private setupAutoSave(): void {
     this.myForm.valueChanges
-      .pipe(
-        debounceTime(2000), // Wait 2 seconds after user stops typing
+       .pipe(
+        debounceTime(2000),
         distinctUntilChanged(),
         takeUntil(this.destroy$)
-      )
-      .subscribe(() => {
-        this.hasUnsavedChanges = true;
-        this.saveFormState();
-        this.cdr.detectChanges();
-  });
+       )
+       .subscribe(() => this.handleFormChange());
+  }
 
-    const contactsArray = this.myForm.get('userDetails.contacts') as FormArray;
-    if (contactsArray) {
-      contactsArray.valueChanges
-        .pipe(
-          debounceTime(2000),
-          distinctUntilChanged(),
-          takeUntil(this.destroy$)
-        )
-        .subscribe(() => {
-          this.myForm.markAsDirty(); // This is the key fix
-          this.saveFormState();
-
-          this.cdr.detectChanges();
-      });
-    }
+  private handleFormChange(): void {
+    this.hasUnsavedChanges = true;
+    this.myForm.markAsDirty();
+    this.saveFormState();
+    this.cdr.detectChanges();
   }
 
   private saveFormState(): void {
