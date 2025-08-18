@@ -2,7 +2,7 @@
   <h1>Change of personal details</h1>
 </div>
 
-<form [formGroup]="myForm" (ngSubmit)="formSubmit()">
+<form [formGroup]="myForm" (ngSubmit)="formSubmit($event)">
 <div class="main-body" formGroupName="userDetails">
   <div class="row">
     <div class="column">
@@ -200,7 +200,7 @@
                 @for (option of group; track option.value) {
                   <p class="row-check-item">
                     <mat-checkbox
-                      [checked]="typeOfChangeReqControl.value.includes(option.value)"
+                      [checked]="typeOfChangeReqControl.value?.includes(option.value)"
                       (change)="
                         onCheckboxChange($event, option.value, 'toc');
                         markAsTouched('userDetails.toc')">
@@ -290,7 +290,7 @@
             <section class="example-section">
               <p class="row-check">
                 <mat-checkbox
-                  [checked]="reasonNameChangeControl.value.includes(reason.value)"
+                  [checked]="reasonNameChangeControl.value?.includes(reason.value)"
                   (change)="
                     onCheckboxChange($event, reason.value, 'resonOfChange');
                     markAsTouched('userDetails.reasonNameChange')">

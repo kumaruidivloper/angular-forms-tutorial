@@ -637,7 +637,7 @@ reasonNameChange = [
   {value: 'knowbyname', label: 'Know by name'},
 ]
 
-  formSubmit() {
+  formSubmit(event: Event) {
     this.formPersistenceService.saveUserData(this.myForm.value)
         .pipe(takeUntil(this.destroy$))
         .subscribe({
@@ -653,6 +653,12 @@ reasonNameChange = [
               // }
             });
             this.lastSaved = null;
+            this.isReset = true;
+            this.localStorageService.removeItem(this.STORAGE_KEY);
+            this.myForm.reset();
+            setTimeout(() => {
+              this.isReset = false;
+            }, 2010)
           },
           error: (error) => {
             this.isSubmitting = false;
@@ -661,29 +667,32 @@ reasonNameChange = [
           }
         });
     // Mark all fields as touched to show validation errors
-    this.myForm.markAllAsTouched();
+    //this.myForm.markAllAsTouched();
+    //this.myForm.markAsUntouched();
     
     // if (this.myForm.valid) {
       // Form is valid, proceed with submission
       console.log('Form submitted:', this.myForm.value);
+      this.myForm.reset();
+      event.preventDefault();
     // } else {
       // console.log('Form is invalid');
       // console.log('reasonNameChange errors:', this.typeOfChangeReqControl.errors);
     // }
 
-    this._empService.addEmployee(this.myForm.value).subscribe({
-        next: (val: User) => {
-          //alert('Employee added successfully')
-          this._coreService.openSanckBar('User Details added successfully');       
-          if (this._dialogRef && typeof this._dialogRef.close === 'function') {
-              this._dialogRef.close(true);
-          }
-          console.table(this.myForm.value)
-        },
-        error: (err: any) => {
-          console.error(err)
-        }
-      }) 
+    // this._empService.addEmployee(this.myForm.value).subscribe({
+    //     next: (val: User) => {
+    //       //alert('Employee added successfully')
+    //       this._coreService.openSanckBar('User Details added successfully');       
+    //       if (this._dialogRef && typeof this._dialogRef.close === 'function') {
+    //           this._dialogRef.close(true);
+    //       }
+    //       console.table(this.myForm.value)
+    //     },
+    //     error: (err: any) => {
+    //       console.error(err)
+    //     }
+    //   }) 
   }
 
   resetForm(event: Event){
