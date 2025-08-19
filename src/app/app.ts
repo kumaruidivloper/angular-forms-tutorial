@@ -644,7 +644,6 @@ reasonNameChange = [
           next: (savedData) => {
             this.isSubmitting = false;
             this.hasUnsavedChanges = false;
-            this.myForm.reset();
             this.snackBar.open('Form submitted successfully!', 'Dismiss', { duration: 3000 });
             this.myForm.patchValue({
               // preferences: {
@@ -655,6 +654,7 @@ reasonNameChange = [
             this.lastSaved = null;
             this.isReset = true;
             this.localStorageService.removeItem(this.STORAGE_KEY);
+            this.formResetOnsubmit();
             this.resetTimeDealy();
           },
           error: (error) => {
@@ -690,6 +690,23 @@ reasonNameChange = [
     //       console.error(err)
     //     }
     //   }) 
+  }
+
+  private formResetOnsubmit() {
+    // Reset nested FormGroup state
+        const userDetailsGroup = this.myForm.get('userDetails') as FormGroup;
+        if (userDetailsGroup) {
+            userDetailsGroup.markAsUntouched();
+            userDetailsGroup.markAsPristine();
+            userDetailsGroup.reset();
+          // Reset individual control states
+          Object.keys(userDetailsGroup.controls).forEach(key => {
+            const control = userDetailsGroup.get(key);
+            control?.markAsUntouched();
+            control?.markAsPristine();
+            control?.setErrors(null);
+          });
+        }
   }
 
   resetForm(event: Event){
