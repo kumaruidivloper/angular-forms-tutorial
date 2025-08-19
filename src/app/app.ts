@@ -644,8 +644,8 @@ reasonNameChange = [
           next: (savedData) => {
             this.isSubmitting = false;
             this.hasUnsavedChanges = false;
-            this.snackBar.open('Form submitted successfully!', 'Dismiss', { duration: 3000 });
             this.myForm.reset();
+            this.snackBar.open('Form submitted successfully!', 'Dismiss', { duration: 3000 });
             this.myForm.patchValue({
               // preferences: {
               //   newsletter: false,
@@ -655,10 +655,7 @@ reasonNameChange = [
             this.lastSaved = null;
             this.isReset = true;
             this.localStorageService.removeItem(this.STORAGE_KEY);
-            this.myForm.reset();
-            setTimeout(() => {
-              this.isReset = false;
-            }, 2010)
+            this.resetTimeDealy();
           },
           error: (error) => {
             this.isSubmitting = false;
@@ -672,9 +669,9 @@ reasonNameChange = [
     
     // if (this.myForm.valid) {
       // Form is valid, proceed with submission
-      console.log('Form submitted:', this.myForm.value);
-      this.myForm.reset();
-      event.preventDefault();
+      // console.log('Form submitted:', this.myForm.value);
+      // this.myForm.reset();
+      // event.preventDefault();
     // } else {
       // console.log('Form is invalid');
       // console.log('reasonNameChange errors:', this.typeOfChangeReqControl.errors);
@@ -703,6 +700,10 @@ reasonNameChange = [
     this.lastSaved = null;
     this.isReset = true;
     this._coreService.openSanckBar('The form has been reset successfully');
+    this.resetTimeDealy();
+  }
+
+  private resetTimeDealy() {
     setTimeout(() => {
       this.isReset = false;
     }, 2010)
