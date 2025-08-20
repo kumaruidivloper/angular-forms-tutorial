@@ -1,5 +1,108 @@
 <h2 mat-dialog-title>Form Value Persistance Data Flow Diagram</h2>
 <mat-dialog-content class="mat-typography">
+<div class="container">
+        <h1>Angular Reactive Form with Auto-Save Functionality</h1>
+        
+        <div class="requirement-item requirement-1">
+            <span class="requirement-number">1</span>
+            <div class="requirement-content">
+                <div class="requirement-title">Initial Load</div>
+                <div class="requirement-description">
+                    On form initialization, check if an <span class="highlight">incomplete form object</span> exists in the backend API. 
+                    If found, patch these values into the Angular reactive form. If no incomplete object exists, load a fresh empty form.
+                </div>
+                <div class="technical-details">
+                    <strong>Technical Implementation:</strong><br>
+                    • API Call: <span class="api-endpoint">GET /api/incomplete-form</span><br>
+                    • Method: <code>form.patchValue(incompleteData)</code><br>
+                    • Fallback: Load empty form if no data found
+                </div>
+            </div>
+        </div>
+
+        <div class="flow-indicator">↓</div>
+
+        <div class="requirement-item requirement-2">
+            <span class="requirement-number">2</span>
+            <div class="requirement-content">
+                <div class="requirement-title">Auto-Save on Typing</div>
+                <div class="requirement-description">
+                    Implement a <span class="highlight">debounced auto-save mechanism</span> that detects when the user stops typing 
+                    and automatically saves the current form values as an incomplete object to the API endpoint.
+                </div>
+                <div class="technical-details">
+                    <strong>Technical Implementation:</strong><br>
+                    • RxJS: <code>debounceTime(500ms)</code>, <code>distinctUntilChanged()</code><br>
+                    • API Call: <span class="api-endpoint">PUT /api/incomplete-form</span><br>
+                    • Trigger: <code>form.valueChanges</code> subscription
+                </div>
+            </div>
+        </div>
+
+        <div class="flow-indicator">↓</div>
+
+        <div class="requirement-item requirement-3">
+            <span class="requirement-number">3</span>
+            <div class="requirement-content">
+                <div class="requirement-title">Form Submission</div>
+                <div class="requirement-description">
+                    When the user successfully submits the form, <span class="highlight">delete the incomplete form object</span> 
+                    from the API endpoint to clean up temporary data.
+                </div>
+                <div class="technical-details">
+                    <strong>Technical Implementation:</strong><br>
+                    • Submit: <span class="api-endpoint">POST /api/submit-form</span><br>
+                    • Cleanup: <span class="api-endpoint">DELETE /api/incomplete-form</span><br>
+                    • Sequence: Submit → Success → Delete incomplete data
+                </div>
+            </div>
+        </div>
+
+        <div class="flow-indicator">↓</div>
+
+        <div class="requirement-item requirement-4">
+            <span class="requirement-number">4</span>
+            <div class="requirement-content">
+                <div class="requirement-title">Reset Form</div>
+                <div class="requirement-description">
+                    When user resets the form, <span class="highlight">delete the incomplete form object</span> 
+                    from the API endpoint to clean up temporary data.
+                </div>
+                <div class="technical-details">
+                    <strong>Technical Implementation:</strong><br>
+                    • Reset: <code>form.reset()</code><br>
+                    • Cleanup: <span class="api-endpoint">DELETE /api/incomplete-form</span><br>
+                    • User Action: Reset button or programmatic reset
+                </div>
+            </div>
+        </div>
+
+        <div class="summary">
+            <h2>🎯 Key Features & Benefits</h2>
+            <div class="key-features">
+                <div class="feature-item">
+                    <div class="feature-icon">💾</div>
+                    <div class="feature-text">Auto-Save<br>No Data Loss</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-text">Debounced<br>Performance</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔄</div>
+                    <div class="feature-text">Auto-Cleanup<br>Data Management</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📱</div>
+                    <div class="feature-text">Seamless UX<br>User Experience</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🛡️</div>
+                    <div class="feature-text">Error Resilient<br>Reliability</div>
+                </div>
+            </div>
+        </div>
+    </div>
 <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
