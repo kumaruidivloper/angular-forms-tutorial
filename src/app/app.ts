@@ -1,9 +1,9 @@
 import { FormPersistenceService } from './services/form-persistence.service';
-import { AfterViewInit, Component, OnInit, Inject, Optional, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, OnInit, Inject, Optional, OnDestroy,inject } from '@angular/core';
 import { EmployeeService } from './services/employee';
 import { Core } from './core/core';
 import { User } from './interface/user';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { Subject, takeUntil, debounceTime, distinctUntilChanged } from 'rxjs';
 import {
   FormControl,
@@ -17,7 +17,7 @@ import { CustomValidators } from './Validators/validators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ChangeDetectorRef } from '@angular/core';
 import { LocalStorageService } from './services/localStorage.service';
-
+import { Dialog } from './dialog/dialog';
 
 @Component({
   selector: 'app-root',
@@ -38,6 +38,8 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   private readonly AUTO_SAVE_DELAY = 1000;
   highestId: number = 0;
   isReset: boolean = false;
+  dialog = inject(MatDialog);
+
 
   myForm!: FormGroup
 
@@ -222,6 +224,23 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
         country: ['', Validators.required],
         contacts: this.fb.array([])
       })
+    })
+  }
+
+  openDialog(event: Event, enterAnimationSpeed: string, exitAnimationSpeed: string) {
+    event.preventDefault();
+    const dialogRef = this.dialog.open(Dialog, {
+      width: '80vw',
+      maxWidth: '1400px',
+      minWidth: '600px',
+      height: '70vh',
+      maxHeight: '800px',
+      enterAnimationDuration: enterAnimationSpeed,
+      exitAnimationDuration: exitAnimationSpeed
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
     })
   }
 

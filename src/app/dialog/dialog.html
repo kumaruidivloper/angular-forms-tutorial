@@ -1,0 +1,181 @@
+<h2 mat-dialog-title>Form Value Persistance Data Flow Diagram</h2>
+<mat-dialog-content class="mat-typography">
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+    </marker>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="800" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="600" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#2c3e50">Angular Reactive Form Architecture</text>
+  
+  <!-- User Interface Layer -->
+  <rect x="50" y="80" width="300" height="180" rx="10" fill="#e3f2fd" stroke="#1976d2" stroke-width="2" filter="url(#shadow)"/>
+  <text x="200" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1976d2">User Interface Layer</text>
+  
+  <!-- Angular Component -->
+  <rect x="70" y="120" width="120" height="60" rx="5" fill="#bbdefb" stroke="#1565c0" stroke-width="1"/>
+  <text x="130" y="140" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#0d47a1">Angular</text>
+  <text x="130" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#0d47a1">Component</text>
+  <text x="130" y="170" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#1565c0">Form UI</text>
+  
+  <!-- Reactive Form -->
+  <rect x="210" y="120" width="120" height="60" rx="5" fill="#bbdefb" stroke="#1565c0" stroke-width="1"/>
+  <text x="270" y="140" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#0d47a1">Reactive</text>
+  <text x="270" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#0d47a1">Form</text>
+  <text x="270" y="170" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#1565c0">FormBuilder</text>
+  
+  <!-- User Actions -->
+  <rect x="70" y="200" width="260" height="40" rx="5" fill="#c8e6c9" stroke="#388e3c" stroke-width="1"/>
+  <text x="200" y="215" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#1b5e20">User Actions: Type, Stop Typing, Submit, Reset</text>
+  <text x="200" y="230" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#2e7d32">Triggers: valueChanges, debounceTime, submit, reset</text>
+  
+  <!-- Service Layer -->
+  <rect x="450" y="80" width="300" height="180" rx="10" fill="#fff3e0" stroke="#f57c00" stroke-width="2" filter="url(#shadow)"/>
+  <text x="600" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#f57c00">Service Layer</text>
+  
+  <!-- Form Service -->
+  <rect x="470" y="120" width="120" height="60" rx="5" fill="#ffe0b2" stroke="#ef6c00" stroke-width="1"/>
+  <text x="530" y="140" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#e65100">Form Service</text>
+  <text x="530" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#ef6c00">Auto-save Logic</text>
+  <text x="530" y="170" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#ef6c00">Debounce Handler</text>
+  
+  <!-- HTTP Service -->
+  <rect x="610" y="120" width="120" height="60" rx="5" fill="#ffe0b2" stroke="#ef6c00" stroke-width="1"/>
+  <text x="670" y="140" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#e65100">HTTP Service</text>
+  <text x="670" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#ef6c00">API Calls</text>
+  <text x="670" y="170" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#ef6c00">Error Handling</text>
+  
+  <!-- State Management -->
+  <rect x="470" y="200" width="260" height="40" rx="5" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="1"/>
+  <text x="600" y="220" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#4a148c">State Management (Optional)</text>
+  <text x="600" y="235" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#7b1fa2">NgRx/Akita for complex state</text>
+  
+  <!-- Backend API Layer -->
+  <rect x="850" y="80" width="300" height="180" rx="10" fill="#f1f8e9" stroke="#689f38" stroke-width="2" filter="url(#shadow)"/>
+  <text x="1000" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#689f38">Backend API Layer</text>
+  
+  <!-- API Endpoints -->
+  <rect x="870" y="120" width="120" height="40" rx="5" fill="#dcedc8" stroke="#558b2f" stroke-width="1"/>
+  <text x="930" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#33691e">GET /incomplete</text>
+  <text x="930" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#558b2f">Load incomplete form</text>
+  
+  <rect x="1010" y="120" width="120" height="40" rx="5" fill="#dcedc8" stroke="#558b2f" stroke-width="1"/>
+  <text x="1070" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#33691e">PUT /incomplete</text>
+  <text x="1070" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#558b2f">Save draft form</text>
+  
+  <rect x="870" y="180" width="120" height="40" rx="5" fill="#dcedc8" stroke="#558b2f" stroke-width="1"/>
+  <text x="930" y="195" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#33691e">POST /submit</text>
+  <text x="930" y="210" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#558b2f">Submit final form</text>
+  
+  <rect x="1010" y="180" width="120" height="40" rx="5" fill="#dcedc8" stroke="#558b2f" stroke-width="1"/>
+  <text x="1070" y="195" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#33691e">DELETE /incomplete</text>
+  <text x="1070" y="210" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#558b2f">Clean up draft</text>
+  
+  <!-- Flow Steps -->
+  <rect x="50" y="320" width="1100" height="520" rx="10" fill="#fafafa" stroke="#757575" stroke-width="1" filter="url(#shadow)"/>
+  <text x="600" y="345" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#424242">Data Flow Steps</text>
+  
+  <!-- Step 1 -->
+  <circle cx="100" cy="380" r="20" fill="#2196f3" stroke="#1565c0" stroke-width="2"/>
+  <text x="100" y="385" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">1</text>
+  <rect x="140" y="360" width="280" height="40" rx="5" fill="#e3f2fd" stroke="#1976d2" stroke-width="1"/>
+  <text x="280" y="375" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#0d47a1">Initial Load</text>
+  <text x="280" y="390" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#1565c0">Check for incomplete form → Patch values or load fresh</text>
+  
+  <!-- Step 2 -->
+  <circle cx="100" cy="440" r="20" fill="#ff9800" stroke="#ef6c00" stroke-width="2"/>
+  <text x="100" y="445" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">2</text>
+  <rect x="140" y="420" width="280" height="40" rx="5" fill="#fff3e0" stroke="#f57c00" stroke-width="1"/>
+  <text x="280" y="435" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#e65100">User Types</text>
+  <text x="280" y="450" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#ef6c00">valueChanges → debounceTime(2000ms) → detect typing stop</text>
+  
+  <!-- Step 3 -->
+  <circle cx="100" cy="500" r="20" fill="#4caf50" stroke="#388e3c" stroke-width="2"/>
+  <text x="100" y="505" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">3</text>
+  <rect x="140" y="480" width="280" height="40" rx="5" fill="#e8f5e8" stroke="#4caf50" stroke-width="1"/>
+  <text x="280" y="495" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#1b5e20">Auto-Save</text>
+  <text x="280" y="510" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#2e7d32">PUT /incomplete → Save current form state as draft</text>
+  
+  <!-- Step 4 -->
+  <circle cx="100" cy="560" r="20" fill="#9c27b0" stroke="#7b1fa2" stroke-width="2"/>
+  <text x="100" y="565" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">4</text>
+  <rect x="140" y="540" width="280" height="40" rx="5" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1"/>
+  <text x="280" y="555" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#4a148c">Form Submit</text>
+  <text x="280" y="570" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#7b1fa2">POST /submit → DELETE /incomplete → Clean up</text>
+  
+  <!-- Step 5 (New Reset Step) -->
+  <circle cx="100" cy="620" r="20" fill="#e91e63" stroke="#c2185b" stroke-width="2"/>
+  <text x="100" y="625" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">5</text>
+  <rect x="140" y="600" width="280" height="40" rx="5" fill="#fce4ec" stroke="#e91e63" stroke-width="1"/>
+  <text x="280" y="615" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#880e4f">Form Reset</text>
+  <text x="280" y="630" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#c2185b">form.reset() → DELETE /incomplete → Clean up draft</text>
+  
+  <!-- Technical Implementation Details -->
+  <rect x="500" y="360" width="620" height="280" rx="5" fill="#f5f5f5" stroke="#9e9e9e" stroke-width="1"/>
+  <text x="810" y="380" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#424242">Technical Implementation</text>
+  
+  <!-- RxJS Operators -->
+  <text x="520" y="405" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#d32f2f">RxJS Operators:</text>
+  <text x="520" y="420" font-family="Arial, sans-serif" font-size="10" fill="#424242">• debounceTime(2000) - Wait for typing to stop</text>
+  <text x="520" y="435" font-family="Arial, sans-serif" font-size="10" fill="#424242">• distinctUntilChanged() - Only emit when form value changes</text>
+  <text x="520" y="450" font-family="Arial, sans-serif" font-size="10" fill="#424242">• switchMap() - Cancel previous HTTP requests</text>
+  <text x="520" y="465" font-family="Arial, sans-serif" font-size="10" fill="#424242">• takeUntil() - Handle component destruction</text>
+  
+  <!-- Form Methods -->
+  <text x="520" y="490" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#1976d2">Form Methods:</text>
+  <text x="520" y="505" font-family="Arial, sans-serif" font-size="10" fill="#424242">• patchValue() - Update form with incomplete data</text>
+  <text x="520" y="520" font-family="Arial, sans-serif" font-size="10" fill="#424242">• valueChanges - Monitor form value changes</text>
+  <text x="520" y="535" font-family="Arial, sans-serif" font-size="10" fill="#424242">• valid/invalid - Form validation status</text>
+  <text x="520" y="550" font-family="Arial, sans-serif" font-size="10" fill="#424242">• reset() - Clear form and trigger cleanup</text>
+  
+  <!-- Reset Implementation -->
+  <text x="520" y="575" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#e91e63">Reset Implementation:</text>
+  <text x="520" y="590" font-family="Arial, sans-serif" font-size="10" fill="#424242">• Custom reset handler with API cleanup</text>
+  <text x="520" y="605" font-family="Arial, sans-serif" font-size="10" fill="#424242">• Disable auto-save during reset operation</text>
+  <text x="520" y="620" font-family="Arial, sans-serif" font-size="10" fill="#424242">• User confirmation for reset action</text>
+  
+  <!-- Error Handling -->
+  <text x="750" y="405" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#ff5722">Error Handling:</text>
+  <text x="750" y="420" font-family="Arial, sans-serif" font-size="10" fill="#424242">• Retry logic for failed auto-saves</text>
+  <text x="750" y="435" font-family="Arial, sans-serif" font-size="10" fill="#424242">• Offline detection and queue mechanism</text>
+  <text x="750" y="450" font-family="Arial, sans-serif" font-size="10" fill="#424242">• User feedback for save status</text>
+  <text x="750" y="465" font-family="Arial, sans-serif" font-size="10" fill="#424242">• Graceful handling of cleanup failures</text>
+  
+  <!-- Arrows -->
+  <!-- UI to Service -->
+  <line x1="350" y1="150" x2="450" y2="150" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="400" y="145" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Form Events</text>
+  
+  <!-- Service to API -->
+  <line x1="750" y1="150" x2="850" y2="150" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="800" y="145" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">HTTP Requests</text>
+  
+  <!-- API Response -->
+  <line x1="850" y1="170" x2="750" y2="170" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="800" y="185" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">API Response</text>
+  
+  <!-- Service to UI -->
+  <line x1="450" y1="170" x2="350" y2="170" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="400" y="185" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Update Form</text>
+  
+  <!-- Data Flow Indicators -->
+  <rect x="50" y="800" width="1100" height="50" rx="5" fill="#e8f5e8" stroke="#4caf50" stroke-width="1"/>
+  <text x="600" y="820" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#1b5e20">Key Benefits</text>
+  <text x="150" y="835" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#2e7d32">• No data loss</text>
+  <text x="350" y="835" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#2e7d32">• Seamless UX</text>
+  <text x="550" y="835" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#2e7d32">• Automatic cleanup</text>
+  <text x="750" y="835" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#2e7d32">• Reset functionality</text>
+  <text x="950" y="835" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#2e7d32">• Error resilient</text>
+</svg>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button matButton mat-dialog-close>Cancel</button>
+</mat-dialog-actions>
