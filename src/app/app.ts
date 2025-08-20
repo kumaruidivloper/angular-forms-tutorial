@@ -39,6 +39,7 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   highestId: number = 0;
   isReset: boolean = false;
   dialog = inject(MatDialog);
+  isSubmitted: boolean = false;
 
 
   myForm!: FormGroup
@@ -434,6 +435,7 @@ private hasStoredFormData(): boolean {
           this.lastSaved = new Date(savedState.lastModified);
           this.cdr.detectChanges(); // Or this.cdr.markForCheck()
           this._coreService.openSanckBar('Form data has been successfully saved to localStorage'); 
+          this.isSubmitted = false;
           this.saveFormData();
           // console.log(this.lastSaved)
           // console.log(this.myForm.value)
@@ -718,6 +720,7 @@ reasonNameChange = [
             userDetailsGroup.markAsUntouched();
             userDetailsGroup.markAsPristine();
             userDetailsGroup.reset();
+            this.isSubmitted = true;
           // Reset individual control states
           Object.keys(userDetailsGroup.controls).forEach(key => {
             const control = userDetailsGroup.get(key);

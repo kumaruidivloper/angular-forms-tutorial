@@ -552,7 +552,7 @@
     <button matButton="tonal" style="margin-right: 10px;" (click)="openDialog($event, '300ms', '200ms')">Data Flow Diagram</button>
     <button matButton="elevated" style="margin-right: 10px;" (click)="resetForm($event)">Clear Form</button>
     <!-- <pre>{{myForm.valid}}</pre> -->
-    <button matButton="filled" type="submit" [disabled]="!myForm.valid">Submit</button>
+    <button matButton="filled" type="submit" [disabled]="!myForm.valid || isSubmitted">Submit</button>
   </div>
   
 </div>
