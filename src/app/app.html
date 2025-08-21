@@ -551,8 +551,14 @@
   <div class="buttonAlginRight">
     <button matButton="tonal" style="margin-right: 10px;" (click)="openDialog($event, '300ms', '200ms')">Data Flow Diagram</button>
     <button matButton="elevated" style="margin-right: 10px;" (click)="resetForm($event)">Clear Form</button>
-    <!-- <pre>{{myForm.valid}}</pre> -->
-    <button matButton="filled" type="submit" [disabled]="!myForm.valid || isSubmitted">Submit</button>
+    <button matButton="filled" color="primary" type="submit" [disabled]="!myForm.valid || isSubmitting">
+      @if(!isSubmitting) {
+        <span>Submit</span>
+      } @else {
+        <mat-spinner diameter="20" style="display: inline-block; margin-right: 8px;"></mat-spinner>
+        <span>Submitting...</span>
+      }
+    </button>
   </div>
   
 </div>

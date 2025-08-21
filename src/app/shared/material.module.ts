@@ -25,6 +25,7 @@ import { CommonModule } from '@angular/common';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const MaterialModules = [
   MatFormFieldModule,
@@ -51,6 +52,7 @@ const MaterialModules = [
   CommonModule,
   MatSlideToggleModule,
   MatButtonToggleModule,
+  MatProgressSpinnerModule,
   HttpClientModule
 ];
 

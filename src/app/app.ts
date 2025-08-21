@@ -4,7 +4,7 @@ import { EmployeeService } from './services/employee';
 import { Core } from './core/core';
 import { User } from './interface/user';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
-import { Subject, takeUntil, debounceTime, distinctUntilChanged } from 'rxjs';
+import { Subject, takeUntil, debounceTime, distinctUntilChanged, finalize } from 'rxjs';
 import {
   FormControl,
   FormGroup,
@@ -39,7 +39,6 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   highestId: number = 0;
   isReset: boolean = false;
   dialog = inject(MatDialog);
-  isSubmitted: boolean = false;
 
 
   myForm!: FormGroup
@@ -209,8 +208,8 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
         contacNumber: ['', [Validators.required, Validators.pattern(/^[0-9\s\-\+\(\)]+$/)]],
         mobileNumber: ['', [Validators.required, Validators.pattern(/^[0-9\s\-\+\(\)]+$/)]],
         email: ['', [Validators.required, Validators.email]],
-        toc: [[], CustomValidators.atLeastOneSelected],
-        reasonNameChange: [[], CustomValidators.atLeastOneSelected],
+        toc: [[], [Validators.required, CustomValidators.atLeastOneSelected]],
+        reasonNameChange: [[], [Validators.required, CustomValidators.atLeastOneSelected]],
         //Inline Validator
         // reasonNameChange: [[], [Validators.required,(control: AbstractControl) => {
         //           return control.value && control.value.length > 0 ? null : { required: true };
@@ -435,7 +434,6 @@ private hasStoredFormData(): boolean {
           this.lastSaved = new Date(savedState.lastModified);
           this.cdr.detectChanges(); // Or this.cdr.markForCheck()
           this._coreService.openSanckBar('Form data has been successfully saved to localStorage'); 
-          this.isSubmitted = false;
           this.saveFormData();
           // console.log(this.lastSaved)
           // console.log(this.myForm.value)
@@ -659,11 +657,16 @@ reasonNameChange = [
 ]
 
   formSubmit(event: Event) {
+    this.isSubmitting = true;
     this.formPersistenceService.saveUserData(this.myForm.value)
-        .pipe(takeUntil(this.destroy$))
+        .pipe(takeUntil(this.destroy$),
+        finalize(() => {
+          this.isSubmitting = false; // ✅ Always executes after completion (success or error)
+        })
+      ) 
         .subscribe({
           next: (savedData) => {
-            this.isSubmitting = false;
+            this.isSubmitting = true;
             this.hasUnsavedChanges = false;
             this.snackBar.open('Form submitted successfully!', 'Dismiss', { duration: 3000 });
             this.myForm.patchValue({
@@ -714,22 +717,40 @@ reasonNameChange = [
   }
 
   private formResetOnsubmit() {
-    // Reset nested FormGroup state
-        const userDetailsGroup = this.myForm.get('userDetails') as FormGroup;
-        if (userDetailsGroup) {
-            userDetailsGroup.markAsUntouched();
-            userDetailsGroup.markAsPristine();
-            userDetailsGroup.reset();
-            this.isSubmitted = true;
-          // Reset individual control states
-          Object.keys(userDetailsGroup.controls).forEach(key => {
-            const control = userDetailsGroup.get(key);
-            control?.markAsUntouched();
-            control?.markAsPristine();
-            control?.setErrors(null);
-          });
-        }
+  const userDetailsGroup = this.myForm.get('userDetails') as FormGroup;
+  if (userDetailsGroup) {
+    // Reset the group first
+    userDetailsGroup.reset();
+    
+    // Set values based on control type
+    Object.keys(userDetailsGroup.controls).forEach(key => {
+      const control = userDetailsGroup.get(key);
+      
+      if (control instanceof FormArray) {
+        // Clear FormArray
+        control.clear();
+      } else if (key === 'hasContacts') {
+        // Boolean field
+        control?.setValue(false);
+      } else if (key === 'toc' || key === 'reasonNameChange') {
+        // Array fields (but not FormArray)
+        control?.setValue([]);
+      } else {
+        // String fields
+        control?.setValue('');
+      }
+      
+      // Mark as fresh state
+      control?.markAsUntouched();
+      control?.markAsPristine();
+    });
+    
+    userDetailsGroup.markAsUntouched();
+    userDetailsGroup.markAsPristine();
+    userDetailsGroup.updateValueAndValidity();
+    this.myForm.updateValueAndValidity();
   }
+}
 
   resetForm(event: Event){
     this.myForm.reset(); event.preventDefault();
