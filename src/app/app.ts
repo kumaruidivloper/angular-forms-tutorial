@@ -18,6 +18,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ChangeDetectorRef } from '@angular/core';
 import { LocalStorageService } from './services/localStorage.service';
 import { Dialog } from './dialog/dialog';
+import { IdleService } from './services/idleservice';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -39,6 +41,8 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
   highestId: number = 0;
   isReset: boolean = false;
   dialog = inject(MatDialog);
+  isIdle = false;
+  private sub!: Subscription;
 
 
   myForm!: FormGroup
@@ -189,7 +193,8 @@ export class App implements OnInit, AfterViewInit, OnDestroy {
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
     private cdr: ChangeDetectorRef,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private idelService: IdleService
   ) {
 
     this.myForm = this.fb.group({
@@ -594,6 +599,12 @@ private hasStoredFormData(): boolean {
 
   ngOnInit(): void {
     this.loadFormData();
+
+    this.idelService.startWatching(5000); // 5 sec
+    this.sub = this.idelService.idleStatus$.subscribe(status => {
+      this.isIdle = status;
+      console.log(status ? 'User is idle'  : 'User is active');
+    });
 
      // Check if localStorage key exists and has data
   if (this.hasStoredFormData()) {
