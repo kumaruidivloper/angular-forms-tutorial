@@ -1,4 +1,3 @@
-// src/app/services/idle.service.ts
 import { Injectable, NgZone } from '@angular/core';
 import { BehaviorSubject, fromEvent, merge, Subscription, timer } from 'rxjs';
 import { switchMapTo, startWith } from 'rxjs/operators';
